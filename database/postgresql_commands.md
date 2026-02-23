@@ -147,6 +147,17 @@ Description :- give list of all database present in your device
 Syntax :- \l
 
 Example:- \l or \\list
+
+
+#Command Name: ALTER TABLE
+
+Description: 	Modifies an existing table (add constraints, columns, etc.).
+
+Syntax:	ALTER TABLE table_name
+		ADD CONSTRAINT constraint_name CHECK (condition);
+
+Example:	ALTER TABLE employees ADD CONSTRAINT employees_email_format_check
+		CHECK (email IS NULL OR email LIKE '%@%');
 		
 		
 		
