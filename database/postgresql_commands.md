@@ -140,7 +140,7 @@
 		
 # show list of Data base
 
-### +Command Name  \l or \list
+### + Command Name  \l or \list
 
 	Description :- give list of all database present in your device
 
