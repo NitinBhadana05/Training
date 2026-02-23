@@ -1,6 +1,6 @@
 # Start PostgreSQL Service
 
-Command Name 	Start PostgreSQL
+### Command Name 	:- Start PostgreSQL
 
 Description :-	Starts the PostgreSQL database server.
 
@@ -12,7 +12,7 @@ Example :-    	sudo systemctl start postgresql
 
 # Login to PostgreSQL
 
-Command Name 	Login to PostgreSQL
+### Command Name 	:- Login to PostgreSQL
 
 Description :-	Switch to postgres user and open psql terminal.
 
@@ -25,7 +25,7 @@ Example :-	sudo -i -u postgres
 
 # Create Database
 
-Command Name 	CREATE DATABASE
+### Command Name 	:- CREATE DATABASE
 
 Description :-	Creates a new database.
 
@@ -37,7 +37,7 @@ Example :-	CREATE DATABASE school_project;
 
 # Connect to Database
 
-Command Name 	\c
+### Command Name 	:- \c
 
 Description :-	Connects to a specific database.
 
@@ -49,7 +49,7 @@ Example :-	\c school_project
 
 # Create Table
 
-Command Name 	CREATE TABLE
+### Command Name 	:- CREATE TABLE
 
 Description :-	Creates a new table with specified columns.
 
@@ -67,7 +67,7 @@ Example :-	CREATE TABLE students (
 		
 # Insert Data
 
-Command Name 	INSERT INTO
+### Command Name 	:- INSERT INTO
 
 Description :-	Adds new records into a table.
 
@@ -81,7 +81,7 @@ Example :-	INSERT INTO students (name, age)
 		
 # View Data
 
-Command Name 	SELECT
+### Command Name 	:- SELECT
 
 Description :-	Retrieves data from a table.
 
@@ -93,7 +93,7 @@ Example :-	SELECT * FROM students;
 
 # Create Second Table (Courses)
 
-Command Name 	CREATE TABLE
+### Command Name 	:- CREATE TABLE
 
 Description :-	Creates another table for storing course details.
 
@@ -111,7 +111,7 @@ Example :-	CREATE TABLE courses (
 		
 # Create Relationship Table
 
-Command Name 	CREATE TABLE (Foreign Key)
+### Command Name 	:- CREATE TABLE (Foreign Key)
 
 Description :-	Creates a table with foreign key references to connect two tables.
 
@@ -128,7 +128,7 @@ Example :-	CREATE TABLE enrollments (
 		
 # Insert Enrollment Data
 
-Command Name 	INSERT INTO
+### Command Name 	:- INSERT INTO
 
 Description :-	Inserts relationship data between students and courses.
 
