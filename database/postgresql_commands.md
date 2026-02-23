@@ -168,6 +168,23 @@ Syntax:	column_name data_type UNIQUE
 Example:	email VARCHAR(150) UNIQUE
 		
 
+#NOT NULL Constraint
+
+Description: 	Prevents NULL values.
+
+Syntax:	column_name data_type NOT NULL
+
+Example:	name VARCHAR(100) NOT NULL
+
+#CHECK Constraint
+
+Description: 	Enforces a condition on column values.
+
+Syntax:	CHECK (condition)
+
+Example:	CHECK (budget >= 0)
+
+
 		
 		
 		
