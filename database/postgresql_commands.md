@@ -1,142 +1,142 @@
-## Start PostgreSQL Service
+# Start PostgreSQL Service
 
-Command Name 	Start PostgreSQL
+### + Command Name 	:- Start PostgreSQL
 
-Description :-	Starts the PostgreSQL database server.
+	Description :-	Starts the PostgreSQL database server.
 
-Syntax :-     	sudo systemctl start postgresql
+	Syntax :-     	sudo systemctl start postgresql
 
-Example :-    	sudo systemctl start postgresql
+	Example :-    	sudo systemctl start postgresql
 
 
 
-#Login to PostgreSQL
+# Login to PostgreSQL
 
-Command Name 	Login to PostgreSQL
+### + Command Name 	:- Login to PostgreSQL
 
-Description :-	Switch to postgres user and open psql terminal.
+	Description :-	Switch to postgres user and open psql terminal.
 
-Syntax :-     	sudo -i -u postgres
-              	psql
+	Syntax :-     	sudo -i -u postgres
+              		psql
 
-Example :-	sudo -i -u postgres
+	Example :-	sudo -i -u postgres
 		psql
 
 
-#Create Database
+# Create Database
 
-Command Name 	CREATE DATABASE
+### + Command Name 	:- CREATE DATABASE
 
-Description :-	Creates a new database.
+	Description :-	Creates a new database.
 
-Syntax :-	CREATE DATABASE database_name;
+	Syntax :-		CREATE DATABASE database_name;
 
-Example :-	CREATE DATABASE school_project;
-
-
-
-#Connect to Database
-
-Command Name 	\c
-
-Description :-	Connects to a specific database.
-
-Syntax :-	\c database_name
-
-Example :-	\c school_project
+	Example :-		CREATE DATABASE school_project;
 
 
 
-#Create Table
+# Connect to Database
 
-Command Name 	CREATE TABLE
+### + Command Name 	:- \c
 
-Description :-	Creates a new table with specified columns.
+	Description :-	Connects to a specific database.
+	
+	Syntax :-		\c database_name
 
-Syntax :-	CREATE TABLE table_name (
-		column_name data_type constraints
-		);
+	Example :-		\c school_project
 
-Example :-	CREATE TABLE students (
-		id SERIAL PRIMARY KEY,
-		name TEXT NOT NULL,
-		age INT
-		);
+
+
+# Create Table
+
+### + Command Name 	:- CREATE TABLE
+
+	Description :-	Creates a new table with specified columns.
+
+	Syntax :-		CREATE TABLE table_name (
+					column_name data_type constraints
+					);
+
+	Example :-	CREATE TABLE students (
+				id SERIAL PRIMARY KEY,
+				name TEXT NOT NULL,
+				age INT
+				);
 		
 		
 		
-#Insert Data
+# Insert Data
 
-Command Name 	INSERT INTO
+### + Command Name 	:- INSERT INTO
 
-Description :-	Adds new records into a table.
+	Description :-	Adds new records into a table.
 
-Syntax :-	INSERT INTO table_name (column1, column2)
-		VALUES (value1, value2);
+	Syntax :-	INSERT INTO table_name (column1, column2)
+				VALUES (value1, value2);
 
-Example :-	INSERT INTO students (name, age)
-		VALUES ('Alice', 20);
+	Example :-	INSERT INTO students (name, age)
+				VALUES ('Alice', 20);
 		
 		
 		
-#View Data
+# View Data
 
-Command Name 	SELECT
+### + Command Name 	:- SELECT
 
-Description :-	Retrieves data from a table.
+	Description :-	Retrieves data from a table.
 
-Syntax :-	SELECT * FROM table_name;
+	Syntax :-		SELECT * FROM table_name;
 
-Example :-	SELECT * FROM students;
+	Example :-		SELECT * FROM students;
 
 
 
-#Create Second Table (Courses)
+# Create Second Table (Courses)
 
-Command Name 	CREATE TABLE
+### + Command Name 	:- CREATE TABLE
 
-Description :-	Creates another table for storing course details.
+	Description :-	Creates another table for storing course details.
 
-Syntax :-	CREATE TABLE courses (
-		id SERIAL PRIMARY KEY,
-		course_name TEXT NOT NULL
-		);
+	Syntax :-	CREATE TABLE courses (
+				id SERIAL PRIMARY KEY,
+				course_name TEXT NOT NULL
+				);
 
-Example :-	CREATE TABLE courses (
-		id SERIAL PRIMARY KEY,
-		course_name TEXT NOT NULL
-		);
+	Example :-	CREATE TABLE courses (
+				id SERIAL PRIMARY KEY,
+				course_name TEXT NOT NULL
+				);
 		
 		
 		
-#Create Relationship Table
+# Create Relationship Table
 
-Command Name 	CREATE TABLE (Foreign Key)
+### + Command Name 	:- CREATE TABLE (Foreign Key)
 
-Description :-	Creates a table with foreign key references to connect two tables.
+	Description :-	Creates a table with foreign key references to connect two tables.
 
-Syntax :-	CREATE TABLE table_name (
-		column_name INT REFERENCES parent_table(column)
-		);
+	Syntax :-	CREATE TABLE table_name (
+				column_name INT REFERENCES parent_table(column)
+				);
 
-Example :-	CREATE TABLE enrollments (
-		student_id INT REFERENCES students(id),
-		course_id INT REFERENCES courses(id)
-		);
+	Example :-	CREATE TABLE enrollments (
+				student_id INT REFERENCES students(id),
+				course_id INT REFERENCES courses(id)
+				);
 		
 		
 		
-#Insert Enrollment Data
+# Insert Enrollment Data
 
-Command Name 	INSERT INTO
+### + Command Name 	:- INSERT INTO
 
-Description :-	Inserts relationship data between students and courses.
+	Description :-	Inserts relationship data between students and courses.
 
-Syntax :-	INSERT INTO enrollments (student_id, course_id)
-		VALUES (value1, value2);
+	Syntax :-		INSERT INTO enrollments (student_id, course_id)
+					VALUES (value1, value2);
 
-Example :-	INSERT INTO enrollments (student_id, course_id)
-		VALUES (1, 1);
+	Example :-		INSERT INTO enrollments (student_id, course_id)
+					VALUES (1, 1);
 		
 #show list of Data base
 
