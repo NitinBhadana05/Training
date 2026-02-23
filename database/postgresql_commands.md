@@ -184,7 +184,15 @@ Syntax:	CHECK (condition)
 
 Example:	CHECK (budget >= 0)
 
+#d (psql meta-command)
 
+Command Name: \d
+
+Description: 	Shows table structure in psql.
+
+Syntax:	\d table_name
+
+Example:	\d departments
 		
 		
 		
