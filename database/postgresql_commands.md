@@ -159,6 +159,15 @@ Syntax:	ALTER TABLE table_name
 Example:	ALTER TABLE employees ADD CONSTRAINT employees_email_format_check
 		CHECK (email IS NULL OR email LIKE '%@%');
 		
+#UNIQUE Constraint
+
+Description: 	Prevents duplicate values in a column.
+
+Syntax:	column_name data_type UNIQUE
+
+Example:	email VARCHAR(150) UNIQUE
+		
+
 		
 		
 		
