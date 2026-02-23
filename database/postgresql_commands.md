@@ -138,6 +138,16 @@ Syntax :-	INSERT INTO enrollments (student_id, course_id)
 Example :-	INSERT INTO enrollments (student_id, course_id)
 		VALUES (1, 1);
 		
+#show list of Data base
+
+Command Name  \l or \list
+
+Description :- give list of all database present in your device
+
+Syntax :- \l
+
+Example:- \l or \\list
+		
 		
 		
 		
