@@ -1,4 +1,4 @@
-## Start PostgreSQL Service
+# Start PostgreSQL Service
 
 Command Name 	Start PostgreSQL
 
@@ -10,7 +10,7 @@ Example :-    	sudo systemctl start postgresql
 
 
 
-#Login to PostgreSQL
+# Login to PostgreSQL
 
 Command Name 	Login to PostgreSQL
 
@@ -23,7 +23,7 @@ Example :-	sudo -i -u postgres
 		psql
 
 
-#Create Database
+# Create Database
 
 Command Name 	CREATE DATABASE
 
@@ -35,7 +35,7 @@ Example :-	CREATE DATABASE school_project;
 
 
 
-#Connect to Database
+# Connect to Database
 
 Command Name 	\c
 
@@ -47,7 +47,7 @@ Example :-	\c school_project
 
 
 
-#Create Table
+# Create Table
 
 Command Name 	CREATE TABLE
 
@@ -65,7 +65,7 @@ Example :-	CREATE TABLE students (
 		
 		
 		
-#Insert Data
+# Insert Data
 
 Command Name 	INSERT INTO
 
@@ -79,7 +79,7 @@ Example :-	INSERT INTO students (name, age)
 		
 		
 		
-#View Data
+# View Data
 
 Command Name 	SELECT
 
@@ -91,7 +91,7 @@ Example :-	SELECT * FROM students;
 
 
 
-#Create Second Table (Courses)
+# Create Second Table (Courses)
 
 Command Name 	CREATE TABLE
 
@@ -109,7 +109,7 @@ Example :-	CREATE TABLE courses (
 		
 		
 		
-#Create Relationship Table
+# Create Relationship Table
 
 Command Name 	CREATE TABLE (Foreign Key)
 
@@ -126,7 +126,7 @@ Example :-	CREATE TABLE enrollments (
 		
 		
 		
-#Insert Enrollment Data
+# Insert Enrollment Data
 
 Command Name 	INSERT INTO
 
