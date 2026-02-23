@@ -12,7 +12,7 @@ Example :-    	sudo systemctl start postgresql
 
 # Login to PostgreSQL
 
-### - Command Name 	:- Login to PostgreSQL
+### -Command Name 	:- Login to PostgreSQL
 
 Description :-	Switch to postgres user and open psql terminal.
 
@@ -23,7 +23,7 @@ Example :-	sudo -i -u postgres
 		psql
 
 
-# - Create Database
+# -Create Database
 
 ### Command Name 	:- CREATE DATABASE
 
@@ -37,7 +37,7 @@ Example :-	CREATE DATABASE school_project;
 
 # Connect to Database
 
-### Command Name 	:- \c
+### -Command Name 	:- \c
 
 Description :-	Connects to a specific database.
 
