@@ -1,6 +1,6 @@
 # Start PostgreSQL Service
 
-### Command Name 	:- Start PostgreSQL
+### - Command Name 	:- Start PostgreSQL
 
 Description :-	Starts the PostgreSQL database server.
 
@@ -12,7 +12,7 @@ Example :-    	sudo systemctl start postgresql
 
 # Login to PostgreSQL
 
-### Command Name 	:- Login to PostgreSQL
+### - Command Name 	:- Login to PostgreSQL
 
 Description :-	Switch to postgres user and open psql terminal.
 
@@ -23,7 +23,7 @@ Example :-	sudo -i -u postgres
 		psql
 
 
-# Create Database
+# - Create Database
 
 ### Command Name 	:- CREATE DATABASE
 
