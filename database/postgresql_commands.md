@@ -138,61 +138,62 @@
 	Example :-		INSERT INTO enrollments (student_id, course_id)
 					VALUES (1, 1);
 		
-#show list of Data base
+# show list of Data base
 
-Command Name  \l or \list
+### +Command Name  \l or \list
 
-Description :- give list of all database present in your device
+	Description :- give list of all database present in your device
 
-Syntax :- \l
+	Syntax :- \l
 
-Example:- \l or \\list
+	Example:- \l or \\list
 
+# to modify thetabel
+### + Command Name: ALTER TABLE
 
-#Command Name: ALTER TABLE
+	Description: 	Modifies an existing table (add constraints, columns, etc.).
 
-Description: 	Modifies an existing table (add constraints, columns, etc.).
+	Syntax:			ALTER TABLE table_name ADD CONSTRAINT constraint_name CHECK (condition);
 
-Syntax:	ALTER TABLE table_name
-		ADD CONSTRAINT constraint_name CHECK (condition);
-
-Example:	ALTER TABLE employees ADD CONSTRAINT employees_email_format_check
-		CHECK (email IS NULL OR email LIKE '%@%');
+	Example:		ALTER TABLE employees ADD CONSTRAINT employees_email_format_check
+					CHECK (email IS NULL OR email LIKE '%@%');
 		
-#UNIQUE Constraint
+# Constraints
 
-Description: 	Prevents duplicate values in a column.
+## UNIQUE Constraint
 
-Syntax:	column_name data_type UNIQUE
+	Description: 	Prevents duplicate values in a column.
 
-Example:	email VARCHAR(150) UNIQUE
+	Syntax:			column_name data_type UNIQUE
+
+	Example:		email VARCHAR(150) UNIQUE
 		
 
-#NOT NULL Constraint
+## NOT NULL Constraint
 
-Description: 	Prevents NULL values.
+	Description: 	Prevents NULL values.
 
-Syntax:	column_name data_type NOT NULL
+	Syntax:			column_name data_type NOT NULL
 
-Example:	name VARCHAR(100) NOT NULL
+	Example:		name VARCHAR(100) NOT NULL
 
-#CHECK Constraint
+## CHECK Constraint
 
-Description: 	Enforces a condition on column values.
+	Description: 	Enforces a condition on column values.
 
-Syntax:	CHECK (condition)
+	Syntax:	CHECK (condition)
 
-Example:	CHECK (budget >= 0)
+	Example:	CHECK (budget >= 0)
 
-#d (psql meta-command)
+# d (psql meta-command)
 
-Command Name: \d
+### + Command Name: \d
 
-Description: 	Shows table structure in psql.
+	Description: 	Shows table structure in psql.
 
-Syntax:	\d table_name
+	Syntax:	\d table_name
 
-Example:	\d departments
+	Example:	\d departments
 		
 		
 		
