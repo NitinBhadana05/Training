@@ -151,12 +151,29 @@
 # to modify thetabel
 ### + Command Name: ALTER TABLE
 
-	Description: 	Modifies an existing table (add constraints, columns, etc.).
+	Description: 	Modifies an existing table (add/drop constraints, modify columns, set defaults).
 
-	Syntax:			ALTER TABLE table_name ADD CONSTRAINT constraint_name CHECK (condition);
+	Syntax:			ALTER TABLE table_name action;
+	Example:		Add CHECK constraint:
 
-	Example:		ALTER TABLE employees ADD CONSTRAINT employees_email_format_check
-					CHECK (email IS NULL OR email LIKE '%@%');
+			### ALTER TABLE users
+				ADD CONSTRAINT users_salary_check
+				CHECK (salary >= 0);
+
+			### Drop constraint:
+
+				ALTER TABLE users
+				DROP CONSTRAINT users_salary_check;
+
+			### Set default:
+
+				ALTER TABLE attendance
+				ALTER COLUMN status SET DEFAULT 'present';
+
+			### Drop NOT NULL:
+
+				ALTER TABLE attendance
+				ALTER COLUMN check_in DROP NOT NULL;
 		
 # Constraints
 
@@ -194,9 +211,64 @@
 	Syntax:	\d table_name
 
 	Example:	\d departments
+	
+# Command Name: 	DROP TABLE
+
+	Description:	Deletes a table permanently from the database.
+
+	Syntax:	DROP TABLE table_name;
+
+	Example:	DROP TABLE attendance;
+
+	
+	
+# Command name:	PRIMARY KEY
+
+	Description:	Ensures each row is uniquely identifiable. Automatically creates an index.
+
+	Syntax:	column_name SERIAL PRIMARY KEY
+
+	Example:	id SERIAL PRIMARY KEY
 		
-		
-		
+# command name: 	FOREIGN KEY
+
+	Description:	Maintains relationship between two tables by enforcing referential integrity.
+
+	Syntax:	FOREIGN KEY (column_name) REFERENCES parent_table(parent_column)
+
+	Example:	FOREIGN KEY (project_id) REFERENCES projects(id) ON DELETE CASCADE
+
+# command name: 	DEFAULT
+
+	Description:	Assigns a default value when no value is provided during insertion.
+
+	Syntax:	column_name data_type DEFAULT value
+	
+	Example:	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+	
+# NULL Checking (Condition Operator)
+
+	Description:	Used to test NULL values properly.
+
+	Syntax:	column IS NULL column IS NOT NULL
+
+	Example:	WHERE email IS NULL;
+	
+# Command name: 	SHOW
+
+	Description:	Displays current configuration parameters.
+
+	Syntax:	SHOW parameter_name;
+
+	Example:	SHOW timezone;
+	
+#  Command name : 	SET
+
+	Description:	Changes session-level configuration settings.
+
+	Syntax:	SET parameter_name = value;
+
+	Example:	SET timezone = 'UTC';
 		
 		
 		
