@@ -269,7 +269,69 @@
 	Syntax:	SET parameter_name = value;
 
 	Example:	SET timezone = 'UTC';
-		
+
+# Command name: 	CREATE INDEX
+
+	Description:	Creates an index to improve query performance on specific columns.
+
+	Syntax:	CREATE INDEX index_name ON table_name (column1, column2, ...);
+
+	Example:	CREATE INDEX users_salary_idx ON users(salary);
+			CREATE INDEX users_role_salary_idx ON users(role, salary);
+# Command name:	EXPLAIN
+
+	Description:	Shows the query execution plan (how PostgreSQL will execute a query).
+
+	Syntax:	EXPLAIN query;
+
+	Example:	EXPLAIN SELECT * FROM users WHERE salary = 200;
+	
+
+# Command name : 	EXPLAIN ANALYZE
+
+	Description:	Executes the query and shows actual execution time and real performance statistics.
+
+	Syntax:	EXPLAIN ANALYZE query;
+
+	Example:	EXPLAIN ANALYZE SELECT * FROM users WHERE username = 'user40000';
+	
+
+# Command name: VACUUM
+
+	Description:	Cleans dead rows and updates the visibility map, enabling better index-only scans.
+
+	Syntax:	VACUUM table_name;
+
+	Example:	VACUUM users;
+
+# Command name :	generate_series()
+
+	Description:	Generates a sequence of numbers (used for bulk test data insertion).
+
+	Syntax:	SELECT generate_series(start, end);
+
+	Example:	INSERT INTO users (username, password, role, salary) SELECT 'user' || g, 'pass', 'employee',  (g % 500)  FROM generate_series(1, 50000) g;
+	
+
+
+# Composite Index (Multi-Column Index)
+
+	Description:	Index built on multiple columns to optimize multi-condition queries.
+
+	Syntax:	CREATE INDEX index_name ON table_name (column1, column2);
+
+	Example:	CREATE INDEX users_role_salary_idx ON users(role, salary);
+	
+	
+# Leftmost Prefix Rule (Concept)
+
+	Description: 	Composite index can only efficiently support queries that filter starting from the first column in the index.
+
+	Example:	Index:(role, salary)
+	
+			Efficient: WHERE role = 'employee'; WHERE role = 'employee' AND salary = 200;
+
+			Not efficient: WHERE salary = 200;
 		
 		
 		
