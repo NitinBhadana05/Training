@@ -350,13 +350,7 @@
 
 	Example:	CREATE INDEX users_admin_idx ON users(username) WHERE role = 'admin';
 
-# CREATE INDEX (Partial)
 
-	Description:	Creates an index only on rows matching a condition.
-
-	Syntax:	CREATE INDEX index_name ON table_name (column_name) WHERE condition;
-
-	Example: 	CREATE INDEX users_admin_idx ON users(username) WHERE role = 'admin';
 		
 # pg_stat_user_indexes
 
@@ -382,3 +376,31 @@
 
 	Example:	SELECT attname, n_distinct, most_common_vals FROM pg_stats WHERE tablename = 'users';
 		
+		
+# Command name: 	INNER JOIN 
+
+	Description:	It returns only matching rows from both tables. If no match → row excluded.
+
+	Syntax:	SELECT columns FROM table1 INNER JOIN table2 ON table1.column = table2.column;
+	
+	Example	SELECT u.username, a.status FROM users u INNER JOIN attendance a ON u.id = a.user_id;
+
+# command name: 	INSERT INTO ... SELECT
+
+	Description:	Inserts rows based on query result.
+
+	Syntax:	INSERT INTO table_name (columns) SELECT columns FROM other_table; 
+	
+	Example:	INSERT INTO attendance (user_id, check_in, check_out, status) SELECT id, NOW(), NOW() + INTERVAL '8 hours', 'present' FROM users;
+	
+# command name:	ORDER BY
+
+	Description:	Sorts result set in specified order.
+
+	Syntax:	SELECT columns FROM table ORDER BY column [ASC | DESC];
+
+	Example:	SELECT * FROM attendance ORDER BY user_id ASC;
+	
+
+	
+
