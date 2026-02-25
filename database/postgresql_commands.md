@@ -334,7 +334,51 @@
 			Not efficient: WHERE salary = 200;
 		
 		
+# CREATE INDEX WITH INCLUDE
+
+	Description:	Creates a covering index that stores extra columns for index-only scans without affecting search key.
+
+	Syntax:	CREATE INDEX index_name ON table_name (search_columns) INCLUDE (extra_columns);
+
+	Example: 	CREATE INDEX users_role_salary_cover_idx ON users(role, salary) INCLUDE (username);
+
+# CREATE INDEX (Partial)
+
+	Description:	Creates an index only on rows matching a condition.
+
+	Syntax:	CREATE INDEX index_name ON table_name (column_name) WHERE condition;
+
+	Example:	CREATE INDEX users_admin_idx ON users(username) WHERE role = 'admin';
+
+# CREATE INDEX (Partial)
+
+	Description:	Creates an index only on rows matching a condition.
+
+	Syntax:	CREATE INDEX index_name ON table_name (column_name) WHERE condition;
+
+	Example: 	CREATE INDEX users_admin_idx ON users(username) WHERE role = 'admin';
 		
+# pg_stat_user_indexes
+
+	Description:	Shows statistics about index usage.
+
+	Syntax: 	SELECT * FROM pg_stat_user_indexes;
+
+	Example:	SELECT relname, indexrelname, idx_scan FROM pg_stat_user_indexes WHERE relname = 'users';
 		
-		
+# Command name:	ANALYZE
+
+	Description:	Collects statistics for query planner.
+
+	Syntax:	ANALYZE table_name;
+
+	Example:	ANALYZE users;
+	
+# Command name :	pg_stats
+
+	Description:	View showing column statistics.
+
+	Syntax:	SELECT * FROM pg_stats WHERE tablename = 'table_name';
+
+	Example:	SELECT attname, n_distinct, most_common_vals FROM pg_stats WHERE tablename = 'users';
 		
