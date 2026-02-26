@@ -385,7 +385,7 @@
 	
 	Example	SELECT u.username, a.status FROM users u INNER JOIN attendance a ON u.id = a.user_id;
 
-# command name: 	INSERT INTO ... SELECT
+# Command name: 	INSERT INTO ... SELECT
 
 	Description:	Inserts rows based on query result.
 
@@ -393,14 +393,53 @@
 	
 	Example:	INSERT INTO attendance (user_id, check_in, check_out, status) SELECT id, NOW(), NOW() + INTERVAL '8 hours', 'present' FROM users;
 	
-# command name:	ORDER BY
+# Command name:		ORDER BY
 
 	Description:	Sorts result set in specified order.
 
 	Syntax:	SELECT columns FROM table ORDER BY column [ASC | DESC];
 
 	Example:	SELECT * FROM attendance ORDER BY user_id ASC;
+
+# Command name: HAVING
+
+	Description:	Filters groups after GROUP BY.
+
+	Syntax:		GROUP BY column HAVING aggregate_condition;
+
+	Example:	HAVING COUNT(*) > 5;
 	
+# Command name:		COUNT(*)
+
+	Description:	Counts total number of rows (including NULL values).
+
+	Syntax:		SELECT COUNT(*) FROM table_name;
+
+	Example:	SELECT COUNT(*) FROM attendance;
+	
+# Command name:		COUNT(column_name)
+
+	Description:	Counts non-NULL values in a specific column.
+
+	Syntax:		SELECT COUNT(column_name) FROM table_name;
+
+	Example:	SELECT COUNT(check_in) FROM attendance;
+
+# Command name:		COUNT() With JOIN
+
+	Description:	Counts rows after joining tables.
+
+	Syntax:		SELECT COUNT(*) FROM table1 INNER JOIN table2 ON condition;
+
+	Example:	SELECT COUNT(*) FROM users u INNER JOIN attendance a ON u.id = a.user_id;
+	
+# Command name:		COUNT() With GROUP BY (Important)
+
+	Description:	Counts rows per group.
+
+	Syntax:		SELECT column, COUNT(*) FROM table GROUP BY column;
+
+	Example:	SELECT user_id, COUNT(*) FROM attendance GROUP BY user_id;
 
 	
 
