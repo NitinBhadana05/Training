@@ -494,6 +494,26 @@
 	
 	Example:	SELECT username AS user_name FROM users;
 
+# Command Name:		RIGHT JOIN
+
+	Description:	
+			Returns:
+
+			- All rows from the right table
+
+			- Matching rows from the left table
+
+			- If no match → left table columns become NULL
+
+			- It preserves all records from the right side.
+
+	Syntax:	
+			-Basic Form:		SELECT columns FROM left_table RIGHT JOIN right_table ON left_table.column = right_table.column;
+			-With Alias:		SELECT l.column, r.column FROM table1 l RIGHT JOIN table2 r ON l.id = r.foreign_id;
+			-With NULL Handling:	SELECT r.column, CASE  WHEN l.column IS NULL THEN 'No Match' ELSE l.column END FROM table1 l RIGHT JOIN table2 r ON l.id = r.foreign_id;
+
+	Example:	SELECT u.username, a.status FROM users u RIGHT JOIN attendance a ON u.id = a.user_id;
+
 
 	
 
