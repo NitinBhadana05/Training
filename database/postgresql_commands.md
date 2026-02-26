@@ -441,5 +441,59 @@
 
 	Example:	SELECT user_id, COUNT(*) FROM attendance GROUP BY user_id;
 
+# Command Name: 	CASE
+
+	Description:	Conditional expression in SQL used to apply if-else logic inside queries.
+
+	Syntax:		CASE WHEN condition THEN value WHEN condition THEN value ELSE value END
+	
+	Examples:
+		- Example 1 –Simple Classification:	SELECT username, CASE WHEN role = 'admin' THEN 'High Access' ELSE 'Normal Access' END AS access_level FROM users;
+						
+		- Example 2 –Conditional Count:		SELECT COUNT(CASE WHEN status = 'present' THEN 1 END) FROM attendance;
+
+		- Example 3 –Conditional SUM Alternative: SELECT SUM(CASE WHEN status = 'present' THEN 1 ELSE 0 END ) FROM attendance;
+
+# Command Name: 	GROUP BY
+
+	Description: 	Groups rows that have the same values in specified columns into summary rows, usually used with aggregate functions like:
+			COUNT()
+			SUM()
+			AVG()
+			MAX()
+			MIN()
+			
+	Syntax:
+		- basic for:	SELECT column1, aggregate_function(column2) FROM table_name GROUP BY column1; 
+		- With JOIN:	SELECT t1.column, COUNT(*) FROM table1 t1 INNER JOIN table2 t2 ON condition GROUP BY t1.column;
+		- With HAVING: 	SELECT column1, COUNT(*) FROM table_name GROUP BY column1 HAVING COUNT(*) > 5;
+		
+	Examples: 
+		- Example 1 – Count Attendance Per User: SELECT user_id, COUNT(*) FROM attendance GROUP BY user_id;
+		- Example 2 – With JOIN:		 SELECT u.username, COUNT(*) FROM users u INNER JOIN attendance a ON u.id = a.user_id GROUP BY u.username;
+		- Example 3 – Using HAVING:		 SELECT user_id, COUNT(*) FROM attendance GROUP BY user_id HAVING COUNT(*) >= 5;
+		
+# Command Name:		LEFT JOIN
+
+	Description:	
+			Returns:
+			- All rows from the left table
+			- Matching rows from the right table
+			- If no match → right table columns become NULL
+			- It preserves all records from the left side.
+
+	Syntax:		SELECT columns FROM left_table LEFT JOIN right_table ON left_table.column = right_table.colum
+	
+	Example:	SELECT u.username, a.status FROM users u LEFT JOIN attendance a ON u.id = a.user_id;
+
+# Command Name:		AS (Column Alias)
+
+	Description:	Renames a column or expression in query output.
+
+	Syntax:		SELECT column AS new_name FROM table; 
+	
+	Example:	SELECT username AS user_name FROM users;
+
+
 	
 
