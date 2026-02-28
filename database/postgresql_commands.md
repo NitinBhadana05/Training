@@ -559,4 +559,61 @@
 	
 	Example:		SELECT username FROM users WHERE role IN ('admin', 'manager');
 
+# Command Name:		NOT
+
+	Description:	Negates a condition. 
+
+	Syntax: 		WHERE NOT condition;
+	
+	Example:		SELECT username FROM users WHERE NOT role = 'admin';
+	
+# Command Name: 	IS NULL
+
+	Description:	Checks if a column contains NULL.
+
+	Syntax:			WHERE column IS NULL;
+
+	Example:		SELECT username FROM users WHERE email IS NULL;
+
+	
+# Command Name:		IS NOT NULL
+
+	Description:	Checks if a column is NOT NULL.
+
+	Syntax:			WHERE column IS NOT NULL;
+
+	Example:		SELECT username FROM users WHERE email IS NOT NULL;
+	
+# Command Name:		AND
+
+	Description:	Combines multiple conditions (all must be TRUE).
+
+	Syntax:			WHERE condition1 AND condition2;
+
+	Example:		SELECT username FROM users WHERE role = 'employee' AND salary > 3000;
+	
+# Command Name:		OR
+
+	Description:	Combines conditions (at least one must be TRUE).
+
+	Syntax:			WHERE condition1 OR condition2;
+	
+	Example:		SELECT username FROM users WHERE role = 'admin' OR role = 'manager';
+
+# Command Name:		EXISTS
+
+	Description:	Checks if a subquery returns at least one row.
+
+	Syntax:			WHERE EXISTS (subquery);
+	
+	Example:		SELECT username FROM users u WHERE EXISTS (     SELECT 1  FROM attendance a  WHERE a.user_id = u.id);
+
+
+# Command Name:		NOT EXISTS
+
+	Description:	Returns rows where subquery returns no records.
+
+	Syntax:			WHERE NOT EXISTS (subquery);
+	
+	Example:		SELECT username FROM users u WHERE NOT EXISTS ( SELECT 1  FROM attendance a  WHERE a.user_id = u.id);
 
