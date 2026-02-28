@@ -515,5 +515,48 @@
 	Example:	SELECT u.username, a.status FROM users u RIGHT JOIN attendance a ON u.id = a.user_id;
 
 
+# Command Name:		WHERE
+
+	Description:	Filters rows based on specified condition(s). Executed after FROM/JOIN and before GROUP BY.
+
+	Syntax: 		SELECT columns FROM table_name WHERE condition;
 	
+	Example:		SELECT username, role FROM users WHERE role = 'employee';
+
+# Command Name: 	LIKE
+
+	Description: 	Pattern matching operator used inside WHERE clause.
+
+	Wildcards: 		% → any number of characters
+					_ → single character
+
+	Syntax: 		SELECT columns FROM table_name WHERE column LIKE pattern; 
+	
+	Example:		SELECT username FROM users WHERE username LIKE 'a%';
+
+
+# Command Name		AS
+
+	Description:	Renames a column or table (alias). Improves readability.
+	
+	Syntax:			SELECT column AS new_name FROM table_name AS alias_name;
+	
+	Example:		SELECT username AS user_name FROM users;
+	
+# Command Name: 	BETWEEN
+
+	Description:	Filters values within a range (inclusive).
+
+	Syntax:			SELECT columns FROM table_name WHERE column BETWEEN value1 AND value2;
+	
+	Example:		SELECT username, salary FROM users WHERE salary BETWEEN 1000 AND 5000;
+	
+# Command Name:		IN
+
+	Description:	Filters rows where column matches any value in a list.
+
+	Syntax:			SELECT columns FROM table_name WHERE column IN (value1, value2, value3);
+	
+	Example:		SELECT username FROM users WHERE role IN ('admin', 'manager');
+
 
