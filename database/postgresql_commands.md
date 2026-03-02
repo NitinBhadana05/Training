@@ -570,5 +570,105 @@
 	Example:	SELECT u.username, r.username AS referrer_name FROM users u LEFT JOIN users r ON u.referred_by = r.id;
 
 
+# Command Name:		WHERE
+
+	Description:	Filters rows based on specified condition(s). Executed after FROM/JOIN and before GROUP BY.
+
+	Syntax: 		SELECT columns FROM table_name WHERE condition;
 	
+	Example:		SELECT username, role FROM users WHERE role = 'employee';
+
+# Command Name: 	LIKE
+
+	Description: 	Pattern matching operator used inside WHERE clause.
+
+	Wildcards: 		% → any number of characters
+					_ → single character
+
+	Syntax: 		SELECT columns FROM table_name WHERE column LIKE pattern; 
+	
+	Example:		SELECT username FROM users WHERE username LIKE 'a%';
+
+
+# Command Name		AS
+
+	Description:	Renames a column or table (alias). Improves readability.
+	
+	Syntax:			SELECT column AS new_name FROM table_name AS alias_name;
+	
+	Example:		SELECT username AS user_name FROM users;
+	
+# Command Name: 	BETWEEN
+
+	Description:	Filters values within a range (inclusive).
+
+	Syntax:			SELECT columns FROM table_name WHERE column BETWEEN value1 AND value2;
+	
+	Example:		SELECT username, salary FROM users WHERE salary BETWEEN 1000 AND 5000;
+	
+# Command Name:		IN
+
+	Description:	Filters rows where column matches any value in a list.
+
+	Syntax:			SELECT columns FROM table_name WHERE column IN (value1, value2, value3);
+	
+	Example:		SELECT username FROM users WHERE role IN ('admin', 'manager');
+
+# Command Name:		NOT
+
+	Description:	Negates a condition. 
+
+	Syntax: 		WHERE NOT condition;
+	
+	Example:		SELECT username FROM users WHERE NOT role = 'admin';
+	
+# Command Name: 	IS NULL
+
+	Description:	Checks if a column contains NULL.
+
+	Syntax:			WHERE column IS NULL;
+
+	Example:		SELECT username FROM users WHERE email IS NULL;
+
+	
+# Command Name:		IS NOT NULL
+
+	Description:	Checks if a column is NOT NULL.
+
+	Syntax:			WHERE column IS NOT NULL;
+
+	Example:		SELECT username FROM users WHERE email IS NOT NULL;
+	
+# Command Name:		AND
+
+	Description:	Combines multiple conditions (all must be TRUE).
+
+	Syntax:			WHERE condition1 AND condition2;
+
+	Example:		SELECT username FROM users WHERE role = 'employee' AND salary > 3000;
+	
+# Command Name:		OR
+
+	Description:	Combines conditions (at least one must be TRUE).
+
+	Syntax:			WHERE condition1 OR condition2;
+	
+	Example:		SELECT username FROM users WHERE role = 'admin' OR role = 'manager';
+
+# Command Name:		EXISTS
+
+	Description:	Checks if a subquery returns at least one row.
+
+	Syntax:			WHERE EXISTS (subquery);
+	
+	Example:		SELECT username FROM users u WHERE EXISTS (     SELECT 1  FROM attendance a  WHERE a.user_id = u.id);
+
+
+# Command Name:		NOT EXISTS
+
+	Description:	Returns rows where subquery returns no records.
+
+	Syntax:			WHERE NOT EXISTS (subquery);
+	
+	Example:		SELECT username FROM users u WHERE NOT EXISTS ( SELECT 1  FROM attendance a  WHERE a.user_id = u.id);
 
