@@ -513,6 +513,44 @@
 			-With NULL Handling:	SELECT r.column, CASE  WHEN l.column IS NULL THEN 'No Match' ELSE l.column END FROM table1 l RIGHT JOIN table2 r ON l.id = r.foreign_id;
 
 	Example:	SELECT u.username, a.status FROM users u RIGHT JOIN attendance a ON u.id = a.user_id;
+	
+# Command Name:		FULL JOIN
+
+	Description:	
+			Returns:
+			- All rows from the left table
+
+			- All rows from the right table
+
+			- Matching rows combined
+
+			- Non-matching rows filled with NULL
+
+			- It is equivalent to: LEFT JOIN + RIGHT JOIN combined.
+
+	Syntax:		SELECT columns FROM table1 FULL JOIN table2 ON table1.column = table2.column;
+	
+	Example:	SELECT u.username, a.status FROM users u FULL JOIN attendance a ON u.id = a.user_id;
+
+
+# Command Name: 	COALESCE
+
+	Description:	Returns the first non-NULL value from a list of expressions. Used to replace NULL with a default value.
+
+	Syntax:		COALESCE(expression1, expression2, ..., expressionN), It checks values from left to right and returns the first non-NULL.
+
+	Examples:	
+			Example 1 – Replace NULL String: SELECT COALESCE(username, 'No User') FROM users;
+
+			- If username is NULL → returns 'No User'.
+
+			Example 2 – With FULL JOIN: SELECT COALESCE(a.user_id, u.id) AS user_id, u.username FROM users u FULL JOIN attendance a ON u.id = a.user_id;
+
+			- If attendance exists without user: a.user_id is used
+			
+			- If user exists without attendance: u.id is used
+
+			Example 3 – Numeric Default: SELECT COALESCE(SUM(salary), 0) FROM users;
 
 
 	
