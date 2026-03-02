@@ -552,6 +552,23 @@
 
 			Example 3 – Numeric Default: SELECT COALESCE(SUM(salary), 0) FROM users;
 
+# Command Name:		SELF JOIN
+
+	Description:	A SELF JOIN is a regular JOIN where a table is joined with itself. Used when rows inside the same table are related to other rows in that table.
+
+	Common use cases: Employee → Manager hierarchy
+			  User → Referrer relationship
+			  Category → Parent category
+			  Organizational structures
+
+	Syntax:		
+			- Basic SELF JOIN (LEFT): SELECT a.column, b.column FROM table_name a LEFT JOIN table_name b ON a.related_column = b.primary_key;
+			- Using INNER JOIN:	  SELECT a.column, b.column FROM table_name a INNER JOIN table_name b ON a.related_column = b.primary_key;
+			- Multi-Level SELF JOIN:  SELECT a.column, b.column, c.column FROM table_name a LEFT JOIN table_name b ON a.related_column = b.id LEFT JOIN table_name c ON b.related_column = c.id;
+
+
+	Example:	SELECT u.username, r.username AS referrer_name FROM users u LEFT JOIN users r ON u.referred_by = r.id;
+
 
 	
 
