@@ -561,7 +561,7 @@
 			  Category → Parent category
 			  Organizational structures
 
-	Syntax:		
+	Syntax:	
 			- Basic SELF JOIN (LEFT): SELECT a.column, b.column FROM table_name a LEFT JOIN table_name b ON a.related_column = b.primary_key;
 			- Using INNER JOIN:	  SELECT a.column, b.column FROM table_name a INNER JOIN table_name b ON a.related_column = b.primary_key;
 			- Multi-Level SELF JOIN:  SELECT a.column, b.column, c.column FROM table_name a LEFT JOIN table_name b ON a.related_column = b.id LEFT JOIN table_name c ON b.related_column = c.id;
@@ -719,4 +719,39 @@
 	Syntax:		SELECT AVG(column_name) FROM table_name;
 
 	Example:	SELECT AVG(salary) FROM employees;
+
+#  Command Name:	EXISTS
+
+	Description:	EXISTS is a conditional operator used inside a WHERE clause to check whether a subquery returns at least one row.
+
+			It returns:
+
+			TRUE → if subquery returns ≥ 1 row
+
+			FALSE → if subquery returns 0 rows
+
+			It does not return data from the subquery.
+			It only checks existence.
+
+	Syntax:		SELECT column_list  FROM table_name t WHERE EXISTS/ NOT EXISTS ( SELECT 1 FROM related_table r WHERE condition_correlating_r_with_t );
+);
+	Example:	Select e.username from core.employees e where exists (select 1 from core.employee_projects ep where ep.user_id = e.user_id);
+
+#  Command Name: 	COUNT()
+	Description:	Aggregate function that returns the number of rows in a table or the number of non-NULL values in a column.
+
+	Syntax:		SELECT COUNT(column_name) FROM table_name;
+
+	Common Variations: SELECT COUNT(*) FROM table_name;          -- Counts all rows
+			   SELECT COUNT(DISTINCT column_name) FROM table_name;  -- Counts unique values
+
+	Example:	SELECT COUNT(*) FROM employees;
+			SELECT COUNT(salary) FROM employees;
+
+# Command Name: 	MIN()
+	Description:	Aggregate function that returns the minimum (smallest) value from a column.
+
+	Syntax:		SELECT MIN(column_name)	FROM table_name;
+
+	Example:	SELECT MIN(salary) FROM employees;
 
