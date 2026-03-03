@@ -672,3 +672,51 @@
 	
 	Example:		SELECT username FROM users u WHERE NOT EXISTS ( SELECT 1  FROM attendance a  WHERE a.user_id = u.id);
 
+# Command Name: 	WITH
+
+	Description:	Defines a temporary result set (Common Table Expression – CTE) that can be referenced within a SELECT, INSERT, UPDATE, or DELETE statement. Improves readability and reusability of complex queries.
+
+	Syntax:		WITH cte_name AS ( SELECT column1, column2   FROM table_name WHERE condition ) SELECT * FROM cte_name; 
+
+	Example:	WITH HighSalary AS (SELECT name, salary FROM employees WHERE salary > 50000) SELECT * FROM HighSalary;
+	
+# Command Name: 	UPSERT
+	Description:	Performs an update if a record exists, otherwise inserts a new record. Used to avoid duplicate key conflicts.
+
+	Syntax:		INSERT INTO table_name (column1, column2) VALUES (value1, value2) ON CONFLICT (column) DO UPDATE SET column2 = excluded.column2;
+
+	Example: 	INSERT INTO employees (id, name, salary) VALUES (1, 'John', 60000) ON CONFLICT (id) DO UPDATE SET salary = EXCLUDED.salary;
+	
+# Command Name: 	SCHEMA
+	Description:	Defines the logical structure of a database. Used to organize database objects like tables, views, and procedures.
+
+	Syntax:		CREATE SCHEMA schema_name;
+
+	Example:	CREATE SCHEMA company;
+
+			CREATE TABLE company.employees (id INT, name VARCHAR(100), salary DECIMAL(10,2));
+
+# Command Name: 	MAX()
+
+	Description:	Aggregate function that returns the maximum value from a column.
+
+	Syntax:		SELECT MAX(column_name) FROM table_name;
+
+	Example:	SELECT MAX(salary) FROM employees;
+	
+# Command Name: 	SUM()
+
+	Description:	Aggregate function that returns the total sum of a numeric column.
+
+	Syntax:		SELECT SUM(column_name) FROM table_name;
+
+	Example:	SELECT SUM(salary) FROM employees;
+
+# Command Name: 	AVG()
+
+	Description:	Aggregate function that returns the average value of a numeric column.
+
+	Syntax:		SELECT AVG(column_name) FROM table_name;
+
+	Example:	SELECT AVG(salary) FROM employees;
+
