@@ -755,3 +755,48 @@
 
 	Example:	SELECT MIN(salary) FROM employees;
 
+
+# Command  Name:	UNION
+
+	Description:	Combines results from two queries and removes duplicate rows.
+
+	Syntax:		SELECT column_list FROM table1 UNION SELECT column_list FROM table2; 
+	
+	Example:	SELECT name FROM employees UNION SELECT name FROM customers;
+
+
+# Command Name:		UNION ALL
+
+	Description:	Combines results from two queries and keeps duplicates.
+
+	Syntax:		SELECT column_list FROM table1 UNION ALL SELECT column_list FROM table2;
+
+	Example:	SELECT name FROM employees UNION ALL SELECT name FROM customers;
+
+# Command Name:		EXCEPT
+
+	Description:	Returns rows from the first query that do not exist in the second query.
+
+	Syntax:		SELECT column_list FROM table1 EXCEPT SELECT column_list FROM table2;
+
+	Example:	SELECT name FROM employees EXCEPT  SELECT name FROM managers;
+
+
+
+# Command Name:		ANY
+
+	Description:	Compares a value with any value returned by a subquery.
+
+	Syntax:		value operator ANY (subquery);
+
+	Example:	SELECT * FROM products WHERE price > ANY (SELECT price FROM products WHERE category = 'electronics');
+
+
+
+# Command Name:		ALL
+
+	Description:	Compares a value with all values returned by a subquery.
+
+	Syntax:		value operator ALL (subquery);
+
+	Example:	SELECT * FROM products WHERE price > ALL ( SELECT price FROM products WHERE category = 'electronics');
