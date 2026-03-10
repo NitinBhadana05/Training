@@ -800,3 +800,71 @@
 	Syntax:		value operator ALL (subquery);
 
 	Example:	SELECT * FROM products WHERE price > ALL ( SELECT price FROM products WHERE category = 'electronics');
+	
+	
+# Command Name:		INTERSECT
+
+	Description:	Returns only the rows that appear in both query results. Duplicate rows are removed by default.
+
+	Syntax:		SELECT column_list FROM table1 INTERSECT SELECT column_list FROM table2;
+
+	Example:	SELECT name FROM employees INTERSECT SELECT name FROM managers;
+
+# Command Name:		INTERSECT ALL
+
+	Description:	Returns rows that appear in both queries including duplicates.
+
+	Syntax:		SELECT column_list FROM table1 INTERSECT ALL SELECT column_list FROM table2;
+
+	Example:	SELECT product_id FROM sales_2023 INTERSECT ALL SELECT product_id FROM sales_2024;
+
+# Command Name:		TRIGGER
+
+	Description:	A trigger is a database object that automatically executes a function when a specified event occurs on a table (INSERT, UPDATE, DELETE).
+
+	Syntax:		CREATE TRIGGER trigger_name {BEFORE | AFTER} {INSERT | UPDATE | DELETE} ON table_name FOR EACH ROW EXECUTE FUNCTION function_name();
+
+	Example:	CREATE TRIGGER update_timestamp BEFORE UPDATE ON users FOR EACH ROW EXECUTE FUNCTION update_modified_column();
+	
+# Command Name:		ERROR HANDLING (PL/pgSQL)
+
+	Description:	Error handling allows catching and managing exceptions inside stored procedures or functions.
+
+	Syntax:	
+			BEGIN
+			    statements;
+			EXCEPTION
+			    WHEN error_condition THEN
+				handling_statements;
+			END;
+
+	Example:
+
+			BEGIN
+			    INSERT INTO users(id) VALUES (1);
+			EXCEPTION
+			    WHEN unique_violation THEN
+				RAISE NOTICE 'Duplicate key detected';
+			END;
+
+# Command Name:		ASSERT
+
+	Description:	ASSERT checks a condition inside PL/pgSQL code and raises an error if the condition is false. Used mainly for debugging.
+
+	Syntax:		ASSERT condition, 'error message';
+
+	Example:	ASSERT salary >= 0, 'Salary must not be negative';
+
+# Command Name:		PRIVILEGE (GRANT / REVOKE)
+
+	Description:	Privileges control which users can access or modify database objects such as tables, schemas, and databases.
+
+- GRANT Syntax:		GRANT privilege ON object_name TO user_name;
+
+	Example:	GRANT SELECT, INSERT ON users TO analyst;
+	
+- REVOKE Syntax:	REVOKE privilege ON object_name FROM user_name;
+
+	Example:	REVOKE INSERT ON users FROM analyst;
+	
+
