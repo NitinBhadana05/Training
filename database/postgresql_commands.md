@@ -868,3 +868,66 @@
 	Example:	REVOKE INSERT ON users FROM analyst;
 	
 
+# Command Name:		ROW_NUMBER()
+
+	Description:	Assigns a unique sequential number to each row based on the specified order.
+
+	Syntax:		ROW_NUMBER() OVER (ORDER BY column)
+
+	Example:	SELECT name, price, ROW_NUMBER() OVER (ORDER BY price DESC) AS row_number FROM ecommerce.products;
+# Command Name:		RANK()
+
+	Description:	Ranks rows based on a column. If two rows have the same value, they receive the same rank and the next rank is skipped.
+
+	Syntax:		RANK() OVER (ORDER BY column)
+
+	Example:	SELECT name, price, RANK() OVER (ORDER BY price DESC) AS price_rank FROM ecommerce.products;
+
+# Command Name:		DENSE_RANK()
+
+	Description:	Ranks rows like RANK() but does not skip numbers when there are ties.
+
+	Syntax:		DENSE_RANK() OVER (ORDER BY column)
+
+	Example:	SELECT name, price, DENSE_RANK() OVER (ORDER BY price DESC) AS price_dense_rank FROM ecommerce.products;
+
+# Command Name :	COUNT() OVER()
+
+	Description:	Counts rows within a window. Often used for running counts or counts per group.
+
+	Syntax:		COUNT(column) OVER (PARTITION BY column ORDER BY column)
+
+	Example:	SELECT user_id, id AS order_id, order_date, COUNT(id) OVER (PARTITION BY user_id ORDER BY order_date) AS orders_so_far FROM ecommerce.orders;
+
+# Command Name:		LAG()
+
+	Description:	Returns the value from the previous row in the ordered window.
+
+	Syntax:		LAG(column) OVER (ORDER BY column)
+
+	Example:	SELECT order_date, LAG(order_date) OVER (ORDER BY order_date) AS previous_order FROM ecommerce.orders;
+	
+# Command Name:		LEAD()
+
+	Description:	Returns the value from the next row in the ordered window.
+
+	Syntax:		LEAD(column) OVER (ORDER BY column)
+
+	Example:	SELECT order_date, LEAD(order_date) OVER (ORDER BY order_date) AS next_order FROM ecommerce.orders;
+
+# Command Name:		PARTITION BY
+
+	Description:	Divides the data into groups so the window function runs separately within each group.
+
+	Syntax:		FUNCTION() OVER (PARTITION BY column ORDER BY column)
+	
+	Example:	SELECT user_id, order_date, ROW_NUMBER() OVER (PARTITION BY user_id ORDER BY order_date) AS order_rank FROM ecommerce.orders;
+	
+# Command Name:		SUM() OVER()
+
+	Description:	Calculates running totals or cumulative values across rows.
+
+	Syntax:		SUM(column) OVER (ORDER BY column)
+
+	Example:	SELECT order_date, SUM(amount) OVER (ORDER BY order_date) AS running_total FROM sales;
+
