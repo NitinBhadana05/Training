@@ -806,25 +806,25 @@
 
 	Description:	Returns only the rows that appear in both query results. Duplicate rows are removed by default.
 
-	Syntax:		SELECT column_list FROM table1 INTERSECT SELECT column_list FROM table2;
+	Syntax:			SELECT column_list FROM table1 INTERSECT SELECT column_list FROM table2;
 
-	Example:	SELECT name FROM employees INTERSECT SELECT name FROM managers;
+	Example:		SELECT name FROM employees INTERSECT SELECT name FROM managers;
 
 # Command Name:		INTERSECT ALL
 
 	Description:	Returns rows that appear in both queries including duplicates.
 
-	Syntax:		SELECT column_list FROM table1 INTERSECT ALL SELECT column_list FROM table2;
-
-	Example:	SELECT product_id FROM sales_2023 INTERSECT ALL SELECT product_id FROM sales_2024;
+	Syntax:			SELECT column_list FROM table1 INTERSECT ALL SELECT column_list FROM table2;
+	
+	Example:		SELECT product_id FROM sales_2023 INTERSECT ALL SELECT product_id FROM sales_2024;
 
 # Command Name:		TRIGGER
 
-	Description:	A trigger is a database object that automatically executes a function when a specified event occurs on a table (INSERT, UPDATE, DELETE).
+	Description:	A trigger is a database object that automatically executes a function when a specified event occurs on a 						table (INSERT, UPDATE, DELETE).
 
-	Syntax:		CREATE TRIGGER trigger_name {BEFORE | AFTER} {INSERT | UPDATE | DELETE} ON table_name FOR EACH ROW EXECUTE FUNCTION function_name();
+	Syntax:			CREATE TRIGGER trigger_name {BEFORE | AFTER} {INSERT | UPDATE | DELETE} ON table_name FOR EACH ROW EXECUTE 						FUNCTION function_name();
 
-	Example:	CREATE TRIGGER update_timestamp BEFORE UPDATE ON users FOR EACH ROW EXECUTE FUNCTION update_modified_column();
+	Example:		CREATE TRIGGER update_timestamp BEFORE UPDATE ON users FOR EACH ROW EXECUTE FUNCTION update_modified_column();
 	
 # Command Name:		ERROR HANDLING (PL/pgSQL)
 
@@ -849,11 +849,11 @@
 
 # Command Name:		ASSERT
 
-	Description:	ASSERT checks a condition inside PL/pgSQL code and raises an error if the condition is false. Used mainly for debugging.
+	Description:	ASSERT checks a condition inside PL/pgSQL code and raises an error if the condition is false. Used mainly for 					debugging.
 
-	Syntax:		ASSERT condition, 'error message';
+	Syntax:			ASSERT condition, 'error message';
 
-	Example:	ASSERT salary >= 0, 'Salary must not be negative';
+	Example:		ASSERT salary >= 0, 'Salary must not be negative';
 
 # Command Name:		PRIVILEGE (GRANT / REVOKE)
 
@@ -861,73 +861,136 @@
 
 - GRANT Syntax:		GRANT privilege ON object_name TO user_name;
 
-	Example:	GRANT SELECT, INSERT ON users TO analyst;
+	Example:		GRANT SELECT, INSERT ON users TO analyst;
 	
 - REVOKE Syntax:	REVOKE privilege ON object_name FROM user_name;
 
-	Example:	REVOKE INSERT ON users FROM analyst;
+	Example:		REVOKE INSERT ON users FROM analyst;
 	
 
 # Command Name:		ROW_NUMBER()
 
 	Description:	Assigns a unique sequential number to each row based on the specified order.
 
-	Syntax:		ROW_NUMBER() OVER (ORDER BY column)
+	Syntax:			ROW_NUMBER() OVER (ORDER BY column)
 
-	Example:	SELECT name, price, ROW_NUMBER() OVER (ORDER BY price DESC) AS row_number FROM ecommerce.products;
+	Example:		SELECT name, price, ROW_NUMBER() OVER (ORDER BY price DESC) AS row_number FROM ecommerce.products;
 # Command Name:		RANK()
 
-	Description:	Ranks rows based on a column. If two rows have the same value, they receive the same rank and the next rank is skipped.
+	Description:	Ranks rows based on a column. If two rows have the same value, they receive the same rank and the next rank 					is skipped.
 
-	Syntax:		RANK() OVER (ORDER BY column)
+	Syntax:			RANK() OVER (ORDER BY column)
 
-	Example:	SELECT name, price, RANK() OVER (ORDER BY price DESC) AS price_rank FROM ecommerce.products;
+	Example:		SELECT name, price, RANK() OVER (ORDER BY price DESC) AS price_rank FROM ecommerce.products;
 
 # Command Name:		DENSE_RANK()
 
 	Description:	Ranks rows like RANK() but does not skip numbers when there are ties.
 
-	Syntax:		DENSE_RANK() OVER (ORDER BY column)
+	Syntax:			DENSE_RANK() OVER (ORDER BY column)
 
-	Example:	SELECT name, price, DENSE_RANK() OVER (ORDER BY price DESC) AS price_dense_rank FROM ecommerce.products;
+	Example:		SELECT name, price, DENSE_RANK() OVER (ORDER BY price DESC) AS price_dense_rank FROM ecommerce.products;
 
 # Command Name :	COUNT() OVER()
 
 	Description:	Counts rows within a window. Often used for running counts or counts per group.
 
-	Syntax:		COUNT(column) OVER (PARTITION BY column ORDER BY column)
+	Syntax:			COUNT(column) OVER (PARTITION BY column ORDER BY column)
 
-	Example:	SELECT user_id, id AS order_id, order_date, COUNT(id) OVER (PARTITION BY user_id ORDER BY order_date) AS orders_so_far FROM ecommerce.orders;
+	Example:		SELECT user_id, id AS order_id, order_date, COUNT(id) OVER (PARTITION BY user_id ORDER BY order_date) AS 						orders_so_far FROM ecommerce.orders;
 
 # Command Name:		LAG()
 
 	Description:	Returns the value from the previous row in the ordered window.
 
-	Syntax:		LAG(column) OVER (ORDER BY column)
+	Syntax:			LAG(column) OVER (ORDER BY column)
 
-	Example:	SELECT order_date, LAG(order_date) OVER (ORDER BY order_date) AS previous_order FROM ecommerce.orders;
+	Example:		SELECT order_date, LAG(order_date) OVER (ORDER BY order_date) AS previous_order FROM ecommerce.orders;
 	
 # Command Name:		LEAD()
 
 	Description:	Returns the value from the next row in the ordered window.
 
-	Syntax:		LEAD(column) OVER (ORDER BY column)
+	Syntax:			LEAD(column) OVER (ORDER BY column)
 
-	Example:	SELECT order_date, LEAD(order_date) OVER (ORDER BY order_date) AS next_order FROM ecommerce.orders;
+	Example:		SELECT order_date, LEAD(order_date) OVER (ORDER BY order_date) AS next_order FROM ecommerce.orders;
 
 # Command Name:		PARTITION BY
 
 	Description:	Divides the data into groups so the window function runs separately within each group.
 
-	Syntax:		FUNCTION() OVER (PARTITION BY column ORDER BY column)
+	Syntax:			FUNCTION() OVER (PARTITION BY column ORDER BY column)
 	
-	Example:	SELECT user_id, order_date, ROW_NUMBER() OVER (PARTITION BY user_id ORDER BY order_date) AS order_rank FROM ecommerce.orders;
+	Example:		SELECT user_id, order_date, ROW_NUMBER() OVER (PARTITION BY user_id ORDER BY order_date) AS order_rank FROM ecommerce.orders;
 	
 # Command Name:		SUM() OVER()
 
 	Description:	Calculates running totals or cumulative values across rows.
 
-	Syntax:		SUM(column) OVER (ORDER BY column)
+	Syntax:			SUM(column) OVER (ORDER BY column)
 
-	Example:	SELECT order_date, SUM(amount) OVER (ORDER BY order_date) AS running_total FROM sales;
+	Example:		SELECT order_date, SUM(amount) OVER (ORDER BY order_date) AS running_total FROM sales;
+
+# Command name:		Create Basic Index
+
+	Description:	Creates a standard B-tree index to speed up searches on a column.
+
+	Syntax:			CREATE INDEX index_name ON table_name (column_name);
+
+	Example:		CREATE INDEX idx_users_email ON users(email);
+
+# Command name:		 Composite (Multi-Column) Index
+
+	Description:	Indexes multiple columns to optimize queries that filter on more than one column.
+
+	Syntax:			CREATE INDEX index_name ON table_name (column1, column2);
+
+	Example:		CREATE INDEX idx_users_name_created_at ON users(name, created_at);
+
+# Command name:		Ordered Index
+
+	Description:	Creates an index with specific sorting order for faster ORDER BY queries.
+
+	Syntax:			CREATE INDEX index_name ON table_name (column DESC);
+
+	Example:		CREATE INDEX idx_users_created_at_desc ON users(created_at DESC);
+
+# Command name:		Covering Index (INCLUDE)
+
+	Description:	Adds extra columns to the index so PostgreSQL can perform an Index-Only Scan.
+
+	Syntax:			CREATE INDEX index_name ON table_name (indexed_column) INCLUDE (extra_column);
+
+	Example:		CREATE INDEX idx_users_email ON users(email) INCLUDE (id);
+
+# Command name:		Partial Index
+
+	Description:	Indexes only rows matching a condition, making the index smaller and faster.
+
+	Syntax:			CREATE INDEX index_name ON table_name (column) WHERE condition;
+
+	Example:		CREATE INDEX idx_users_email_recent ON users(email) WHERE created_at > '2024-01-01';
+
+# Command name:		Functional / Expression Index	
+	Description:	Indexes the result of an expression or function.
+
+	Syntax:		CREATE INDEX index_name ON table_name (function(column));
+
+	Example		CREATE INDEX idx_users_email_lower ON users(lower(email));
+
+# Command name:		Pattern Search Index (text_pattern_ops)
+
+	Description:	Optimizes prefix pattern searches using LIKE 'text%'.
+
+	Syntax:			CREATE INDEX index_name ON table_name (column text_pattern_ops);
+
+	Example:		CREATE INDEX idx_users_email_prefix ON users(email text_pattern_ops);
+
+# Command name:		BRIN Index
+
+	Description:	Very small index that stores block summaries, best for huge time-ordered tables.
+
+	Syntax:			CREATE INDEX index_name ON table_name USING BRIN (column);
+
+	Example: 		CREATE INDEX idx_users_created_at_brin ON users USING BRIN (created_at);
 
