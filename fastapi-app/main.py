@@ -2,9 +2,18 @@ from fastapi import FastAPI
 
 app = FastAPI()
 
-@app.get("/")
+@app.get("/home")
 def home():
-    return {"message": "FastAPI is working!"}
+    
+    return {"id": "A12S3","Status":"Complete"}
+    
+@app.get("/")
+def index():
+    return {"msg": "home"}
+
+@app.get("/about")
+def about():
+    return {"msg": "about page"}
 
 @app.post("/items")
 def create_item():
