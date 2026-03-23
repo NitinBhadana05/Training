@@ -51,3 +51,71 @@ def get_price(price: int):
 @app.get("/orders/{order_id}")
 def  get_order(order_id: int, status: str):
     return {"order_id": order_id,"status": status}
+    
+    
+#Requesting body (jason + pydantic)
+
+from pydantic import BaseModel
+
+class User(BaseModel):
+    username: str
+    password: str
+  
+@app.post("/login1")
+def login1(user:User):
+    return {"username": user.username, 
+    "message": "Login successful"
+    }
+    
+class Signin(BaseModel):
+    name: str
+    email: str
+    age: int
+   
+@app.post("/signin")
+def signin(user: Signin):
+    return {"message": f"{user.name} is registered"} 
+    
+#1
+@app.post("/login")
+def login(user: User):
+    return {"username": user.username}
+    
+#2    
+@app.post("/user")
+def user(user: Signin):
+    return {"name":user.name,"age":user.age}
+    
+#3
+class Product(BaseModel):
+    name: str
+    price: int
+    
+@app.post("/product")
+def product(item: Product):
+    return {
+    "message": "Product created",
+    "name": item.name,
+    "price": item.price
+}
+    
+#4 
+@app.put("/user/{user_id}")
+def update_user(user_id: int, user: Signin):
+    return {
+        "user_id": user_id,
+        "name": user.name,
+        "age": user.age
+    }
+    
+#5
+
+class Register(BaseModel):
+     email: str
+     password: str
+    
+@app.post("/register")
+def reg(r: Register):
+    return {"message": "user registered"}
+ 
+    
