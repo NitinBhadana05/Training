@@ -2,7 +2,6 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm import Session
 
-
 DATABASE_URL = "postgresql://postgres:1234@localhost/fastapi_db"
 
 engine = create_engine(DATABASE_URL)
@@ -15,3 +14,4 @@ def get_db():
         yield db
     finally:
         db.close()
+        

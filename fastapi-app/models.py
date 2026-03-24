@@ -13,3 +13,15 @@ class User(Base):
 
 # create table
 Base.metadata.create_all(bind=engine)
+
+
+class Product(Base):
+    __tablename__ = "products"
+
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String)
+    price = Column(Integer)
+
+# create table
+Base.metadata.create_all(bind=engine)
+
