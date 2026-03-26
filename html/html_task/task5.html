@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Website</title>
+  <link rel="stylesheet" href="task6.css">
 </head>
 <body>
 
@@ -12,46 +13,48 @@
   </header>
   <hr>
 
-  <nav>
-    <ul>
-      <li><a href="#">Home</a></li>
-      <li><a href="#">About</a></li>
-      <li><a href="#">Contact</a></li>
-    </ul>
+  <nav style="display: flex; gap: 15%; margin: 10px;">
+    
+      <button><a href="#">Home</a></button>
+      <button><a href="#">About</a></button>
+      <button><a href="#">Contact</a></button>
   </nav>
 <hr>
   <main>
 
-    <section>
+    <section >
       <h2>About</h2>
-      <div>
+      <div align="center">
         <p>I am learning HTML and improving my frontend skills.</p>
       </div>
     </section>
 
     <section>
       <h2>Goals</h2>
-      <div>
+      <div align="center">
         <p>My goal is to become a professional web developer.</p>
       </div>
     </section>
 
-    <section> <h2>Latest News</h2>
-            
-            <article>
+    <section> 
+          <h2>Latest News</h2>
+          <div align="center">
+            <article >
                 <h3>Learning Semantic HTML</h3>
                 <p>Semantic tags make your code cleaner and easier to read.</p>
             </article>
 
-            <article>
+            <article >
                 <h3>Why Divs Aren't Enough</h3>
                 <p>While divs work, they don't tell the browser what the content is.</p>
             </article>
-          </section>
-          <aside>
-            <h4>About the Author</h4>
-            <p>I'm a web developer learning the ropes!</p>
-        </aside>
+          </div>
+    </section>
+
+    <aside align="center">
+          <h4>About the Author</h4>
+          <p>I'm a web developer learning the ropes!</p>
+     </aside>
 
   </main>
 <hr>
