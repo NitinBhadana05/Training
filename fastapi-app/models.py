@@ -25,3 +25,14 @@ class Product(Base):
 # create table
 Base.metadata.create_all(bind=engine)
 
+
+class Registor(Base):
+    __tablename__ = "registor"
+
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String)
+    email = Column(String)
+    password = Column(String)
+
+# create table
+Base.metadata.create_all(bind=engine)

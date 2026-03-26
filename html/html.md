@@ -1,8 +1,8 @@
-# <!DOCTYPE html> :- 
+# "<!DOCTYPE html>" :- 
 	- Tells the browser: this is HTML5
 	- Always at the top
 	
-2# <html lang="en">
+# <html lang="en">
 
 	- Root of the page
 	- lang="en" → important for accessibility & SEO
