@@ -1,0 +1,110 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body{
+  background: #858688;
+  padding: 40px;
+}
+
+section{
+  max-width: 490px;
+  margin: 40px auto;
+  height: 700px;
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  
+}
+section:hover{
+  box-shadow: 0 4px 10px rgba(0, 64, 254, 0.882);
+  
+}
+
+h1{
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+form{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.card{
+  display: flex;  
+  flex-direction: column;
+  height: 100%;
+  gap: 20px;
+  border: 1px solid #000000;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 3px 2px 2px #655e5e;
+}
+
+
+
+input{
+  padding: 10px;
+  border: 1px solid #0343f2;
+  border-radius: 5px;
+  outline: none;
+  
+}
+input:hover{
+  box-shadow: 0 4px 10px rgba(4, 4, 4, 0.882);
+}
+
+input::placeholder {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+input:focus::placeholder {
+  opacity: 0;
+}
+
+textarea{
+  padding: 10px;
+  border: 1px solid #0343f2;
+  border-radius: 5px;
+  outline: none;
+}
+
+textarea:hover{
+  box-shadow: 0 4px 10px rgba(4, 4, 4, 0.882);
+}
+
+button {
+  width: 27%;
+  height: 35px;
+  padding: 10px;
+  border: none;
+  background: #001eff;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: medium;
+
+  margin: 0; 
+}
+
+button:hover{
+  background: #f4f3f3;
+  color: rgb(6, 5, 5);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.882);
+}
+
+.btn-container {
+  margin-top: 10px;
+  display: flex;       /* makes buttons go in one line */
+  justify-content: center; /* center horizontally */
+  gap: 50px;           /* space between buttons */
+}
+
+.card_heading{
+  margin-bottom: 11%;
+}

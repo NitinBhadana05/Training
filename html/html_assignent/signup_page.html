@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Signup Page</title>    
+  <link rel="stylesheet" href="style/login_style.css">
+</head>
+<body>
+    <section style="height: 800px; max-width: 600px;">
+      <div class="card">
+        <div>
+          <h1>Register</h1>
+        </div>
+        <div>
+          <form action="/signup" method="POST">
+            <label for="name">First Name:</label>
+            <input type="text" id="firstname" name="firstname" required placeholder="First Name"><br>
+            <label for="name">Last Name:</label>
+            <input type="text" id="lastname" name="lastname" required placeholder="Last Name"><br>
+            <label for="name">Contact Info.:</label>
+            <input type="text" id="content" name="content" required placeholder="Phone Number"><br>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required placeholder="Email"><br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required placeholder="Password"><br>
+            <div class="btn-container">
+              <button type="submit">Register</button>
+              <button type="submit">Signin</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+</body>
+</html>

@@ -1,0 +1,84 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background-color: #2f3440;
+}
+
+/* HERO SECTION */
+.hero {
+  background: url('/html/html_assignent/images/background.jpg') no-repeat center/cover;
+  height: 500px;
+  position: relative;
+}
+
+/* INFO BOXES */
+.info-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding-top: 60px;
+}
+
+.info-box {
+  background: #ff5722;
+  color: white;
+  padding: 20px;
+  width: 250px;
+  border-radius: 15px;
+  text-align: center;
+  font-size: 14px;
+}
+
+/* CARD */
+.card {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -100px;
+
+  background: #eee;
+  width: 500px;
+  text-align: center;
+  padding: 40px 20px;
+  border-radius: 15px;
+}
+
+/* PROFILE IMAGE */
+.profile-img {
+  position: absolute;
+  top: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.profile-img img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 5px solid white;
+}
+
+/* TEXT */
+.card h1 {
+  font-size: 40px;
+  margin-top: 60px;
+}
+
+.card h3 {
+  color: #2807fb;
+  margin: 10px 0;
+}
+
+.card p {
+  margin: 15px 0;
+  color: #333;
+}
+
+.card small {
+  color: gray;
+}
