@@ -1,0 +1,216 @@
+
+
+/* Center everything */
+body {
+  height: 100vh;              
+  display: flex;
+  justify-content: center;    
+  align-items: center;        
+  background: #f5f7fa;
+}
+
+/* Form container */
+.box {
+  width: 100%;
+  max-width: 600px;
+  padding: 30px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+/*css for counter app*/
+.counter{
+  height: 400px;
+  width: 500px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  text-align: center;
+  position: relative;
+  font-size: xx-large;
+  
+}
+.counter button{
+  width: 80%;
+  padding: 10px;
+  background: #0080ff;
+  border: none;
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s
+}
+
+.counter button:hover{
+  background: #f0eeec;
+  color: black;
+}
+  
+/* css for form*/
+.card form {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  margin-top: 20px;
+  width: 400px;
+  gap: 5px;
+  color:blue;
+}
+
+.card h1{
+  text-decoration: underline;
+  color: #007BFF;
+}
+
+.card input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  
+}
+.card input::placeholder {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.card input:focus::placeholder {
+  opacity: 0;
+}
+
+.card input:hover{
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.882);
+}
+
+.card  .btn_box{
+text-align: center;
+}
+.card button {
+  padding: 10px 20px;
+  background: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-left: 40px;
+  
+  
+}
+
+.card button:hover {
+  background: #d6d7d9;
+  color: black;
+} 
+
+/* Error text */
+.error {
+  color: red;
+  font-size: 12px;
+  display: block;
+  margin-bottom: 10px;
+}
+
+/* Input error */
+.input-error {
+  border: 2px solid red;
+}
+
+
+/*todo app css*/
+
+.todo {
+  height: 600px;
+  width: 600px;
+  border-radius: 10px;
+  text-align: center;
+  font-size: xx-large;
+  
+}
+
+.todo h1{
+  text-decoration: underline;
+}
+
+.todo button{
+  width: 60%;
+  padding: 20px;
+  background: #0080ff;
+  border: none;
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: large;
+}
+
+.todo button:hover{
+  background: #f0eeec;
+  color: black;
+}
+.todo input{
+  width: 80%;
+  height: 15%;
+  padding: 10px;
+  margin-bottom: 50px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 25px;
+
+} 
+
+.todo input:hover{
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.882);
+}
+
+.todo input::placeholder {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.todo input:focus::placeholder {
+  opacity: 0;
+}
+
+.todo ul{
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  margin-top: 20px;
+  width: 400px;
+  gap: 5px;
+  
+}
+
+/* list style */
+#taskList {
+  list-style: none;
+  padding: 0;
+}
+
+/* each task */
+#taskList li {
+  display: flex;
+  justify-content: space-between; /* text left, button right */
+  align-items: center;
+  background: #fff;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 5px;
+}
+
+/* button */
+#taskList button {
+  background: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}

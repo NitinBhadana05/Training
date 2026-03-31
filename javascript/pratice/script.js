@@ -1,3 +1,48 @@
+const click = document.querySelector("#click");
+
+click.addEventListener('click', () => {
+    alert("Button clicked")
+});
+
+
+
+
+
+
+const toggle = document.querySelector("#tog");
+const heading = document.querySelector("#heading");
+
+toggle.addEventListener("click", () => {
+  heading.textContent = heading.textContent === "Hello" ? "Goodbye" : "Hello";
+});
+
+heading.addEventListener("dblclick", () => {
+  heading.style.color = "red";
+});
+
+
+
+
+
+
+
+const list = document.querySelector("#list");
+const input = document.querySelector("#input");
+const addButton = document.querySelector("#addbtn");
+
+
+addButton.addEventListener('click', () => {
+  const item = document.createElement('li');
+  item.textContent = input.value;
+  list.appendChild(item);
+  input.value = '';
+});
+
+const removebtn = document.querySelector  ("#removebtn");
+
+removebtn.addEventListener('click', () => {
+  list.removeChild(list.lastElementChild);
+});
 //1
 
 
@@ -75,4 +120,11 @@ addTaskBtn.addEventListener("click", () => {
   taskInput.value = "";
 });
 
-//
+
+
+const inp = document.querySelector("#inp");
+const output = document.querySelector("#output");
+
+inp.addEventListener("input", () => {
+  output.value = inp.value;
+});
