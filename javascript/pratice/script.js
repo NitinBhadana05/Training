@@ -128,3 +128,36 @@ const output = document.querySelector("#output");
 inp.addEventListener("input", () => {
   output.value = inp.value;
 });
+
+
+
+const form = document.querySelector("#form");
+const name = document.querySelector("#name");
+const message = document.querySelector("#message");
+const message1 = document.querySelector("#message1");
+const emailInput = document.querySelector("#email");
+
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const emailValue = emailInput.value.trim();
+
+  if (!name.value.trim()) {
+    message.textContent = "please enter your name";
+    return;
+  }else {
+  message.textContent = "Success";
+  }
+
+
+  if (!emailValue) {
+    message.textContent = "Please enter your email";
+    return; 
+  }
+
+  if (!emailValue.includes("@") || !emailValue.includes("."))  {
+    message1.textContent = "Please enter a valid email";
+    return;
+  }
+
+  message.textContent = "Success";
+});

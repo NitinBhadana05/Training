@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Stock Dashboard</title>
+  <link rel="stylesheet" href="style/stock_dashord.css">
+</head>
+<body>
+
+<div class="container">
+
+  <!-- 📋 Sidebar -->
+  <div class="sidebar">
+    <h3>Companies</h3>
+    <ul id="companyList"></ul>
+  </div>
+
+  <!-- 📊 Main Content -->
+  <div class="main">
+    <h2>📊 Stock Dashboard</h2>
+
+    <input type="text" id="search" placeholder="Search company...">
+    <button onclick="searchStock()">Search</button>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Company</th>
+          <th>Symbol</th>
+          <th>Price</th>
+          <th>High</th>
+          <th>Low</th>
+          <th>Volume</th>
+        </tr>
+      </thead>
+      <tbody id="stockTable"></tbody>
+    </table>
+  </div>
+
+</div>
+
+<script src="script/stock_dashord.js"></script>
+</body>
+</html>
