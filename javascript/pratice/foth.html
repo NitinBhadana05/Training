@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Todo App</title>
+  <style>
+    body {
+      font-family: Arial;
+      display: flex;
+      justify-content: center;
+      margin-top: 50px;
+    }
+
+    .container {
+      width: 300px;
+      text-align: center;
+    }
+
+    input {
+      padding: 10px;
+      width: 70%;
+    }
+
+    button {
+      padding: 10px;
+      cursor: pointer;
+    }
+
+    li {
+      list-style: none;
+      margin: 10px 0;
+      display: flex;
+      justify-content: space-between;
+      background: #f2f2f2;
+      padding: 8px;
+      border-radius: 5px;
+    }
+
+    .completed {
+      text-decoration: line-through;
+      color: gray;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>To-Do List</h2>
+  <input type="text" id="taskInput" placeholder="Enter task">
+  <button onclick="addTask()">Add</button>
+
+  <ul id="taskList"></ul>
+</div>
+
+<script>
+  function addTask() {
+    let input = document.getElementById("taskInput");
+    let taskText = input.value;
+
+    if (taskText === "") return;
+
+    let li = document.createElement("li");
+    li.innerText = taskText;
+
+    // Mark complete
+    li.onclick = function () {
+      li.classList.toggle("completed");
+    };
+
+    // Delete button
+    let delBtn = document.createElement("button");
+    delBtn.innerText = "❌";
+
+    delBtn.onclick = function (e) {
+      e.stopPropagation(); // prevents triggering complete
+      li.remove();
+    };
+
+    li.appendChild(delBtn);
+
+    document.getElementById("taskList").appendChild(li);
+
+    input.value = "";
+  }
+</script>
+
+</body>
+</html>

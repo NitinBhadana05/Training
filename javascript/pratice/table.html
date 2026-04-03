@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Table Example</title>
+
+  <style>
+    body {
+      font-family: Arial;
+      display: flex;
+      justify-content: center;
+      margin-top: 40px;
+    }
+
+    table {
+      width: 60%;
+      border-collapse: collapse;
+      text-align: center;
+    }
+
+    th, td {
+      border: 1px solid black;
+      padding: 10px;
+    }
+
+    thead {
+      background-color: black;
+      color: white;
+    }
+
+    tbody tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    tbody tr:hover {
+      background-color: #ddd;
+    }
+
+    tfoot {
+      background-color: #333;
+      color: white;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+<table>
+
+  <!-- 🔹 Table Head -->
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Course</th>
+    </tr>
+  </thead>
+
+  <!-- 🔹 Table Body -->
+  <tbody>
+    <tr>
+      <td rowspan="2">Nitin</td>
+      <td>20</td>
+      <td>BCA</td>
+    </tr>
+
+    <tr>
+      
+      
+      <td>22</td>
+      <td>B.Tech</td>
+    </tr>
+
+    <tr>
+      <td>Aman</td>
+      <td>21</td>
+      <td>BBA</td>
+    </tr>
+  </tbody>
+
+  <!-- 🔹 Table Footer -->
+  <tfoot>
+    <tr>
+      <td colspan="2">Total Students</td>
+      <td>3</td>
+    </tr>
+  </tfoot>
+
+</table>
+
+</body>
+</html>
