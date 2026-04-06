@@ -1,0 +1,43 @@
+.card{
+  border: 2px solid black;
+  width: 20%;
+  height: 300px;
+  padding: 20px;
+  margin: 20px;
+  
+}
+.card h1{
+  display: flex;
+}
+
+form{
+
+  border: 2px solid black;
+  display: block;
+  margin: 10px;
+  padding: 20px;
+  gap: 30px;
+  height: 200px;
+  width: 40%;
+  text-align: center;
+}
+
+form label{
+
+  padding: 30px;
+}
+
+form input{
+  border: 1px solid black;
+}
+form input:focus::placeholder{
+  opacity: 0;
+}
+
+.completed {
+  
+  text-decoration: line-through;
+  color: gray;
+  text-decoration-thickness: 3px;
+}
+
