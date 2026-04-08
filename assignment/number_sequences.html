@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Number Sequences</title>
+  <link rel="stylesheet" href="number_sequences.css">
+</head>
+<body>
+
+<section class="app">
+  
+  <!-- Header -->
+  <header class="header">
+    <h1>Number Sequences</h1>
+    <p>Generate sequences of numbers</p>
+  </header>
+
+  <!-- Buttons Section -->
+  <div class="btn-container">
+    
+    
+    <!-- Prime -->
+    <div class="card">
+      <button onclick="openModal('modal-prime')" class="btn prime">
+        Prime Numbers
+      </button>
+
+      <div id="modal-prime" class="modal">
+        <div class="modal-content">
+          <h2>Prime Numbers</h2>
+          <p>Enter a range to generate a sequence of prime numbers.</p><hr>
+          <div class="form">
+            <div class="ninput">
+              <label for="prime-start">Start:</label>
+              <input type="text" id="prime-start" placeholder="Enter the starting number"><br><br>
+              
+              <label for="prime-end">End:</label>
+              <input type="text" id="prime-end" placeholder="Enter the ending number">
+              <p id ="prime-error" class="error"></p>
+            </div>
+            <div class="fbutton">
+              <button id="primeButton" class="close btn prime">Generate</button>
+              <button onclick="closeModal('modal-prime')" class="close btn oddeven">Close</button>      
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Factorial -->
+    <div class="card">
+      <button onclick="openSlider('slider-factorial')" class="btn factorial">
+        Factorial
+      </button>
+
+      <div id="slider-factorial" class="slider">
+        <h2>Factorial</h2>
+        <p>Enter a number to calculate its factorial.</p><hr>
+        <div class="form">
+          <div class="ninput side">
+            <label for="factorial-value">Value:</label>
+            <input type="text" id="factorial-value" placeholder="Enter the number">
+            <p id ="factorial-error" class="error"></p>
+            <br><br>
+                                                 
+          </div>
+          <div class="fbutton sid ">
+            <button id="factorialButton" class="close btn prime">Calculate</button>
+            <button onclick="closeSlider('slider-factorial')" class="close btn oddeven">Close</button>      
+          </div>
+        </div>
+        
+      </div>
+    </div>
+
+    <!-- Odd Even -->
+    <div class="card">
+      <button onclick="openModal('modal-odd-even')" class="btn oddeven">
+        Odd / Even
+      </button>
+
+      <div id="modal-odd-even" class="modal">
+        <div class="modal-content">
+            <div>
+              <h2>Odd / Even</h2>
+              <p>Enter a number to check whether it is an odd or even number.</p><hr>
+              <div class="form">
+                <div class="ninput">
+                  <label for="oddeven-value">Value:</label>
+                  <input type="text" id="oddeven-value" placeholder="Enter the number"><br><br>
+                  <p id ="oddeven-error" class="error"></p>                             
+                </div>
+                <div class="fbutton">
+                  <button id="oddevenButton" class="close btn prime">Check</button>
+                  <button onclick="closeModal('modal-odd-even')" class="close btn oddeven">Close</button>      
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Fibonacci -->
+    <div class="card">
+      <button onclick="openSlider('slider-fibonacci')" class="btn fibonacci">
+        Fibonacci Series
+      </button>
+
+      <div id="slider-fibonacci" class="slider">
+        <h2>Fibonacci Series</h2>
+        <p>Enter a range to generate a Fibonacci series.</p><hr>
+        <div class="form">
+          <div class="ninput side">
+            <label for="fibonacci-value">Range:</label>
+            <input type="text" id="fibonacci-value" placeholder="Enter the range"><br><br>
+             <p id ="fibonacci-error" class="error"></p>                                    
+          </div>
+          <div class="fbutton sid">
+            <button id="fibonacciButton" class="close btn prime">Generate</button>
+            <button onclick="closeSlider('slider-fibonacci')" class="close btn oddeven">Close</button>      
+          </div>
+        </div>
+        
+       
+      </div>
+    </div>
+
+    <!-- Armstrong -->
+    <div class="card">
+      <button onclick="openModal('modal-armstrong')" class="btn armstrong">
+        Armstrong Numbers
+      </button>
+
+      <div id="modal-armstrong" class="modal">
+        <div class="modal-content">
+          <h2>Armstrong Numbers</h2>
+          <p>Check if a number is an Armstrong number.</p><hr>
+          <div class="form">
+            <div class="ninput">
+              <label for="armstrong-value">Value:</label>
+              <input type="text" id="armstrong-value" placeholder="Enter the number"><br><br>
+               <p id ="armstrong-error" class="error"></p>                                  
+            </div>
+            <div class="fbutton">
+              <button id="armstrongButton" class="close btn prime">Check</button>
+              <button onclick="closeModal('modal-armstrong')" class="close btn oddeven">Close</button>      
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+
+  </div>
+  
+
+  <!-- Result Section -->
+  <div class="result-container" id="reslt_section" style="display: none;">
+    <h2>Result</h2><hr>
+    <div>
+      <ol id="result-list"></ol>
+      <button id="clearButton"  style="display: none; margin-left: 300px; width: 100px; height: 30px;" onclick="clearResult()  ">Clear</button>
+    </div>
+  </div>
+
+</section>
+
+
+<script src="number_sequences.js"></script>
+</body>
+</html>
