@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Number Logics</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>   
+<body>
+  <section>
+
+    <header>
+      <h1>Number Logics</h1>
+      <p>Generate sequences of numbers</p>
+    </header>
+
+    <fieldset>
+      <legend>Select an option</legend>
+
+      <div class="container">
+
+        <!-- PRIME -->
+        <div class="card">
+          <div class="btn-container">
+            <button class="open primary" onclick="openmodal('prime-modal')">Prime</button>
+          </div>
+
+          <div id="prime-modal" class="modal">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h2>Prime Number</h2>
+                <p>Enter a range to generate prime numbers</p><hr>
+              </div>
+
+              <div class="modal-body">
+
+                <form action="/prime" method="post">
+
+                  <label>From:</label>
+                  <input type="number" name="start" id="from" placeholder="Enter starting range"><br><br>
+
+                  <label>To:</label>
+                  <input type="number" name="end" id="to" placeholder="Enter Ending range"><br><br>
+                  
+
+                  <button type="submit" class="open primary">Generate</button>
+
+                </form>
+
+                <button class="close" onclick="closemodal('prime-modal')">close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FACTORIAL -->
+        <div class="card">
+          <div class="btn-container">
+            <button class="open green" onclick="openmodal('factorial-modal')">Factorial</button>
+          </div>
+
+          <div id="factorial-modal" class="modal">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h2>Factorial</h2>
+                <p>Enter a Number to calculate its factorial</p><hr>
+              </div>
+
+              <div class="modal-body">
+
+                <form action="/factorial" method="post">
+
+                  <label for="factvalue">Value:</label>
+                  <input type="number" name="value" id="factvalue"><br><br>
+
+                  <button type="submit" class="open green">Calculate</button>
+
+                </form>
+
+                <button class="close" onclick="closemodal('factorial-modal')">close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FIBONACCI -->
+        <div class="card">
+          <div class="btn-container">
+            <button class="open danger" onclick="openmodal('fibonacci-modal')">Fibonacci Series</button>
+          </div>
+
+          <div id="fibonacci-modal" class="modal">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h2>Fibonacci Series</h2>
+                <p>Enter a range to generate Fibonacci Series</p><hr>
+              </div>
+
+              <div class="modal-body">
+
+                <form action="/fibonacci" method="post">
+
+                  <label for="fibvalue">Range:</label>
+                  <input type="number" name="value" id="fibvalue"><br><br>
+
+                  <button type="submit" class="open danger">Generate</button>
+
+                </form>
+
+                <button class="close" onclick="closemodal('fibonacci-modal')">close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- REVERSE -->
+        <div class="card">
+          <div class="btn-container">
+            <button class="open yellow" onclick="openmodal('reverse-modal')">Reverse Number</button>
+          </div>
+
+          <div id="reverse-modal" class="modal">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h2>Reverse</h2>
+                <p>Enter a Number to generate its Reverse</p><hr>
+              </div>
+
+              <div class="modal-body">
+
+                <form action="/reverse" method="post">
+
+                  <label for="revvalue">Value:</label>
+                  <input type="number" name="value" id="revvalue"><br><br>
+
+                  <button type="submit" class="open yellow">Reverse</button>
+
+                </form>
+
+                <button class="close" onclick="closemodal('reverse-modal')">close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ARMSTRONG -->
+        <div class="card">
+          <div class="btn-container">
+            <button class="open gray" onclick="openmodal('armstrong-modal')">Armstrong Number</button>
+          </div>
+
+          <div id="armstrong-modal" class="modal">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h2>Armstrong Number</h2>
+                <p>Enter a Number to check Armstrong</p><hr>
+              </div>
+
+              <div class="modal-body">
+
+                <form action="/armstrong" method="post">
+
+                  <label for="armvalue">Value:</label>
+                  <input type="number" name="value" id="armvalue"><br><br>
+
+                  <button type="submit" class="open gray">Check</button>
+
+                </form>
+
+                <button class="close" onclick="closemodal('armstrong-modal')">close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- STRONG -->
+        <div class="card">
+          <div class="btn-container">
+            <button class="open danger" onclick="openmodal('strong-modal')">Strong Number</button>
+          </div>
+
+          <div id="strong-modal" class="modal">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h2>Strong Number</h2>
+                <p>Enter a Number to check Strong</p><hr>
+              </div>
+
+              <div class="modal-body">
+
+                <form action="/strong" method="post">
+
+                  <label for="strvalue">Value:</label>
+                  <input type="number" name="value" id="strvalue"><br><br>
+
+                  <button type="submit" class="open danger">Check</button>
+
+                </form>
+
+                <button class="close" onclick="closemodal('strong-modal')">close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ODD EVEN -->
+        <div class="card">
+          <div class="btn-container">
+            <button class="open primary" onclick="openmodal('evenodd-modal')">ODD / EVEN</button>
+          </div>
+
+          <div id="evenodd-modal" class="modal">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h2>ODD / EVEN</h2>
+                <p>Enter a number to check</p><hr>
+              </div>
+
+              <div class="modal-body">
+
+                <form action="/evenodd" method="post">
+
+                  <label for="oddeven">Value:</label>
+                  <input type="number" name="value" id="oddeven"><br><br>
+
+                  <button type="submit" class="open primary" id="check">Check</button>
+                  <button class="close" onclick="closemodal('evenodd-modal')">close</button>
+
+                </form>
+
+                
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </fieldset>
+
+    <footer>
+      <div class="result-container">
+        <h3>Result</h3>
+        <hr>
+        <h3 id="result">{{ result }}</h3>
+      </div>
+    </footer>
+
+  </section>
+
+<script src="/static/script.js"></script>
+</body>
+</html>
