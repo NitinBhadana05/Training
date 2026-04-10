@@ -1,0 +1,11 @@
+<h1>Hello Rails</h1>
+
+
+<h2><%= @message %></h2>
+<p>Age: <%= @age %></p>
+<p>Time: <%= @time.strftime("%d %b %Y %H:%M") %></p>
+<% if @age > 18 %>
+  <p>Adult</p>
+<% else %>
+  <p>Minor</p>
+<% end %>
