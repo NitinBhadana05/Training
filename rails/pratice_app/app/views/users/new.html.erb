@@ -1,0 +1,19 @@
+
+<h1>Register User</h1>
+
+<% if @user.errors.any? %>
+  <% @user.errors.full_messages.each do |error| %>
+    <p style="color:red;"><%= error %></p>
+  <% end %>
+<% end %>
+
+<form action="/users" method="post">
+  <input type="text" name="user[name]" placeholder="Name"><br><br>
+  <input type="email" name="user[email]" placeholder="Email"><br><br>
+  <input type="password" name="user[password]" placeholder="Password"><br><br>
+  <input type="password" name="user[password_confirmation]" placeholder="Confirm Password"><br><br>
+  <input type="text" name="user[phone]" placeholder="Phone"><br><br>
+  <button type="submit">Register</button>
+</form>
+
+<a href="/users">Back</a>

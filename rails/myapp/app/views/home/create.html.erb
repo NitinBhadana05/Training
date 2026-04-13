@@ -1,0 +1,19 @@
+<h1>New Post</h1>
+
+<% if @post.errors.any? %>
+  <ul>
+    <% @post.errors.full_messages.each do |error| %>
+      <li><%= error %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<form action="/posts" method="post">
+  <input type="text" name="post[title]" placeholder="Title">
+  <br>
+
+  <textarea name="post[content]" placeholder="Content"></textarea>
+  <br>
+
+  <button type="submit">Create</button>
+</form>

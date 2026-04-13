@@ -1,0 +1,19 @@
+<h1>Search Posts</h1>
+
+<form action="/search" method="get">
+  <input type="text" name="keyword" placeholder="Search title">
+  <button type="submit">Search</button>
+</form>
+
+<hr>
+
+
+<% if @posts.any? %>
+  
+  <% @posts.each do |post| %>
+    <p><%= post.title %></p>
+  <% end %>
+  <% else %>
+  <p>No result found</p>
+  
+<% end %>

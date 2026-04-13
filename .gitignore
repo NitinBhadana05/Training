@@ -1,12 +1,131 @@
-# Virtual environments
-*_env/
-venv/
-env/
+# 🔹 Bundler
+/vendor/bundle
 
-# Python cache
+# 🔹 Rails Logs & Temp
+/log/*
+/tmp/*
+!/log/.keep
+!/tmp/.keep
+
+# 🔹 Storage
+/storage/*
+!/storage/.keep
+
+# 🔹 Database
+/db/*.sqlite3
+/db/*.sqlite3-journal
+
+# 🔹 Environment
+.env
+.env.*
+nitin/
+nitin_env/
+
+# 🔹 Node
+/node_modules
+
+# 🔹 Logs
+*.log
+
+# 🔹 System
+.DS_Store
+Thumbs.db
+
+# 🔹 Editor
+.vscode/
+.idea/
+*.iml
+
+# 🔹 Ruby
+*.gem
+
+# 🔹 Credentials
+/config/master.key
+
+# 🔹 Temp
+*.swp
+*.swo
+
+# 🔹 Coverage
+/coverage/
+
+# 🔹 Python cache
 __pycache__/
 *.pyc
+*.pyo
 
-# Environment variables
+/.bundle
+# Ignore all logfiles and tempfiles.
+/log/*
+/tmp/*
+!/log/.keep
+!/tmp/.keep
+
+# Ignore pidfiles, but keep the directory.
+/tmp/pids/*
+!/tmp/pids/
+!/tmp/pids/.keep
+
+# Ignore uploaded files in development.
+/storage/*
+!/storage/.keep
+/tmp/storage/*
+!/tmp/storage/
+!/tmp/storage/.keep
+
+# Ignore the default SQLite database.
+/db/*.sqlite3
+/db/*.sqlite3-journal
+/db/*.sqlite3-wal
+
+# Ignore master key for decrypting credentials and more.
+/config/master.key
+/config/credentials/*.key
+
+# Kamal deployment secrets (CRITICAL)
+/.kamal/secrets
+/.kamal/secrets-common
 .env
-.vscode
+.env*.local
+
+# Ignore system files
+.DS_Store
+
+# Ignore bundler config.
+rails/myapp/.bundle
+
+# Ignore all logfiles and tempfiles.
+rails/myapp/log/*
+rails/myapp/tmp/*
+!rails/myapp/log/.keep
+!rails/myapp/tmp/.keep
+
+# Ignore pidfiles, but keep the directory.
+rails/myapp/tmp/pids/*
+!rails/myapp/tmp/pids/
+!rails/myapp/tmp/pids/.keep
+
+# Ignore uploaded files in development.
+rails/myapp/storage/*
+!rails/myapp/storage/.keep
+rails/myapp/tmp/storage/*
+!rails/myapp/tmp/storage/
+!rails/myapp/tmp/storage/.keep
+
+# Ignore the default SQLite database.
+rails/myapp/db/*.sqlite3
+rails/myapp/db/*.sqlite3-journal
+rails/myapp/db/*.sqlite3-wal
+
+# Ignore master key for decrypting credentials and more.
+rails/myapp/config/master.key
+rails/myapp/config/credentials/*.key
+
+# Kamal deployment secrets (CRITICAL)
+rails/myapp/.kamal/secrets
+rails/myapp/.kamal/secrets-common
+rails/myapp/.env
+rails/myapp/.env*.local
+
+# Ignore system files
+.DS_Store

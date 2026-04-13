@@ -1,6 +1,23 @@
+
+
 <h1>Hello Rails</h1>
 
+<h2><a href="/about">About</a></h2>
+<h2><a href="/contact">Content</a></h2>
 
+
+<div>
+
+<h3>Search Posts</h3>
+
+<button><a href="/search">Search</button></a>
+
+<h3>Create Posts</h3>
+
+<button><a href="/search">Search</button></a>
+
+<hr>
+</div>
 <h2><%= @message %></h2>
 <p>Age: <%= @age %></p>
 <p>Time: <%= @time.strftime("%d %b %Y %H:%M") %></p>
@@ -9,3 +26,69 @@
 <% else %>
   <p>Minor</p>
 <% end %>
+
+<hr>
+1.<h2>Task 1</h2>
+
+<% @posts.each do |post| %>
+  <div>
+    <h3><%= post.title %></h3>
+    <a href="/posts/<%= post.id%>">view</a>
+    <hr>
+
+  </div>  
+<% end %> 
+
+2. <h2>Task 2</h2>
+
+<% @posts.each do |post| %>
+  <div>
+
+    <h3><%= post.id %> <%= post.title %></h3>
+  </div>  
+<% end %> 
+
+3. <h2>Task 3</h2>
+<% @posts.each do |post|%>
+<div>
+  
+  <% if post==0 %>
+  <p>No Post avalible</p>
+      
+  <% end %>
+  
+</div>
+<% end %>
+
+4. <h2>Task 4</h2>
+<% @posts.each do |post| %>
+  <div>
+    <h3>Title: <%= post.title%></h3>
+    <p>Content: <%= post.content%></p>
+    <hr>
+  </div>
+<% end %>
+
+5. <h2>Task 5</h2>
+  <h2>Posts</h2>
+
+<% if @posts.empty? %>
+  <p>No posts available</p>
+<% else %>
+  <% @posts.each_with_index do |post, index| %>
+    <div>
+      <h3><%= index + 1 %>. <%= post.title %></h3>
+      <p><%= post.content %></p>
+
+      
+
+      <hr>
+    </div>
+  <% end %>
+<% end %>
+
+
+
+
+
+
