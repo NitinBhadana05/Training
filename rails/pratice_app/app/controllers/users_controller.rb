@@ -5,6 +5,31 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
+  def tasks
+    @task_message = "This is task page"
+    @task = Task.new
+    @tasks = Task.order(created_at: :desc)
+  end
+
+  def create_task
+    @task = Task.new(task_params)
+
+    if @task.save
+      redirect_to "/tasks"
+    else
+      @task_message = "this is task page"
+      @tasks = Task.order(created_at: :desc)
+      render :tasks, status: :unprocessable_entity
+    end
+  end
+
+  def destroy_task
+    @task = Task.find_by(id: params[:id])
+    @task&.destroy
+    redirect_to "/tasks"
+  end
+
+
   def new
     @user = User.new
   end
@@ -48,5 +73,19 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation, :phone)
   end
+
+  def task_params
+    params.require(:task).permit(:title, :status)
+  end
+
+
+
+
+
+
+
+
+
+
 
 end

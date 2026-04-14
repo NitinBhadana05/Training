@@ -1,0 +1,58 @@
+<h1><%= @task_message %></h1>
+
+<h2>Create Task</h2>
+
+<% if @task&.errors&.any? %>
+  <div>
+    <h3><%= pluralize(@task.errors.count, "error") %> prevented this task from being saved:</h3>
+    <ul>
+      <% @task.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<form action="/tasks" method="post">
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+
+  <p>
+    <label for="task_title">Task :</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <input id="task_title" type="text" name="task[title]" value="<%= @task&.title %>" placeholder="Enter your task" >
+  </p>
+
+  <p>
+    <label for="task_status">Status :</label>&nbsp;&nbsp;&nbsp;
+    <select id="task_status" name="task[status]">
+      <option value="">Select status</option>
+      <option value="finished" <%= "selected" if @task&.status == "finished" %>>Finished...</option>
+      <option value="not finished" <%= "selected" if @task&.status == "not finished" %>>Pending...</option>
+    </select>
+  </p>
+
+  
+    <button type="submit">Create Task</button>
+  
+  <a href="/" style="margin-left: 10px;">
+  <button type="button">Go Back</button>
+</a>
+</form>
+
+<h2>All Tasks</h2>
+
+<% if @tasks.any? %>
+  <% @tasks.each do |task| %>
+    <div style="margin-bottom: 12px;">
+      <strong><%= task.title %></strong> |
+      <span><%= task.status %></span>
+
+      <form action="/tasks/<%= task.id %>" method="post" style="display:inline;">
+        <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+        <input type="hidden" name="_method" value="delete">
+        <button type="submit">Delete</button>
+      </form>
+    </div>
+  <% end %>
+<% else %>
+  <p>No tasks created yet.</p>
+<% end %>

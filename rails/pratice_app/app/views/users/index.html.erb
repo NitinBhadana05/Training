@@ -2,6 +2,7 @@
 
 <a href="/users/new">Create User</a>
 
+
 <% @users.each do |user| %>
   <p>
     <%= user.name %> |
@@ -16,3 +17,7 @@
 
   </p>
 <% end %>
+<hr>
+<a href="/tasks" style="margin-left: 10px;">
+  <button type="button">Open Tasks Page</button>
+</a>

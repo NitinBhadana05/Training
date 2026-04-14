@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get "contact", to:"home#contact"
   get "posts", to:"home#index"
   get "posts/:id", to:"home#show"
+  get "show", to:"home#show"
   get "search", to:"home#search"
   get "create", to:"home#create"
   root "home#index"
