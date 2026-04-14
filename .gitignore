@@ -129,3 +129,14 @@ rails/myapp/.env*.local
 
 # Ignore system files
 .DS_Store
+
+# User auth Python app
+assignment/user_authentication_system/.env
+assignment/user_authentication_system/.codex
+assignment/user_authentication_system/.venv/
+assignment/user_authentication_system/venv/
+assignment/user_authentication_system/__pycache__/
+assignment/user_authentication_system/*.py[cod]
+assignment/user_authentication_system/.pytest_cache/
+assignment/user_authentication_system/.mypy_cache/
+assignment/user_authentication_system/.ruff_cache/
