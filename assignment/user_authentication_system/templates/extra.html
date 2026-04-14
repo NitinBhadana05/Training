@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Extra Protected Page{% endblock %}
+{% block content %}
+<section class="w-full rounded-[2rem] bg-white p-6 shadow-soft sm:p-8">
+    <div class="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
+        <div>
+            <p class="text-sm font-medium uppercase tracking-[0.2em] text-gold">Protected page</p>
+            <h1 class="mt-3 text-3xl font-semibold">Extra page</h1>
+            <p class="mt-2 text-sm text-slate-600">This is an extra protected page.</p>
+        </div>
+        <div class="flex gap-3">
+            <a href="/dashboard" class="rounded-2xl border border-slate-300 px-5 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-100">Dashboard</a>
+            <form method="post" action="/logout">
+                <button type="submit" class="rounded-2xl bg-ink px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-800">Logout</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="mt-8 grid gap-5 md:grid-cols-3">
+        <article class="rounded-[1.5rem] bg-slate-50 p-6">
+            <p class="text-sm text-slate-500">Current user</p>
+            <h2 class="mt-2 text-xl font-semibold text-slate-900">{{ user.name }}</h2>
+            <p class="mt-2 text-sm text-slate-600">{{ user.email }}</p>
+        </article>
+        <article class="rounded-[1.5rem] bg-amber-50 p-6">
+            <p class="text-sm text-amber-700">Session rule</p>
+            <h2 class="mt-2 text-xl font-semibold text-slate-900">Authenticated only</h2>
+            <p class="mt-2 text-sm text-slate-600">Unauthenticated visitors are redirected to login.</p>
+        </article>
+        <article class="rounded-[1.5rem] bg-emerald-50 p-6">
+            <p class="text-sm text-emerald-700">Architecture</p>
+            <h2 class="mt-2 text-xl font-semibold text-slate-900">Clean separation</h2>
+            <p class="mt-2 text-sm text-slate-600">Templates, routes, services, and persistence remain separated.</p>
+        </article>
+    </div>
+</section>
+{% endblock %}

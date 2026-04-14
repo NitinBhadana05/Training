@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<section class="w-full rounded-[2rem] bg-white p-6 shadow-soft sm:p-8">
+    <div class="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
+        <div>
+            <p class="text-sm font-medium uppercase tracking-[0.2em] text-gold">Protected page</p>
+            <h1 class="mt-3 text-3xl font-semibold">Dashboard</h1>
+            <p class="mt-2 max-w-2xl text-sm text-slate-600"></p>
+        </div>
+        <form method="post" action="/logout">
+            <button type="submit" class="rounded-2xl border border-slate-300 px-5 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-100">
+                Logout
+            </button>
+        </form>
+    </div>
+
+    {% include "partials/messages.html" %}
+
+    <div class="mt-8 grid gap-5 lg:grid-cols-[1.15fr_0.85fr]">
+        <div class="rounded-[1.75rem] bg-ink p-8 text-white">
+            <p class="text-sm uppercase tracking-[0.18em] text-amber-200">Welcome</p>
+            <h2 class="mt-4 text-3xl font-semibold">{{ user.name }}</h2>
+            <p class="mt-3 text-slate-200">{{ user.email }}</p>
+            <p class="mt-6 text-sm text-slate-300">Account created on {{ user.created_at.strftime("%d %b %Y, %I:%M %p") }}</p>
+        </div>
+
+        <div class="rounded-[1.75rem] border border-slate-200 bg-slate-50 p-8">
+            <h3 class="text-xl font-semibold text-slate-900">Navigation</h3>
+            <p class="mt-2 text-sm text-slate-600">Move to another protected route or test logout behavior.</p>
+            <div class="mt-6 space-y-3">
+                <a href="/extra" class="block rounded-2xl bg-white px-5 py-4 text-sm font-semibold text-slate-900 transition hover:border-slate-300 hover:shadow-md">
+                    Open extra protected page
+                </a>
+                <a href="/login" class="block rounded-2xl bg-white px-5 py-4 text-sm font-semibold text-slate-900 transition hover:border-slate-300 hover:shadow-md">
+                    Return to login page
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

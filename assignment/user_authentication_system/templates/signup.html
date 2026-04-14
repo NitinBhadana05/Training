@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}Sign Up{% endblock %}
+{% block content %}
+<section class="grid w-full gap-8 lg:grid-cols-[1.05fr_0.95fr]">
+    <div class="hidden rounded-[2rem] bg-ink p-10 text-white shadow-soft lg:block">
+        <span class="inline-flex rounded-full bg-white/10 px-4 py-1 text-sm">Secure onboarding</span>
+        <h1 class="mt-6 max-w-md text-4xl font-semibold leading-tight">Create an account with strong password protection from day one.</h1>
+        <p class="mt-4 max-w-lg text-base text-slate-200">
+            The application uses PostgreSQL, SQLAlchemy, bcrypt hashing, and JWT-based sessions.
+        </p>
+        <div class="mt-10 grid gap-4">
+            <div class="rounded-2xl border border-white/10 bg-white/5 p-5">
+                <h2 class="text-lg font-medium">Password policy</h2>
+                <p class="mt-2 text-sm text-slate-200">Minimum 8 characters and at least one special character.</p>
+            </div>
+            <div class="rounded-2xl border border-white/10 bg-white/5 p-5">
+                <h2 class="text-lg font-medium">Protected pages</h2>
+                <p class="mt-2 text-sm text-slate-200">Dashboard and extra routes require a valid JWT session.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="rounded-[2rem] bg-white p-6 shadow-soft sm:p-8">
+        <p class="text-sm font-medium uppercase tracking-[0.2em] text-gold">Account setup</p>
+        <h1 class="mt-3 text-3xl font-semibold">Sign up</h1>
+        <p class="mt-2 text-sm text-slate-600">Create your account to access the protected dashboard.</p>
+
+        {% include "partials/messages.html" %}
+
+        <form method="post" action="/signup" class="space-y-5" data-validate>
+            <div>
+                <label for="name" class="mb-2 block text-sm font-medium text-slate-700">Full name</label>
+                <input id="name" name="name" type="text" value="{{ form_data.name if form_data else '' }}" required minlength="2"
+                    class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 outline-none transition focus:border-gold focus:bg-white focus:ring-2 focus:ring-amber-100">
+            </div>
+            <div>
+                <label for="email" class="mb-2 block text-sm font-medium text-slate-700">Email address</label>
+                <input id="email" name="email" type="email" value="{{ form_data.email if form_data else '' }}" required
+                    class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 outline-none transition focus:border-gold focus:bg-white focus:ring-2 focus:ring-amber-100">
+            </div>
+            <div>
+                <label for="password" class="mb-2 block text-sm font-medium text-slate-700">Password</label>
+                <input id="password" name="password" type="password" required minlength="8" pattern="^(?=.*[!@#$%^&*(),.?&quot;:{}|&lt;&gt;_\-+=\/\\[\];']).{8,}$"
+                    class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 outline-none transition focus:border-gold focus:bg-white focus:ring-2 focus:ring-amber-100">
+                <p class="mt-2 text-xs text-slate-500">Use at least 8 characters and one special character.</p>
+            </div>
+            <div>
+                <label for="confirm_password" class="mb-2 block text-sm font-medium text-slate-700">Confirm password</label>
+                <input id="confirm_password" name="confirm_password" type="password" required minlength="8"
+                    class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 outline-none transition focus:border-gold focus:bg-white focus:ring-2 focus:ring-amber-100">
+            </div>
+            <button type="submit"
+                class="w-full rounded-2xl bg-ink px-4 py-3 text-sm font-semibold text-white transition hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-300">
+                Create account
+            </button>
+        </form>
+
+        <p class="mt-6 text-sm text-slate-600">
+            Already registered?
+            <a href="/login" class="font-semibold text-ember transition hover:text-orange-700">Go to login</a>
+        </p>
+    </div>
+</section>
+{% endblock %}
