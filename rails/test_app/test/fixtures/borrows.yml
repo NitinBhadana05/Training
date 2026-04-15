@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  copy: one
+  issued_at: 2026-04-15 15:38:06
+  due_at: 2026-04-15 15:38:06
+  returned_at: 2026-04-15 15:38:06
+  fine: 9.99
+  status: MyString
+
+two:
+  user: two
+  copy: two
+  issued_at: 2026-04-15 15:38:06
+  due_at: 2026-04-15 15:38:06
+  returned_at: 2026-04-15 15:38:06
+  fine: 9.99
+  status: MyString
