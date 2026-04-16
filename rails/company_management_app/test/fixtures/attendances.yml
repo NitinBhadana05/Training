@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  employee: one
+  attendance_date: 2026-04-16
+  check_in: 2026-04-16 16:50:33
+  check_out: 2026-04-16 16:50:33
+
+two:
+  employee: two
+  attendance_date: 2026-04-16
+  check_in: 2026-04-16 16:50:33
+  check_out: 2026-04-16 16:50:33
