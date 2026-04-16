@@ -10,7 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_14_071440) do
+ActiveRecord::Schema[8.1].define(version: 2026_04_16_045641) do
+  create_table "marks", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "exam_type"
+    t.string "grade"
+    t.integer "marks"
+    t.integer "student_id", null: false
+    t.string "subject"
+    t.datetime "updated_at", null: false
+    t.index ["student_id"], name: "index_marks_on_student_id"
+  end
+
+  create_table "students", force: :cascade do |t|
+    t.boolean "actie"
+    t.integer "age"
+    t.string "course"
+    t.datetime "created_at", null: false
+    t.string "email"
+    t.date "enroll_on"
+    t.string "name"
+    t.datetime "updated_at", null: false
+  end
+
   create_table "tasks", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "status"
@@ -26,4 +48,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_14_071440) do
     t.string "phone"
     t.datetime "updated_at", null: false
   end
+
+  add_foreign_key "marks", "students"
 end
