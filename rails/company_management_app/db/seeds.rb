@@ -1,3 +1,5 @@
+# data for department table
+
 dept = ["Sales", "Development", "Accounting", "HR", "Management", "Marketing",  "IT",]
 
 dept.each do |name|
@@ -6,7 +8,7 @@ dept.each do |name|
   end
 end
 
-
+# data for employee table
 
 employees_data = [
   { name: "Nitin", role: "Manager", dept: "HR", salary: 60000, doj: "2023-01-10" },
@@ -33,7 +35,7 @@ employees_data.each do |emp|
   )
 end
 
-
+# data for project table
 
 projects = []
 
@@ -50,7 +52,7 @@ end
 
 
 
-
+# data for assign table
 
 
 employees = Employee.limit(9)
@@ -65,7 +67,7 @@ employees.each do |emp|
 end
 
 
-
+# data for attendance table
 start_date = Date.today - 90
 end_date = Date.today
 
@@ -94,3 +96,30 @@ Employee.find_each do |emp|
 
   end
 end
+
+# data for book table
+
+books = Book.create!([
+  { title: "AI Basics", author: "Nitin", price: 500 },
+  { title: "Cyber Security", author: "Rahul", price: 800 },
+  { title: "Ruby on Rails", author: "Amit", price: 650 },
+  { title: "Data Structures", author: "Suresh", price: 400 },
+  { title: "Machine Learning", author: "Priya", price: 900 }
+])
+
+# data for order table
+Order.create!([
+  { user: "User1", book: books[0], issue_date: Date.today, return_date: Date.today + 3 },
+  { user: "User2", book: books[1], issue_date: Date.today, return_date: Date.today + 5 },
+  { user: "User3", book: books[2], issue_date: Date.today, return_date: Date.today + 2 },
+  { user: "User4", book: books[3], issue_date: Date.today, return_date: Date.today + 4 },
+  { user: "User5", book: books[4], issue_date: Date.today, return_date: Date.today + 6 },
+
+  { user: "User6", book: books[0], issue_date: Date.today, return_date: Date.today + 7 },
+  { user: "User7", book: books[1], issue_date: Date.today, return_date: Date.today + 3 },
+  { user: "User8", book: books[2], issue_date: Date.today, return_date: Date.today + 5 },
+  { user: "User9", book: books[3], issue_date: Date.today, return_date: Date.today + 2 },
+  { user: "User10", book: books[4], issue_date: Date.today, return_date: Date.today + 4 }
+])
+
+

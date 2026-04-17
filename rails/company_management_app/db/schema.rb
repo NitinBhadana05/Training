@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_16_115514) do
+ActiveRecord::Schema[8.1].define(version: 2026_04_17_070404) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -34,6 +34,14 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_16_115514) do
     t.index ["employee_id"], name: "index_attendances_on_employee_id"
   end
 
+  create_table "books", force: :cascade do |t|
+    t.string "author"
+    t.datetime "created_at", null: false
+    t.decimal "price"
+    t.string "title"
+    t.datetime "updated_at", null: false
+  end
+
   create_table "departments", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "name"
@@ -52,6 +60,16 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_16_115514) do
     t.index ["department_id"], name: "index_employees_on_department_id"
   end
 
+  create_table "orders", force: :cascade do |t|
+    t.bigint "book_id", null: false
+    t.datetime "created_at", null: false
+    t.date "issue_date"
+    t.date "return_date"
+    t.datetime "updated_at", null: false
+    t.string "user"
+    t.index ["book_id"], name: "index_orders_on_book_id"
+  end
+
   create_table "projects", force: :cascade do |t|
     t.decimal "budget", precision: 12, scale: 2
     t.datetime "created_at", null: false
@@ -65,4 +83,5 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_16_115514) do
   add_foreign_key "assigns", "projects"
   add_foreign_key "attendances", "employees"
   add_foreign_key "employees", "departments"
+  add_foreign_key "orders", "books"
 end
