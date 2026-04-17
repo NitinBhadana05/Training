@@ -122,4 +122,18 @@ Order.create!([
   { user: "User10", book: books[4], issue_date: Date.today, return_date: Date.today + 4 }
 ])
 
+# create authors
+a1 = Author.create!(name: "Nitin")
+a2 = Author.create!(name: "Rahul")
+a3 = Author.create!(name: "Priya")
 
+# use existing books
+b1 = Book.first
+b2 = Book.second
+
+# create relationships
+b1.authors << a1
+b1.authors << a2
+
+b2.authors << a2
+b2.authors << a3
