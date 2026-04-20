@@ -1,7 +1,13 @@
 class User < ApplicationRecord
   has_many :addresses
   validates_associated :addresses
+  validate :username_no_spaces
 
+  def username_no_spaces
+    if username.present? && username.include?(" ")
+      errors.add(:username, "cannot contain spaces")
+    end
+  end
   validates :name, presence: true
   validates :middle_name, absence: true
   validates :email, uniqueness: true
@@ -15,4 +21,5 @@ class User < ApplicationRecord
     end
 
   validates_with AgeValidator
+  validates_with EmailDomainValidator
 end
