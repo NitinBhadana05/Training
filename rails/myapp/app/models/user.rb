@@ -6,6 +6,7 @@ class User < ApplicationRecord
   validates :middle_name, absence: true
   validates :email, uniqueness: true
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
+  validates :email, presence: true, on: :create
   validates :password, confirmation: true
   validates_each :name do |record, attr, value|
       if value =~ /\d/
