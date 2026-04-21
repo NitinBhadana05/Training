@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  has_one :profile
   has_many :addresses
   validates_associated :addresses
   validate :username_no_spaces
