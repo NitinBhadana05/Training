@@ -10,7 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_16_045641) do
+ActiveRecord::Schema[8.1].define(version: 2026_04_22_064300) do
+  create_table "dish_ingredients", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.integer "dish_id", null: false
+    t.integer "ingredient_id", null: false
+    t.integer "quantity_required"
+    t.datetime "updated_at", null: false
+    t.index ["dish_id"], name: "index_dish_ingredients_on_dish_id"
+    t.index ["ingredient_id"], name: "index_dish_ingredients_on_ingredient_id"
+  end
+
+  create_table "dishes", force: :cascade do |t|
+    t.boolean "available", default: true, null: false
+    t.datetime "created_at", null: false
+    t.string "name"
+    t.decimal "price", precision: 10, scale: 2
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "ingredients", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "name"
+    t.integer "stock", default: 0, null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "marks", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "exam_type"
@@ -20,6 +45,16 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_16_045641) do
     t.string "subject"
     t.datetime "updated_at", null: false
     t.index ["student_id"], name: "index_marks_on_student_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.integer "dish_id", null: false
+    t.integer "quantity"
+    t.integer "status", default: 0
+    t.decimal "total_price", precision: 10, scale: 2
+    t.datetime "updated_at", null: false
+    t.index ["dish_id"], name: "index_orders_on_dish_id"
   end
 
   create_table "students", force: :cascade do |t|
@@ -49,5 +84,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_16_045641) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "dish_ingredients", "dishes"
+  add_foreign_key "dish_ingredients", "ingredients"
   add_foreign_key "marks", "students"
+  add_foreign_key "orders", "dishes"
 end
