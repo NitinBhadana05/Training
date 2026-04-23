@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  layout "mailer"
+  #layout "mailer"
   def home
     
 
