@@ -10,7 +10,11 @@ Rails.application.routes.draw do
   namespace :admin do
     get :dashboard
   end
+
+  
  
   root "pages#home"
+  get "contact", to: "pages#contact"
+  get "user", to: "pages#user"
  
 end

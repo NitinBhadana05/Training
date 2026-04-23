@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,19 +11,21 @@
 <body>
   <header>
     <h1>My App Header</h1>
-    <%= link_to "Home", root_path %>
-    <%= link_to "Posts", posts_path %>
-    <%= link_to "Dashboard", admin_dashboard_path%>
+    <%= link_to "Home", root_path %> &nbsp;&nbsp;
+    <%= link_to "Posts", posts_path %>&nbsp;&nbsp;
+    <%= link_to "Dashboard", admin_dashboard_path%>&nbsp;&nbsp;
+    <%= link_to "Contact", contact_path %>&nbsp;&nbsp;
+    <%= link_to "Users", user_path %>&nbsp;&nbsp;
   </header>
 
   <hr>
 
   <%= yield %>
 
-  <hr>
+  
 
   <footer>
-    <p>Footer Section</p>
+    <p>All right reserverd</p>
   </footer>
 </body>
 </html>
