@@ -11,7 +11,9 @@
 <body>
   <header>
     <h1>My App Header</h1>
-    <%= link_to "Home", root_path %> &nbsp;&nbsp;
+    <li class="<%= 'active' if current_page?(root_path) %>">
+  <%= link_to "Home", root_path %>
+</li>
     <%= link_to "Posts", posts_path %>&nbsp;&nbsp;
     <%= link_to "Dashboard", admin_dashboard_path%>&nbsp;&nbsp;
     <%= link_to "Contact", contact_path %>&nbsp;&nbsp;

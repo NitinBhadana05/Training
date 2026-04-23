@@ -1,0 +1,23 @@
+<% content_for :title do %>
+  Signup page
+<% end %>
+
+<h2>Signup</h2>
+
+<%= form_with model: @user, url:pages_path do |f| %>
+
+  <% if @user.errors.any? %>
+    <ul>
+      <% @user.errors.each do |error| %>
+        <li><%= error.full_message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <%= f.text_field :name %>
+  <%= f.email_field :email %>
+  <%= f.password_field :password %>
+
+  <%= f.submit "Register" %>
+
+<% end %>

@@ -2,6 +2,13 @@
   <h3><%= post.title %></h3>
   <p><%= post.body %></p>
 
-  <%= link_to "View", post_path(post) %>
+  <%= link_to "View", post_path(post) %><br>
+
+  <%= truncate(post.body, length: 10) %>
+
+
+  <%= highlight("Learning Rails is fun", "Rails") %>
+
+  <%= simple_format(post.body) %>
 </div>
 <hr>

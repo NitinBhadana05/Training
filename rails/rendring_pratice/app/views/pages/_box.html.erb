@@ -1,5 +1,10 @@
 <div>
   <p><strong>Name:</strong> <%= box.name %></p>
   <p><strong>Email:</strong> <%= box.email %></p>
+
+  <%= "Joined #{time_ago_in_words(box.created_at)} ago" %>
+<%= l(Date.today, format: :long) %><br>
+
+<%= distance_of_time_in_words(box.created_at, Time.current) %>
 </div>
 <hr>

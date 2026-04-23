@@ -11,4 +11,8 @@ class PagesController < ApplicationController
   def user
      @users = User.all
   end
+
+  def signup
+    @user = User.new
+  end
 end

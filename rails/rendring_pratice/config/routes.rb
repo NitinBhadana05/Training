@@ -11,10 +11,11 @@ Rails.application.routes.draw do
     get :dashboard
   end
 
-  
  
+  resources :pages
   root "pages#home"
   get "contact", to: "pages#contact"
   get "user", to: "pages#user"
+  get "signup", to: "pages#signup"
  
 end

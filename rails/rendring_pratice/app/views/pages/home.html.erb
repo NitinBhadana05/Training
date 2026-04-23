@@ -5,3 +5,17 @@
 <h2>Home Page</h2>
 
 <p>Welcome to Our Web App</p>
+
+<%= " Convert to currency: #{number_to_currency(1000)}" %><br><br>
+
+<%= "Convert to percentage: #{number_to_percentage(75)}" %><br><br>
+
+<%= "With delimiter: #{number_with_delimiter(1000000)}" %><br><br>
+
+<%= "human readable: #{number_to_human(1500)}" %> <br><br>
+
+<%= link_to "signup", signup_path%>
+
+<%= javascript_tag do %>
+  alert("Hello");
+<% end %>

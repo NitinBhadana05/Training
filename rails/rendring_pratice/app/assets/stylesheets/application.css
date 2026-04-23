@@ -8,3 +8,6 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+.active {
+ text-decoration:5px line-through rgb(255, 255, 255);
+}
