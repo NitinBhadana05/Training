@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "products/show"
 
   get "about", to:"home#about"
   get "contact", to:"home#contact"
@@ -7,6 +8,7 @@ Rails.application.routes.draw do
   get "show", to:"home#show"
   get "search", to:"home#search"
   get "create", to:"home#create"
+  get "product", to: "products#show"
   root "home#index"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
