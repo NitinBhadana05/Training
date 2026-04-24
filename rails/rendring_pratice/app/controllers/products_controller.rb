@@ -28,11 +28,26 @@ class ProductsController < ApplicationController
     product = Product.new(product_params)
 
     if product.save
-      render plain: "Product created: #{product.name} - #{product.price}"
+      render plain: "Product created successfully: #{product.name} - #{product.price}"
     else
       render plain: product.errors.full_messages.join(", ")
     end
   end
+
+
+  def expensive
+    price = params[:price].to_i
+
+    products = Product.where("price > ?", price)
+
+    if products.any?
+      result = products.map { |p| "#{p.name} - #{p.price}" }.join("\n")
+      render plain: result
+    else
+      render plain: "No expensive products found"
+    end
+  end
+
 
   private
 

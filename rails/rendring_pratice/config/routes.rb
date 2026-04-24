@@ -19,4 +19,5 @@ Rails.application.routes.draw do
   get "signup", to: "pages#signup"
  
   resources :products
+  get '/products/expensive/:price', to: 'products#expensive'
 end
