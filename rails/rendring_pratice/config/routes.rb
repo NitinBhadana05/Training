@@ -18,4 +18,5 @@ Rails.application.routes.draw do
   get "user", to: "pages#user"
   get "signup", to: "pages#signup"
  
+  resources :products
 end
