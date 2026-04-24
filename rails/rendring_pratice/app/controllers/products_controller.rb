@@ -10,6 +10,14 @@ class ProductsController < ApplicationController
     else
       render plain: "No products found"
     end
+
+    message = flash[:notice] || flash[:alert]
+
+    if message
+      render plain: "Message: #{message}"
+    else
+      render plain: "No message"
+    end
   end
 
   # GET /products/:id
@@ -24,16 +32,27 @@ class ProductsController < ApplicationController
   end
 
   # POST /products
+  #def create
+  #  product = Product.new(product_params)
+#
+  #  if product.save
+  #    render plain: "Product created successfully: #{product.name} - #{product.price}"
+  #  else
+  #    render plain: product.errors.full_messages.join(", ")
+  #  end
+  #end
+
   def create
-    product = Product.new(product_params)
+      product = Product.new(product_params)
 
-    if product.save
-      render plain: "Product created successfully: #{product.name} - #{product.price}"
-    else
-      render plain: product.errors.full_messages.join(", ")
-    end
+      if product.save
+        flash[:notice] = "Product created successfully"
+        redirect_to products_path
+      else
+        flash[:alert] = product.errors.full_messages.join(", ")
+        redirect_to products_path
+      end
   end
-
 
   def expensive
     price = params[:price].to_i

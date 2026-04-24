@@ -20,4 +20,8 @@ Rails.application.routes.draw do
  
   resources :products
   get '/products/expensive/:price', to: 'products#expensive'
+
+  resources :users do
+    resources :pages
+  end
 end
