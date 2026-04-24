@@ -1,23 +1,27 @@
 class ProductsController < ApplicationController
 
+  before_action :require_login
+  before_action :check_admin, only: [:create]
+
+  
   # GET /products
   def index
     @products = Product.all
 
     if @products.any?
       result = @products.map { |p| "#{p.name} - #{p.price}" }.join("\n")
-      render plain: result
+      render "products/index"
     else
       render plain: "No products found"
     end
 
-    message = flash[:notice] || flash[:alert]
+    #message = flash[:notice] || flash[:alert]
 
-    if message
-      render plain: "Message: #{message}"
-    else
-      render plain: "No message"
-    end
+    #if message
+    #  render plain: "Message: #{message}"
+    #else
+    #  render plain: "No message"
+    #end
   end
 
   # GET /products/:id

@@ -1,7 +1,7 @@
 class PagesController < ApplicationController  
   
   
-  before_action :check_user
+  #before_action :check_user
   def check_user
       unless params[:token] == "123"
         render plain: "Unauthorized access"
@@ -11,7 +11,7 @@ class PagesController < ApplicationController
 
   #layout "mailer"
   def home
-   
+   @user = NewUser.find_by(email: params[:email], password: params[:password])
 
   end
 

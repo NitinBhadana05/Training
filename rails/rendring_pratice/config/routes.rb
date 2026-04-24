@@ -13,7 +13,10 @@ Rails.application.routes.draw do
 
  
   resources :pages
-  root "pages#home"
+
+ # root "pages#home"
+  root "sessions#new"
+
   get "contact", to: "pages#contact"
   get "user", to: "pages#user"
   get "signup", to: "pages#signup"
@@ -24,4 +27,6 @@ Rails.application.routes.draw do
   resources :users do
     resources :pages
   end
+
+  resources :sessions
 end

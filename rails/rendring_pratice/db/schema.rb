@@ -10,9 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_24_062800) do
+ActiveRecord::Schema[8.1].define(version: 2026_04_24_091424) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "new_users", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "email", null: false
+    t.string "name", null: false
+    t.string "password"
+    t.bigint "role_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["role_id"], name: "index_new_users_on_role_id"
+  end
+
+  create_table "permissions", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "name"
+    t.bigint "role_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["role_id"], name: "index_permissions_on_role_id"
+  end
 
   create_table "posts", force: :cascade do |t|
     t.text "body"
@@ -28,10 +46,19 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_24_062800) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "roles", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "name", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "email"
     t.string "name"
     t.datetime "updated_at", null: false
   end
+
+  add_foreign_key "new_users", "roles"
+  add_foreign_key "permissions", "roles"
 end
