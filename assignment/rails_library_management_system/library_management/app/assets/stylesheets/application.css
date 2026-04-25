@@ -33,17 +33,18 @@ body {
 
 /* CONTAINER */
 .container {
-  max-width: 900px;
+  max-width: 500px;
   margin: 40px auto;
   background: rgba(255,255,255,0.1);
   padding: 25px;
   border-radius: 15px;
   backdrop-filter: blur(10px);
+  text-align: center;
 }
 
 /* FORM */
 input, select {
-  width: 100%;
+  width: 80%;
   padding: 10px;
   margin: 8px 0;
   border-radius: 8px;
@@ -56,7 +57,30 @@ input[type="submit"], button {
   cursor: pointer;
   font-weight: bold;
 }
+/* BUTTON */
+input[type="submit"] {
+  background: #ff7eb3;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  width: 40%;
+  cursor: pointer;
+  margin-top: 10px;
+}
 
+/* LINK BUTTON STYLE */
+.link-btn {
+  display: block;
+  width: 35%;
+  margin-top: 15px;
+  margin-left: 150px;
+  padding: 10px;
+  background: #4facfe;
+  border-radius: 8px;
+  color: white;
+  text-decoration: none;
+}
 /* LIST */
 ul {
   list-style: none;
