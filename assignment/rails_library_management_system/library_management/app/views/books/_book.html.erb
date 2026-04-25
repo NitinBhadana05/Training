@@ -1,0 +1,14 @@
+<li>
+  <span>
+    <%= book.title %> - <%= book.author %>
+  </span>
+
+  <span class="<%= book.available ? 'available' : 'issued' %>">
+    <%= book.available ? "Available" : "Issued" %>
+  </span>
+
+  <% unless book.available %>
+    <% issue = book.issues.last %>
+    <%= button_to "Return", return_book_issue_path(issue), method: :patch %>
+  <% end %>
+</li>

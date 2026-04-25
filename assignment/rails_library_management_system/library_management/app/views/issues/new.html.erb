@@ -1,2 +1,10 @@
-<h1>Issues#new</h1>
-<p>Find me in app/views/issues/new.html.erb</p>
+<div class="container">
+  <h1>Issue Book</h1>
+
+  <%= form_with model: @issue do |f| %>
+    <%= f.collection_select :user_id, User.all, :id, :name %>
+    <%= f.collection_select :book_id, Book.where(available: true), :id, :title %>
+    <%= f.date_field :issue_date %>
+    <%= f.submit %>
+  <% end %>
+</div>

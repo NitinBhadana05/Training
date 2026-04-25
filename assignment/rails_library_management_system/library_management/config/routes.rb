@@ -1,26 +1,27 @@
 Rails.application.routes.draw do
-  get "issues/new"
-  get "issues/create"
-  get "books/index"
-  get "books/show"
-  get "books/new"
-  get "books/create"
-  get "sessions/new"
-  get "sessions/create"
-  get "sessions/destroy"
-  get "users/new"
-  get "users/create"
-  get "users/index"
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
-  get "up" => "rails/health#show", as: :rails_health_check
+  # 🔐 Authentication
+  get    "/signup", to: "users#new"
+  post   "/users",  to: "users#create"
 
-  # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
-  # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
-  # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
+  get    "/login",  to: "sessions#new"
+  post   "/login",  to: "sessions#create"
+  delete "/logout", to: "sessions#destroy"
 
-  # Defines the root path route ("/")
-  # root "posts#index"
+  #  Books
+  resources :books
+
+  #  Users
+  resources :users, only: [:index]
+
+  # Issues (borrow/return)
+  resources :issues, only: [:new, :create] do
+    member do
+      patch :return_book
+    end
+  end
+
+  # Home
+  root "books#index"
+
 end

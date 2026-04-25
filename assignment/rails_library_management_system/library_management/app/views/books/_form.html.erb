@@ -1,0 +1,6 @@
+<%= form_with model: book do |f| %>
+  <%= f.text_field :title, placeholder: "Title" %>
+  <%= f.text_field :author, placeholder: "Author" %>
+  <%= f.text_field :isbn, placeholder: "ISBN" %>
+  <%= f.submit %>
+<% end %>
