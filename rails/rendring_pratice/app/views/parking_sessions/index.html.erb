@@ -1,0 +1,56 @@
+<div class="p-6">
+  <h1 class="text-2xl font-bold mb-4">🚗 Smart Parking Dashboard</h1>
+
+  <!-- Start Parking -->
+  <div class="bg-white p-4 rounded shadow mb-6">
+    <h2 class="text-xl font-semibold mb-2">Start Parking</h2>
+
+    <%= form_with url: parking_sessions_path, method: :post, local: true do |f| %>
+      <div class="mb-2">
+        <%= label_tag :vehicle_number %>
+        <%= text_field_tag :vehicle_number, nil, class: "border p-2 w-full" %>
+      </div>
+
+      <div class="mb-2">
+        <%= label_tag :parking_slot_id, "Select Slot" %>
+        <%= select_tag :parking_slot_id,
+              options_from_collection_for_select(@slots, :id, :slot_number),
+              class: "border p-2 w-full" %>
+      </div>
+
+      <%= submit_tag "Start Parking", class: "bg-green-500 text-white px-4 py-2 rounded" %>
+    <% end %>
+  </div>
+
+  <!-- Active Sessions -->
+  <div class="bg-white p-4 rounded shadow">
+    <h2 class="text-xl font-semibold mb-2">Active Sessions</h2>
+
+    <table class="w-full border">
+      <thead>
+        <tr class="bg-gray-200">
+          <th class="p-2">Vehicle</th>
+          <th class="p-2">Slot</th>
+          <th class="p-2">Entry Time</th>
+          <th class="p-2">Action</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @active_sessions.each do |s| %>
+          <tr class="border-t">
+            <td class="p-2"><%= s.vehicle.vehicle_number %></td>
+            <td class="p-2"><%= s.parking_slot.slot_number %></td>
+            <td class="p-2"><%= s.entry_time %></td>
+            <td class="p-2">
+              <%= button_to "End",
+                    end_parking_parking_session_path(s),
+                    method: :patch,
+                    class: "bg-red-500 text-white px-3 py-1 rounded" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

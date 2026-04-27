@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   resources :pages
 
  # root "pages#home"
-  root "sessions#new"
+  #root "sessions#new"
 
   get "contact", to: "pages#contact"
   get "user", to: "pages#user"
@@ -29,4 +29,21 @@ Rails.application.routes.draw do
   end
 
   resources :sessions
+
+  resources :parking_sessions, only: [:create, :show] do
+    member do
+      patch :end_parking
+    end
+
+    collection do
+      get :active
+    end
+  end
+
+  resources :payments, only: [:show] do
+    member do
+      patch :pay
+    end
+  end
+  root "parking_sessions#index"
 end
