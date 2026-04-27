@@ -1,0 +1,27 @@
+<section class="mx-auto max-w-4xl rounded-[2rem] bg-white p-8 shadow-sm ring-1 ring-slate-200">
+  <div class="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+    <div>
+      <h1 class="text-4xl font-semibold tracking-tight text-slate-900"><%= @bill.issue.book.title %></h1>
+      <p class="mt-2 text-slate-500">For <%= @bill.user.full_name %></p>
+    </div>
+    <% if admin_user? %>
+      <%= link_to "Edit bill", edit_bill_path(@bill), class: "inline-flex items-center rounded-full bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-700" %>
+    <% end %>
+  </div>
+
+  <dl class="mt-8 space-y-4 rounded-3xl bg-slate-50 p-6 text-sm">
+    <div class="flex items-center justify-between"><dt class="text-slate-500">Rent amount</dt><dd class="font-semibold text-slate-900"><%= number_to_currency(@bill.rent_amount) %></dd></div>
+    <div class="flex items-center justify-between"><dt class="text-slate-500">Late fine</dt><dd class="font-semibold text-slate-900"><%= number_to_currency(@bill.late_fine) %></dd></div>
+    <div class="flex items-center justify-between"><dt class="text-slate-500">Status</dt><dd class="font-semibold text-slate-900"><%= @bill.status.capitalize %></dd></div>
+    <div class="flex items-center justify-between"><dt class="text-slate-500">Billed on</dt><dd class="font-semibold text-slate-900"><%= @bill.billed_on.strftime("%d %b %Y") %></dd></div>
+    <div class="flex items-center justify-between"><dt class="text-slate-500">Paid on</dt><dd class="font-semibold text-slate-900"><%= @bill.paid_on&.strftime("%d %b %Y") || "Pending" %></dd></div>
+    <div class="flex items-center justify-between border-t border-slate-200 pt-4"><dt class="font-semibold text-slate-900">Total amount</dt><dd class="text-lg font-semibold text-slate-900"><%= number_to_currency(@bill.total_amount) %></dd></div>
+  </dl>
+
+  <% if @bill.notes.present? %>
+    <div class="mt-6 rounded-3xl border border-slate-200 p-5">
+      <h2 class="text-lg font-semibold text-slate-900">Notes</h2>
+      <p class="mt-2 text-slate-600"><%= @bill.notes %></p>
+    </div>
+  <% end %>
+</section>

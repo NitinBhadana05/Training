@@ -1,0 +1,8 @@
+<section class="mx-auto max-w-3xl rounded-[2rem] bg-white p-8 shadow-sm ring-1 ring-slate-200">
+  <div class="mb-8">
+    <p class="text-sm font-medium uppercase tracking-[0.2em] text-sky-700"><%= admin_user? ? "Admin" : "Member Signup" %></p>
+    <h1 class="mt-2 text-4xl font-semibold tracking-tight text-slate-900"><%= admin_user? ? "Create user" : "Create your account" %></h1>
+  </div>
+
+  <%= render "form", user: @user %>
+</section>

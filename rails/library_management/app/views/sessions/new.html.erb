@@ -1,0 +1,39 @@
+<div class="mx-auto grid min-h-[80vh] max-w-6xl items-center gap-10 lg:grid-cols-[1.2fr_0.8fr]">
+  <section class="space-y-6">
+    <span class="inline-flex rounded-full border border-amber-300 bg-amber-50 px-3 py-1 text-sm font-medium text-amber-700">
+      Library Operations Portal
+    </span>
+    <h1 class="max-w-2xl text-5xl font-semibold tracking-tight text-slate-900">
+      Welcome to our E-library
+    </h1>
+    <p class="max-w-2xl text-lg text-slate-600">
+       You can Buy, Rent Books from US, Cheaper Then Traditional Library. 
+    </p>
+  </section>
+
+  <section class="rounded-[2rem] bg-white p-8 shadow-xl ring-1 ring-slate-200">
+    <h2 class="text-3xl font-semibold text-slate-900">Sign in</h2>
+    <p class="mt-2 text-sm text-slate-500">
+    <%= form_with url: session_url, class: "mt-8 space-y-5" do |form| %>
+      <div>
+        <%= form.label :email_address, "Email address", class: "text-sm font-medium text-slate-700" %>
+        <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "admin@library.com", value: params[:email_address], class: "mt-2 block w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-slate-900 shadow-sm outline-none transition focus:border-sky-500 focus:ring-2 focus:ring-sky-200" %>
+      </div>
+
+      <div>
+        <%= form.label :password, class: "text-sm font-medium text-slate-700" %>
+        <%= form.password_field :password, required: true, autocomplete: "current-password", placeholder: "Enter your password", maxlength: 72, class: "mt-2 block w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-slate-900 shadow-sm outline-none transition focus:border-sky-500 focus:ring-2 focus:ring-sky-200" %>
+      </div>
+
+      <div class="flex items-center justify-between gap-4">
+        <%= form.submit "Sign in", class: "inline-flex cursor-pointer items-center rounded-full bg-slate-900 px-6 py-3 text-sm font-semibold text-white transition hover:bg-slate-700" %>
+        <%= link_to "Forgot password?", new_password_path, class: "text-sm font-medium text-sky-700 hover:text-sky-900" %>
+      </div>
+    <% end %>
+
+    <div class="mt-6 border-t border-slate-200 pt-6 text-sm text-slate-600">
+      New member?
+      <%= link_to "Create your account", signup_path, class: "font-medium text-sky-700 hover:text-sky-900" %>
+    </div>
+  </section>
+</div>

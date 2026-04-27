@@ -1,0 +1,45 @@
+<%= form_with model: issue, class: "space-y-6" do |form| %>
+  <% if issue.errors.any? %>
+    <div class="rounded-3xl border border-red-200 bg-red-50 p-4 text-sm text-red-700"><%= issue.errors.full_messages.to_sentence %></div>
+  <% end %>
+
+  <% creating = issue.new_record? %>
+
+  <div class="grid gap-6 sm:grid-cols-2">
+    <div>
+      <%= form.label :user_id, "User", class: "text-sm font-medium text-slate-700" %>
+      <%= form.collection_select :user_id, @users, :id, :full_name, {}, disabled: !creating, class: "mt-2 block w-full rounded-2xl border border-slate-300 px-4 py-3 outline-none disabled:bg-slate-100 focus:border-sky-500 focus:ring-2 focus:ring-sky-200" %>
+    </div>
+    <div>
+      <%= form.label :book_id, "Book", class: "text-sm font-medium text-slate-700" %>
+      <%= form.collection_select :book_id, @books, :id, :title, {}, disabled: !creating, class: "mt-2 block w-full rounded-2xl border border-slate-300 px-4 py-3 outline-none disabled:bg-slate-100 focus:border-sky-500 focus:ring-2 focus:ring-sky-200" %>
+    </div>
+    <div>
+      <%= form.label :transaction_type, class: "text-sm font-medium text-slate-700" %>
+      <%= form.select :transaction_type, Issue.transaction_types.keys.map { |value| [value.capitalize, value] }, {}, disabled: !creating, class: "mt-2 block w-full rounded-2xl border border-slate-300 px-4 py-3 outline-none disabled:bg-slate-100 focus:border-sky-500 focus:ring-2 focus:ring-sky-200" %>
+    </div>
+    <div>
+      <%= form.label :issue_date, class: "text-sm font-medium text-slate-700" %>
+      <%= form.date_field :issue_date, disabled: !creating, class: "mt-2 block w-full rounded-2xl border border-slate-300 px-4 py-3 outline-none disabled:bg-slate-100 focus:border-sky-500 focus:ring-2 focus:ring-sky-200" %>
+    </div>
+    <div>
+      <%= form.label :due_date, class: "text-sm font-medium text-slate-700" %>
+      <%= form.date_field :due_date, class: "mt-2 block w-full rounded-2xl border border-slate-300 px-4 py-3 outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-200" %>
+    </div>
+    <div>
+      <%= form.label :return_date, class: "text-sm font-medium text-slate-700" %>
+      <%= form.date_field :return_date, class: "mt-2 block w-full rounded-2xl border border-slate-300 px-4 py-3 outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-200" %>
+    </div>
+    <% unless creating %>
+      <div class="sm:col-span-2">
+        <%= form.label :status, class: "text-sm font-medium text-slate-700" %>
+        <%= form.select :status, Issue.statuses.keys.map { |value| [value.humanize, value] }, {}, class: "mt-2 block w-full rounded-2xl border border-slate-300 px-4 py-3 outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-200" %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="flex items-center gap-4">
+    <%= form.submit class: "inline-flex cursor-pointer items-center rounded-full bg-slate-900 px-6 py-3 text-sm font-semibold text-white transition hover:bg-slate-700" %>
+    <%= link_to "Back to issues", issues_path, class: "text-sm font-medium text-slate-600 hover:text-slate-900" %>
+  </div>
+<% end %>

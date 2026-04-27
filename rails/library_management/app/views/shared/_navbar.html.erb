@@ -1,0 +1,23 @@
+<header class="border-b border-white/60 bg-white/80 backdrop-blur">
+  <div class="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-4 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
+    <div>
+      <%= link_to "LibraryMS", root_path, class: "text-2xl font-semibold tracking-tight text-slate-900" %>
+      <p class="text-sm text-slate-500">Secure library operations</p>
+    </div>
+
+    <nav class="flex flex-wrap items-center gap-3 text-sm font-medium text-slate-600">
+      <%= link_to "Home", root_path, class: "rounded-full px-4 py-2 transition hover:bg-slate-100 hover:text-slate-900" %>
+      <%= link_to "About", about_path, class: "rounded-full px-4 py-2 transition hover:bg-slate-100 hover:text-slate-900" %>
+      <%= link_to "Books", books_path, class: "rounded-full px-4 py-2 transition hover:bg-slate-100 hover:text-slate-900" %>
+      <%= link_to "Issued", issues_path, class: "rounded-full px-4 py-2 transition hover:bg-slate-100 hover:text-slate-900" %>
+      <%= link_to "Search", search_books_path, class: "rounded-full px-4 py-2 transition hover:bg-slate-100 hover:text-slate-900" %>
+      <%= link_to "Bills", bills_path, class: "rounded-full px-4 py-2 transition hover:bg-slate-100 hover:text-slate-900" %>
+      <% if admin_user? %>
+        <%= link_to "Users", users_path, class: "rounded-full px-4 py-2 transition hover:bg-slate-100 hover:text-slate-900" %>
+      <% else %>
+        <%= link_to "Profile", user_path(current_user), class: "rounded-full px-4 py-2 transition hover:bg-slate-100 hover:text-slate-900" %>
+      <% end %>
+      <%= button_to "Logout", logout_path, method: :delete, class: "inline-flex cursor-pointer items-center rounded-full bg-slate-900 px-5 py-2.5 text-white transition hover:bg-slate-700" %>
+    </nav>
+  </div>
+</header>

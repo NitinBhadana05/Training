@@ -1,0 +1,41 @@
+<section class="space-y-8">
+  <div class="rounded-[2rem] bg-white p-8 shadow-sm ring-1 ring-slate-200">
+    <div class="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+      <div>
+        <h1 class="text-4xl font-semibold tracking-tight text-slate-900"><%= @user.full_name %></h1>
+        <p class="mt-2 text-slate-500"><%= @user.email_address %> • <%= @user.role.capitalize %></p>
+      </div>
+      <% if admin_user? %>
+        <div class="flex gap-3">
+          <%= link_to "Edit", edit_user_path(@user), class: "inline-flex items-center rounded-full bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-700" %>
+          <%= button_to "Delete", user_path(@user), method: :delete, class: "inline-flex cursor-pointer items-center rounded-full border border-red-200 px-5 py-3 text-sm font-semibold text-red-700 transition hover:bg-red-50", form: { data: { turbo_confirm: "Delete this user?" } } %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="grid gap-8 lg:grid-cols-2">
+    <div class="rounded-[2rem] bg-white p-8 shadow-sm ring-1 ring-slate-200">
+      <h2 class="text-2xl font-semibold text-slate-900">Recent issues</h2>
+      <div class="mt-6 space-y-4">
+        <% @issues.each do |issue| %>
+          <div class="rounded-3xl border border-slate-200 p-5">
+            <p class="font-semibold text-slate-900"><%= issue.book.title %></p>
+            <p class="mt-1 text-sm text-slate-500"><%= issue.transaction_type.capitalize %> • <%= issue.status.humanize %></p>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="rounded-[2rem] bg-white p-8 shadow-sm ring-1 ring-slate-200">
+      <h2 class="text-2xl font-semibold text-slate-900">Recent bills</h2>
+      <div class="mt-6 space-y-4">
+        <% @bills.each do |bill| %>
+          <div class="rounded-3xl border border-slate-200 p-5">
+            <p class="font-semibold text-slate-900"><%= bill.issue.book.title %></p>
+            <p class="mt-1 text-sm text-slate-500"><%= number_to_currency(bill.total_amount) %> • <%= bill.status.capitalize %></p>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>

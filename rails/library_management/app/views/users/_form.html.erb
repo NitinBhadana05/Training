@@ -1,0 +1,35 @@
+<%= form_with model: user, class: "space-y-6" do |form| %>
+  <% if user.errors.any? %>
+    <div class="rounded-3xl border border-red-200 bg-red-50 p-4 text-sm text-red-700"><%= user.errors.full_messages.to_sentence %></div>
+  <% end %>
+
+  <div class="grid gap-6 sm:grid-cols-2">
+    <div class="sm:col-span-2">
+      <%= form.label :full_name, class: "text-sm font-medium text-slate-700" %>
+      <%= form.text_field :full_name, class: "mt-2 block w-full rounded-2xl border border-slate-300 px-4 py-3 outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-200" %>
+    </div>
+    <div class="sm:col-span-2">
+      <%= form.label :email_address, "Email address", class: "text-sm font-medium text-slate-700" %>
+      <%= form.email_field :email_address, class: "mt-2 block w-full rounded-2xl border border-slate-300 px-4 py-3 outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-200" %>
+    </div>
+    <div>
+      <%= form.label :password, class: "text-sm font-medium text-slate-700" %>
+      <%= form.password_field :password, class: "mt-2 block w-full rounded-2xl border border-slate-300 px-4 py-3 outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-200" %>
+    </div>
+    <div>
+      <%= form.label :password_confirmation, class: "text-sm font-medium text-slate-700" %>
+      <%= form.password_field :password_confirmation, class: "mt-2 block w-full rounded-2xl border border-slate-300 px-4 py-3 outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-200" %>
+    </div>
+    <% if admin_user? %>
+      <div class="sm:col-span-2">
+        <%= form.label :role, class: "text-sm font-medium text-slate-700" %>
+        <%= form.select :role, User.roles.keys.map { |role| [role.capitalize, role] }, {}, class: "mt-2 block w-full rounded-2xl border border-slate-300 px-4 py-3 outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-200" %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="flex items-center gap-4">
+    <%= form.submit class: "inline-flex cursor-pointer items-center rounded-full bg-slate-900 px-6 py-3 text-sm font-semibold text-white transition hover:bg-slate-700" %>
+    <%= link_to(admin_user? ? "Back to users" : "Back to sign in", admin_user? ? users_path : login_path, class: "text-sm font-medium text-slate-600 hover:text-slate-900") %>
+  </div>
+<% end %>

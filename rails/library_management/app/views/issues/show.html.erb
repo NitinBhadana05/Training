@@ -1,0 +1,40 @@
+<section class="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
+  <div class="rounded-[2rem] bg-white p-8 shadow-sm ring-1 ring-slate-200">
+    <div class="flex items-start justify-between gap-4">
+      <div>
+        <h1 class="text-4xl font-semibold tracking-tight text-slate-900"><%= @issue.book.title %></h1>
+        <p class="mt-2 text-slate-500"><%= @issue.transaction_type.capitalize %> for <%= @issue.user.full_name %></p>
+      </div>
+      <span class="rounded-full px-4 py-2 text-sm font-semibold <%= @issue.overdue? ? "bg-red-100 text-red-700" : "bg-slate-100 text-slate-700" %>">
+        <%= @issue.status.humanize %>
+      </span>
+    </div>
+    <dl class="mt-8 space-y-4">
+      <div class="flex items-center justify-between"><dt class="text-slate-500">Issue date</dt><dd class="font-semibold text-slate-900"><%= @issue.issue_date.strftime("%d %b %Y") %></dd></div>
+      <div class="flex items-center justify-between"><dt class="text-slate-500">Due date</dt><dd class="font-semibold text-slate-900"><%= @issue.due_date&.strftime("%d %b %Y") || "Not applicable" %></dd></div>
+      <div class="flex items-center justify-between"><dt class="text-slate-500">Return date</dt><dd class="font-semibold text-slate-900"><%= @issue.return_date&.strftime("%d %b %Y") || "Pending" %></dd></div>
+      <div class="flex items-center justify-between"><dt class="text-slate-500">Late days</dt><dd class="font-semibold text-slate-900"><%= @issue.late_days %></dd></div>
+    </dl>
+    <div class="mt-8 flex flex-wrap gap-3">
+      <% if admin_user? %>
+        <%= link_to "Edit issue", edit_issue_path(@issue), class: "inline-flex items-center rounded-full bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-700" %>
+      <% end %>
+      <% if @issue.returnable_by?(current_user) %>
+        <%= button_to "Mark as returned", mark_returned_issue_path(@issue), method: :patch, class: "inline-flex cursor-pointer items-center rounded-full border border-slate-300 px-5 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-50" %>
+      <% end %>
+    </div>
+  </div>
+
+  <aside class="rounded-[2rem] bg-white p-8 shadow-sm ring-1 ring-slate-200">
+    <h2 class="text-2xl font-semibold text-slate-900">Billing summary</h2>
+    <dl class="mt-6 space-y-4 text-sm">
+      <div class="flex items-center justify-between"><dt class="text-slate-500">Rent amount</dt><dd class="font-semibold text-slate-900"><%= number_to_currency(@issue.rent_amount) %></dd></div>
+      <div class="flex items-center justify-between"><dt class="text-slate-500">Late fine</dt><dd class="font-semibold text-slate-900"><%= number_to_currency(@issue.late_fine) %></dd></div>
+      <div class="flex items-center justify-between"><dt class="text-slate-500">Bill status</dt><dd class="font-semibold text-slate-900"><%= @issue.bill_status_label %></dd></div>
+      <div class="flex items-center justify-between border-t border-slate-200 pt-4"><dt class="font-semibold text-slate-900">Total</dt><dd class="text-lg font-semibold text-slate-900"><%= number_to_currency(@issue.total_amount) %></dd></div>
+    </dl>
+    <% if @issue.bill.present? %>
+      <%= link_to "Open bill", bill_path(@issue.bill), class: "mt-6 inline-flex items-center rounded-full bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-700" %>
+    <% end %>
+  </aside>
+</section>

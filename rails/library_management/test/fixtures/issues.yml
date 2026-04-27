@@ -1,0 +1,23 @@
+one:
+  user: one
+  book: one
+  transaction_type: rent
+  status: active
+  issue_date: 2026-04-20
+  due_date: 2026-04-27
+  return_date:
+  rent_amount: 69.93
+  late_fine: 0
+  total_amount: 69.93
+
+two:
+  user: two
+  book: two
+  transaction_type: purchase
+  status: purchased
+  issue_date: 2026-04-21
+  due_date:
+  return_date:
+  rent_amount: 54.99
+  late_fine: 0
+  total_amount: 54.99

@@ -1,0 +1,46 @@
+<section class="space-y-6">
+  <div>
+    <p class="text-sm font-medium uppercase tracking-[0.2em] text-sky-700">Billing</p>
+    <h1 class="mt-2 text-4xl font-semibold tracking-tight text-slate-900"><%= admin_user? ? "All bills" : "My bills" %></h1>
+  </div>
+
+  <% if admin_user? %>
+    <%= form_with url: bills_path, method: :get, class: "flex flex-wrap gap-3 rounded-[2rem] bg-white p-5 shadow-sm ring-1 ring-slate-200", local: true do |form| %>
+      <%= form.select :status, options_for_select([["Any status", ""]] + Bill.statuses.keys.map { |value| [value.capitalize, value] }, params[:status]), {}, class: "rounded-full border border-slate-300 bg-white px-5 py-3 text-sm outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-200" %>
+      <%= form.collection_select :user_id, @users, :id, :full_name, { include_blank: "Any user", selected: params[:user_id] }, class: "rounded-full border border-slate-300 bg-white px-5 py-3 text-sm outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-200" %>
+      <%= form.submit "Filter", class: "inline-flex cursor-pointer items-center rounded-full bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-700" %>
+    <% end %>
+  <% end %>
+
+  <div class="overflow-hidden rounded-[2rem] bg-white shadow-sm ring-1 ring-slate-200">
+    <table class="min-w-full divide-y divide-slate-200">
+      <thead class="bg-slate-50">
+        <tr>
+          <th class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Book</th>
+          <th class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">User</th>
+          <th class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Status</th>
+          <th class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Amount</th>
+          <th class="px-6 py-4"></th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-slate-100">
+        <% @bills.each do |bill| %>
+          <tr>
+            <td class="px-6 py-4 font-medium text-slate-900"><%= bill.issue.book.title %></td>
+            <td class="px-6 py-4 text-slate-600"><%= bill.user.full_name %></td>
+            <td class="px-6 py-4 text-slate-600"><%= bill.status.capitalize %></td>
+            <td class="px-6 py-4 font-medium text-slate-900"><%= number_to_currency(bill.total_amount) %></td>
+            <td class="px-6 py-4 text-right">
+              <div class="flex justify-end gap-3">
+                <%= link_to "View", bill_path(bill), class: "font-medium text-sky-700 hover:text-sky-900" %>
+                <% if admin_user? %>
+                  <%= link_to "Edit", edit_bill_path(bill), class: "font-medium text-slate-700 hover:text-slate-900" %>
+                <% end %>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</section>

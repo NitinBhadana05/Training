@@ -1,0 +1,19 @@
+one:
+  user: one
+  issue: one
+  billed_on: 2026-04-20
+  rent_amount: 69.93
+  late_fine: 0
+  total_amount: 69.93
+  status: pending
+  notes: Rental billing
+
+two:
+  user: two
+  issue: two
+  billed_on: 2026-04-21
+  rent_amount: 54.99
+  late_fine: 0
+  total_amount: 54.99
+  status: paid
+  notes: Purchase billing

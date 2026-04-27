@@ -1,0 +1,23 @@
+one:
+  title: Domain-Driven Design
+  author: Eric Evans
+  isbn: 9780321125217
+  category: Software
+  description: Strategic and tactical design reference.
+  total_copies: 3
+  available_copies: 2
+  daily_rent: 9.99
+  purchase_price: 59.99
+  active: true
+
+two:
+  title: Refactoring
+  author: Martin Fowler
+  isbn: 9780134757599
+  category: Software
+  description: Improving the design of existing code.
+  total_copies: 2
+  available_copies: 1
+  daily_rent: 8.50
+  purchase_price: 54.99
+  active: true
