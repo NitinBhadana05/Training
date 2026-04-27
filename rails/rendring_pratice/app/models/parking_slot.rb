@@ -1,11 +1,11 @@
 class ParkingSlot < ApplicationRecord
-  has_many :parking_session
+  has_many :parking_sessions, dependent: :destroy
 
   validates :slot_number, presence: true, uniqueness: true
   validates :status, presence: true
 
-  # default status
-  before_create :set_default_status
+  # Set default before validations run.
+  before_validation :set_default_status, on: :create
 
   private
 

@@ -3,6 +3,7 @@
 <html>
 <head>
   <title><%= yield(:title) || "My App" %></title>
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
 
   <%= stylesheet_link_tag "application" %>
   <%= javascript_include_tag "application" %>

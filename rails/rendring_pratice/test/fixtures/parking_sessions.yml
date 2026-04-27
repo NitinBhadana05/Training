@@ -3,15 +3,15 @@
 one:
   vehicle: one
   parking_slot: one
-  entry_time: 2026-04-27 13:06:39
-  exit_time: 2026-04-27 13:06:39
+  entry_time: 2026-04-27 15:31:29
+  exit_time: 2026-04-27 15:31:29
   duration: 1
   status: MyString
 
 two:
   vehicle: two
   parking_slot: two
-  entry_time: 2026-04-27 13:06:39
-  exit_time: 2026-04-27 13:06:39
+  entry_time: 2026-04-27 15:31:29
+  exit_time: 2026-04-27 15:31:29
   duration: 1
   status: MyString

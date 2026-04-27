@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_24_091424) do
+ActiveRecord::Schema[8.1].define(version: 2026_04_27_100135) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -22,6 +22,36 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_24_091424) do
     t.bigint "role_id", null: false
     t.datetime "updated_at", null: false
     t.index ["role_id"], name: "index_new_users_on_role_id"
+  end
+
+  create_table "parking_sessions", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.integer "duration"
+    t.datetime "entry_time"
+    t.datetime "exit_time"
+    t.bigint "parking_slot_id", null: false
+    t.string "status"
+    t.datetime "updated_at", null: false
+    t.bigint "vehicle_id", null: false
+    t.index ["parking_slot_id"], name: "index_parking_sessions_on_parking_slot_id"
+    t.index ["vehicle_id"], name: "index_parking_sessions_on_vehicle_id"
+  end
+
+  create_table "parking_slots", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "slot_number"
+    t.string "status"
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "payments", force: :cascade do |t|
+    t.decimal "amount"
+    t.datetime "created_at", null: false
+    t.datetime "paid_at"
+    t.bigint "parking_session_id", null: false
+    t.string "payment_status"
+    t.datetime "updated_at", null: false
+    t.index ["parking_session_id"], name: "index_payments_on_parking_session_id"
   end
 
   create_table "permissions", force: :cascade do |t|
@@ -59,6 +89,16 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_24_091424) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "vehicles", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "vehicle_number"
+    t.string "vehicle_type"
+  end
+
   add_foreign_key "new_users", "roles"
+  add_foreign_key "parking_sessions", "parking_slots"
+  add_foreign_key "parking_sessions", "vehicles"
+  add_foreign_key "payments", "parking_sessions"
   add_foreign_key "permissions", "roles"
 end

@@ -26,31 +26,93 @@
   <div class="bg-white p-4 rounded shadow">
     <h2 class="text-xl font-semibold mb-2">Active Sessions</h2>
 
-    <table class="w-full border">
+    <div class="overflow-x-auto">
+    <table class="w-full table-auto border-collapse border border-gray-300">
       <thead>
         <tr class="bg-gray-200">
-          <th class="p-2">Vehicle</th>
-          <th class="p-2">Slot</th>
-          <th class="p-2">Entry Time</th>
-          <th class="p-2">Action</th>
+          <th class="border border-gray-300 p-2 text-left">Vehicle</th>
+          <th class="border border-gray-300 p-2 text-left">Slot</th>
+          <th class="border border-gray-300 p-2 text-left">Entry Time</th>
+          <th class="border border-gray-300 p-2 text-left">Action</th>
         </tr>
       </thead>
 
       <tbody>
         <% @active_sessions.each do |s| %>
-          <tr class="border-t">
-            <td class="p-2"><%= s.vehicle.vehicle_number %></td>
-            <td class="p-2"><%= s.parking_slot.slot_number %></td>
-            <td class="p-2"><%= s.entry_time %></td>
-            <td class="p-2">
+          <tr>
+            <td class="border border-gray-300 p-2 align-middle"><%= s.vehicle.vehicle_number %></td>
+            <td class="border border-gray-300 p-2 align-middle"><%= s.parking_slot.slot_number %></td>
+            <td class="border border-gray-300 p-2 align-middle whitespace-nowrap"><%= s.entry_time %></td>
+            <td class="border border-gray-300 p-2 align-middle">
               <%= button_to "End",
                     end_parking_parking_session_path(s),
                     method: :patch,
-                    class: "bg-red-500 text-white px-3 py-1 rounded" %>
+                    class: "bg-red-500 text-white px-3 py-1 rounded",
+                    form: { class: "inline-block m-0" } %>
             </td>
+          </tr>
+        <% end %>
+
+        <% if @active_sessions.empty? %>
+          <tr>
+            <td colspan="4" class="border border-gray-300 p-2 text-center text-gray-500">No active sessions</td>
           </tr>
         <% end %>
       </tbody>
     </table>
+    </div>
+  </div>
+
+  <div class="bg-white p-4 rounded shadow mt-6">
+    <h2 class="text-xl font-semibold mb-2">Completed Sessions</h2>
+
+    <div class="overflow-x-auto">
+    <table class="w-full table-auto border-collapse border border-gray-300">
+      <thead>
+        <tr class="bg-gray-200">
+          <th class="border border-gray-300 p-2 text-left">Vehicle</th>
+          <th class="border border-gray-300 p-2 text-left">Slot</th>
+          <th class="border border-gray-300 p-2 text-left">Duration</th>
+          <th class="border border-gray-300 p-2 text-left">Amount</th>
+          <th class="border border-gray-300 p-2 text-left">Status</th>
+          <th class="border border-gray-300 p-2 text-left">Paid At</th>
+          <th class="border border-gray-300 p-2 text-left">Payment</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @completed_sessions.each do |s| %>
+          <% payment = s.payment %>
+          <tr>
+            <td class="border border-gray-300 p-2 align-middle"><%= s.vehicle.vehicle_number %></td>
+            <td class="border border-gray-300 p-2 align-middle"><%= s.parking_slot.slot_number %></td>
+            <td class="border border-gray-300 p-2 align-middle"><%= s.duration %> hour(s)</td>
+            <td class="border border-gray-300 p-2 align-middle whitespace-nowrap">₹<%= payment&.amount || 0 %></td>
+            <td class="border border-gray-300 p-2 align-middle"><%= payment&.payment_status || "pending" %></td>
+            <td class="border border-gray-300 p-2 align-middle whitespace-nowrap"><%= payment&.paid_at || "-" %></td>
+            <td class="border border-gray-300 p-2 align-middle">
+              <% if payment.present? && payment.payment_status != "paid" %>
+                <%= button_to "Pay Now",
+                      pay_payment_path(payment),
+                      method: :patch,
+                      class: "bg-blue-500 text-white px-3 py-1 rounded",
+                      form: { class: "inline-block m-0" } %>
+              <% elsif payment.present? %>
+                <%= link_to "View Payment", payment_path(payment), class: "text-blue-600 underline" %>
+              <% else %>
+                Pending
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+
+        <% if @completed_sessions.empty? %>
+          <tr>
+            <td colspan="7" class="border border-gray-300 p-2 text-center text-gray-500">No completed sessions</td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    </div>
   </div>
 </div>
