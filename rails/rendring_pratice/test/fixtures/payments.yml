@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  parking_session: one
+  amount: 9.99
+  payment_status: MyString
+  paid_at: 2026-04-27 13:06:40
+
+two:
+  parking_session: two
+  amount: 9.99
+  payment_status: MyString
+  paid_at: 2026-04-27 13:06:40
