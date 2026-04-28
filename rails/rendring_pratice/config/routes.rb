@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get "tasks/index"
+  get "tasks/show"
+  get "tasks/new"
+  get "tasks/create"
   get "notes/index"
   get "notes/show"
   get "notes/new"
@@ -55,4 +59,5 @@ Rails.application.routes.draw do
 
   resources :books
   resources :notes
+  resources :tasks
 end

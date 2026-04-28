@@ -1,0 +1,10 @@
+<div class="max-w-md mx-auto mt-6 bg-white p-6 rounded shadow">
+  <%= form_with model: @task do |f| %>
+
+    <%= f.label :title %>
+    <%= f.text_field :title, class: "w-full border p-2 mb-4" %>
+
+    <%= f.submit "Create Task", class: "bg-blue-600 text-white px-4 py-2 rounded" %>
+
+  <% end %>
+</div>
