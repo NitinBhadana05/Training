@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get "notes/index"
+  get "notes/show"
+  get "notes/new"
+  get "notes/create"
   get "book/index"
   get "book/show"
   
@@ -50,4 +54,5 @@ Rails.application.routes.draw do
   root "parking_sessions#index"
 
   resources :books
+  resources :notes
 end
