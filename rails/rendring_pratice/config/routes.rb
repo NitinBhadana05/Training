@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get "book/index"
+  get "book/show"
   
     resources :posts do
     collection do
@@ -46,4 +48,6 @@ Rails.application.routes.draw do
     end
   end
   root "parking_sessions#index"
+
+  resources :books
 end
