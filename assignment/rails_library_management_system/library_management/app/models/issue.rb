@@ -3,7 +3,7 @@ class Issue < ApplicationRecord
   belongs_to :book
 
   validates :issue_date, presence: true
-  validate :book_must_be_available
+  validate :book_must_be_available, on: :create
 
   def book_must_be_available
     errors.add(:book, "is already issued") unless book.available

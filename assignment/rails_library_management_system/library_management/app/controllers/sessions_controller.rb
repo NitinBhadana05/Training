@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
       redirect_to books_path, notice: "Logged in successfully"
     else
       flash.now[:alert] = "Invalid email or password"
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 

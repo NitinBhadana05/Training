@@ -13,12 +13,12 @@ class UsersController < ApplicationController
       redirect_to books_path, notice: "Account created successfully"
     else
       flash.now[:alert] = "Signup failed"
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
   def index
-    @users = User.all
+    @users = User.includes(:books, :issues).order(:name)
   end
 
   private

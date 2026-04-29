@@ -1,9 +1,89 @@
-<div class="container">
-  <h1>Books</h1>
+<section class="hero">
+  <div>
+    <p class="eyebrow">Library dashboard</p>
+    <h1>Track the catalog and keep circulation visible.</h1>
+    <p class="hero__copy">
+      Search books, monitor issued titles, and move quickly between catalog work and member activity.
+    </p>
+  </div>
 
-  <%= link_to "Add Book", new_book_path %>
+  <div class="hero__actions">
+    <%= link_to "Add Book", new_book_path, class: "button button--primary" %>
+    <%= link_to "Issue Book", new_issue_path, class: "button button--secondary" %>
+  </div>
+</section>
 
-  <ul>
-    <%= render @books %>
-  </ul>
-</div>
+<section class="stats-grid">
+  <article class="stat-card">
+    <span>Total Books</span>
+    <strong><%= @stats[:total_books] %></strong>
+  </article>
+  <article class="stat-card">
+    <span>Available Now</span>
+    <strong><%= @stats[:available_books] %></strong>
+  </article>
+  <article class="stat-card">
+    <span>Issued Books</span>
+    <strong><%= @stats[:issued_books] %></strong>
+  </article>
+  <article class="stat-card">
+    <span>Members</span>
+    <strong><%= @stats[:members] %></strong>
+  </article>
+</section>
+
+<section class="panel">
+  <div class="panel__header">
+    <div>
+      <p class="eyebrow">Catalog</p>
+      <h2>Books</h2>
+    </div>
+
+    <%= form_with url: books_path, method: :get, class: "search-form" do %>
+      <%= text_field_tag :q, @query, placeholder: "Search by title, author, or ISBN" %>
+      <%= submit_tag "Search", class: "button button--primary" %>
+    <% end %>
+  </div>
+
+  <% if @books.any? %>
+    <div class="book-grid">
+      <%= render @books %>
+    </div>
+  <% else %>
+    <div class="empty-state">
+      <h3>No books matched your search.</h3>
+      <p>Try a different keyword or add a new title to the catalog.</p>
+    </div>
+  <% end %>
+</section>
+
+<section class="panel">
+  <div class="panel__header">
+    <div>
+      <p class="eyebrow">Circulation</p>
+      <h2>Active loans</h2>
+    </div>
+  </div>
+
+  <% if @active_issues.any? %>
+    <div class="table-list">
+      <% @active_issues.each do |issue| %>
+        <article class="table-list__row">
+          <div>
+            <strong><%= issue.book.title %></strong>
+            <p><%= issue.user.name %> borrowed it on <%= issue.issue_date.strftime("%d %b %Y") %>.</p>
+          </div>
+          <div class="table-list__actions">
+            <%= link_to "View", book_path(issue.book), class: "button button--ghost" %>
+            <%= button_to "Return", return_book_issue_path(issue), method: :patch, class: "button button--secondary" %>
+          </div>
+        </article>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="empty-state">
+      <h3>No active loans.</h3>
+      <p>All books are currently available in the catalog.</p>
+    </div>
+  <% end %>
+</section>

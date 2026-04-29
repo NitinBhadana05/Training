@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Library System</title>
-  <%= csrf_meta_tags %>
-  <%= csp_meta_tag %>
-  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-</head>
+  <head>
+    <title>Library System</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  </head>
 
-<body>
-
-  <%= render "shared/navbar" %>
-  <%= render "shared/flash" %>
-  
-
-  <%= yield %>
-
-</body>
+  <body>
+    <div class="page-background"></div>
+    <%= render "shared/navbar" %>
+    <main class="page-shell">
+      <%= render "shared/flash" %>
+      <%= yield %>
+    </main>
+  </body>
 </html>

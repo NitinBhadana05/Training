@@ -1,16 +1,19 @@
 class Book < ApplicationRecord
-    has_many :issues, dependent: :destroy
-    has_many :users, through: :issues
+  has_many :issues, dependent: :destroy
+  has_many :users, through: :issues
 
-    validates :title, :author, :isbn, presence: true
-    validates :isbn, uniqueness: true
+  validates :title, :author, :isbn, presence: true
+  validates :isbn, uniqueness: true
 
-    before_create :set_default_availability
+  before_create :set_default_availability
 
-    private
+  def active_issue
+    issues.includes(:user).find_by(return_date: nil)
+  end
 
-    def set_default_availability
-        self.available = true if available.nil?
-    end
+  private
 
+  def set_default_availability
+    self.available = true if available.nil?
+  end
 end

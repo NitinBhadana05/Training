@@ -1,14 +1,32 @@
-<li>
-  <span>
-    <%= book.title %> - <%= book.author %>
-  </span>
+<% active_issue = book.active_issue %>
 
-  <span class="<%= book.available ? 'available' : 'issued' %>">
-    <%= book.available ? "Available" : "Issued" %>
-  </span>
+<article class="book-card">
+  <div class="book-card__top">
+    <span class="status-pill <%= book.available ? "status-pill--available" : "status-pill--issued" %>">
+      <%= book.available ? "Available" : "Issued" %>
+    </span>
+    <span class="book-card__isbn">ISBN <%= book.isbn %></span>
+  </div>
 
-  <% unless book.available %>
-    <% issue = book.issues.last %>
-    <%= button_to "Return", return_book_issue_path(issue), method: :patch %>
-  <% end %>
-</li>
+  <div class="book-card__body">
+    <h3><%= book.title %></h3>
+    <p class="book-card__author"><%= book.author %></p>
+
+    <% if active_issue %>
+      <p class="book-card__meta">Borrowed by <strong><%= active_issue.user.name %></strong> on <%= active_issue.issue_date.strftime("%d %b %Y") %>.</p>
+    <% else %>
+      <p class="book-card__meta">Ready to issue to the next member.</p>
+    <% end %>
+  </div>
+
+  <div class="book-card__actions">
+    <%= link_to "Details", book_path(book), class: "button button--ghost" %>
+    <%= link_to "Edit", edit_book_path(book), class: "button button--ghost" %>
+    <% if active_issue %>
+      <%= button_to "Return", return_book_issue_path(active_issue), method: :patch, class: "button button--secondary" %>
+    <% else %>
+      <%= link_to "Issue", new_issue_path(issue: { book_id: book.id }), class: "button button--primary" %>
+    <% end %>
+    <%= button_to "Delete", book_path(book), method: :delete, class: "button button--danger" %>
+  </div>
+</article>

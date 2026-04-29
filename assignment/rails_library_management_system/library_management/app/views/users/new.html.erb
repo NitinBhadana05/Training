@@ -1,13 +1,35 @@
-<div class="container">
-  <h1>Sign Up</h1>
+<section class="auth-shell auth-shell--centered">
+  <article class="auth-card auth-card--stacked">
+    <p class="eyebrow">Welcome</p>
+    <h1>Create your library account.</h1>
+    <p class="auth-card__intro">Register once to manage books, issue titles, and keep member records organized.</p>
+    <hr class="auth-divider">
 
-  <%= form_with model: @user do |f| %>
-    <%= f.text_field :name, placeholder: "Name" %>
-    <%= f.email_field :email, placeholder: "Email" %>
-    <%= f.password_field :password, placeholder: "Password" %>
-    <%= f.password_field :password_confirmation, placeholder: "Confirm Password" %>
-    <%= f.submit "Register" %>
-  <% end %>
+    <%= form_with model: @user do |f| %>
+      <div class="form-grid">
+        <div class="field field--full">
+          <%= f.label :name %>
+          <%= f.text_field :name, placeholder: "Aarav Sharma" %>
+        </div>
+        <div class="field field--full">
+          <%= f.label :email %>
+          <%= f.email_field :email, placeholder: "aarav@example.com" %>
+        </div>
+        <div class="field">
+          <%= f.label :password %>
+          <%= f.password_field :password, placeholder: "Minimum 6 characters" %>
+        </div>
+        <div class="field">
+          <%= f.label :password_confirmation %>
+          <%= f.password_field :password_confirmation, placeholder: "Repeat password" %>
+        </div>
+      </div>
 
-  <%= link_to "Login", login_path, class: "link-btn" %>
-</div>
+      <div class="form-actions form-actions--full">
+        <%= f.submit "Register", class: "button button--primary" %>
+      </div>
+    <% end %>
+
+    <p class="auth-card__switch">Already registered? <%= link_to "Login", login_path %></p>
+  </article>
+</section>

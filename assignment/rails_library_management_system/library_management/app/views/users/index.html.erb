@@ -1,7 +1,13 @@
-<div class="container">
-  <h1>Users</h1>
+<section class="panel">
+  <div class="panel__header">
+    <div>
+      <p class="eyebrow">Members</p>
+      <h1>Library users</h1>
+    </div>
+    <p class="panel__caption">See who is in the system and how many books each member currently holds.</p>
+  </div>
 
-  <ul>
+  <div class="member-grid">
     <%= render @users %>
-  </ul>
-</div>
+  </div>
+</section>

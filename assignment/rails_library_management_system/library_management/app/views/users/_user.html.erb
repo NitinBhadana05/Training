@@ -1,3 +1,20 @@
-<li>
-  <%= user.name %> - <%= user.email %>
-</li>
+<% active_issue_count = user.issues.count { |issue| issue.return_date.nil? } %>
+
+<article class="member-card">
+  <div class="member-card__top">
+    <div>
+      <h3><%= user.name %></h3>
+      <p><%= user.email %></p>
+    </div>
+    <span class="status-pill <%= active_issue_count.zero? ? "status-pill--available" : "status-pill--issued" %>">
+      <%= pluralize(active_issue_count, "active loan") %>
+    </span>
+  </div>
+
+  <% current_titles = user.issues.select { |issue| issue.return_date.nil? }.map { |issue| issue.book.title } %>
+  <% if current_titles.any? %>
+    <p class="member-card__meta"><%= current_titles.join(", ") %></p>
+  <% else %>
+    <p class="member-card__meta">No books currently issued.</p>
+  <% end %>
+</article>

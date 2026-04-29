@@ -1,13 +1,13 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  title: MyString
-  author: MyString
-  isbn: MyString
+  title: Clean Code
+  author: Robert C. Martin
+  isbn: ISBN-001
   available: false
 
 two:
-  title: MyString
-  author: MyString
-  isbn: MyString
-  available: false
+  title: Refactoring
+  author: Martin Fowler
+  isbn: ISBN-002
+  available: true

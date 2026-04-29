@@ -1,2 +1,77 @@
-<h1>Books#show</h1>
-<p>Find me in app/views/books/show.html.erb</p>
+<section class="detail-shell">
+  <article class="detail-card">
+    <div class="detail-card__header">
+      <div>
+        <p class="eyebrow">Book details</p>
+        <h1><%= @book.title %></h1>
+        <p class="detail-card__subhead"><%= @book.author %></p>
+      </div>
+      <span class="status-pill <%= @book.available ? "status-pill--available" : "status-pill--issued" %>">
+        <%= @book.available ? "Available" : "Issued" %>
+      </span>
+    </div>
+
+    <dl class="detail-grid">
+      <div>
+        <dt>ISBN</dt>
+        <dd><%= @book.isbn %></dd>
+      </div>
+      <div>
+        <dt>Catalog status</dt>
+        <dd><%= @book.available ? "Ready to issue" : "Currently with a member" %></dd>
+      </div>
+      <div>
+        <dt>Created</dt>
+        <dd><%= @book.created_at.strftime("%d %b %Y") %></dd>
+      </div>
+      <div>
+        <dt>Last updated</dt>
+        <dd><%= @book.updated_at.strftime("%d %b %Y") %></dd>
+      </div>
+    </dl>
+
+    <div class="detail-actions">
+      <%= link_to "Back to catalog", books_path, class: "button button--ghost" %>
+      <%= link_to "Edit book", edit_book_path(@book), class: "button button--secondary" %>
+      <% if @active_issue %>
+        <%= button_to "Return book", return_book_issue_path(@active_issue), method: :patch, class: "button button--primary" %>
+      <% else %>
+        <%= link_to "Issue book", new_issue_path(issue: { book_id: @book.id }), class: "button button--primary" %>
+      <% end %>
+    </div>
+  </article>
+
+  <article class="panel">
+    <div class="panel__header">
+      <div>
+        <p class="eyebrow">Circulation history</p>
+        <h2>Borrowing timeline</h2>
+      </div>
+    </div>
+
+    <% if @issue_history.any? %>
+      <div class="table-list">
+        <% @issue_history.each do |issue| %>
+          <article class="table-list__row">
+            <div>
+              <strong><%= issue.user.name %></strong>
+              <p>
+                Issued on <%= issue.issue_date.strftime("%d %b %Y") %>
+                <% if issue.return_date.present? %>
+                  and returned on <%= issue.return_date.strftime("%d %b %Y") %>.
+                <% else %>
+                  and is still active.
+                <% end %>
+              </p>
+            </div>
+          </article>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="empty-state">
+        <h3>No borrowing history yet.</h3>
+        <p>This title has not been issued to any member.</p>
+      </div>
+    <% end %>
+  </article>
+</section>
