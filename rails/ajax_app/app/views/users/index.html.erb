@@ -1,0 +1,85 @@
+
+<h1>User Search</h1>
+
+<input type="text" id="search-box" placeholder="Search users...">
+
+<div id="results">
+  <%= render partial: "users", locals: { users: @users } %>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const input = document.getElementById("search-box");
+  const results = document.getElementById("results");
+
+  let timer;
+
+  input.addEventListener("keyup", () => {
+    clearTimeout(timer);
+
+    const query = input.value.trim();
+
+    // handle empty input
+    if (query === "") {
+      results.innerHTML = "<p>Start typing to search...</p>";
+      return;
+    }
+
+    timer = setTimeout(() => {
+      // show loading
+      results.innerHTML = "Loading...";
+
+      fetch(`/users?query=${encodeURIComponent(query)}`, {
+        headers: { "Accept": "application/json" }
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error("Network error");
+        }
+        return response.json();   // IMPORTANT: JSON mode
+      })
+      .then(data => {
+        let html = "";
+
+        if (data.length === 0) {
+          html = "<p>No users found</p>";
+        } else {
+          data.forEach(user => {
+            html += `<p>${user.name} - ${user.email}</p>`;
+          });
+        }
+
+        results.innerHTML = html;
+      })
+      .catch(error => {
+        console.error(error);
+        results.innerHTML = "<p>Error loading data</p>";
+      });
+
+    }, 300); // debounce
+  });
+});
+
+function deleteUser(userId) {
+  fetch(`/users/${userId}`, {
+    method: "DELETE",
+    headers: {
+      "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').content,
+      "Accept": "application/json"
+    }
+  })
+  .then(response => {
+    if (!response.ok) throw new Error("Delete failed");
+    return response.json();
+  })
+  .then(data => {
+    if (data.success) {
+      const userElement = document.getElementById(`user-${userId}`);
+      if (userElement) userElement.remove();
+    }
+  })
+  .catch(() => {
+    alert("Error deleting user");
+  });
+}
+</script>

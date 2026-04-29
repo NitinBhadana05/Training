@@ -1,0 +1,8 @@
+<% if users.any? %>
+  <% users.each do |user| %>
+    <p>Name: <%= user.name %> </p><p>Age: <%= user.age %> </p><p>Email:  <%= user.email %></p>
+     <button onclick="deleteUser(<%= user.id %>)">Delete</button>
+  <% end %>
+<% else %>
+  <p>No users found</p>
+<% end %>
