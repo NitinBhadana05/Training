@@ -1,0 +1,7 @@
+<%= turbo_frame_tag dom_id(@post) do %>
+  <%= form_with model: @post do |f| %>
+    <%= f.text_field :title %><br><br>
+    <%= f.text_area :content %><br><br>
+    <%= f.submit "Update" %>
+  <% end %>
+<% end %>
