@@ -1,0 +1,17 @@
+<h1>Edit Book</h1>
+
+<%= form_with model: @book do |form| %>
+  <div>
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div>
+    <%= form.label :auther %>
+    <%= form.text_field :auther %>
+  </div>
+
+  <div>
+    <%= form.submit "Update Book" %>
+  </div>
+<% end %>

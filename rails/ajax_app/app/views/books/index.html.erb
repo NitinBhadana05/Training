@@ -1,0 +1,56 @@
+<div>
+  <h2>
+    <%= link_to "Create Book", new_book_path %>
+  </h2>
+  <h2>
+    <%= link_to "Show Book", book_path(@books) %>
+  </h2>
+  
+</div>
+
+
+<h2>Search for Books</h2>
+
+<input type="text" id="search-box" placeholder="Search books..." value="<%= params[:query] %>">
+
+<div id="results">
+  <% @books.each do |book| %>
+    <p><%= book.title %> - <%= book.auther %></p>
+  <% end %>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const input = document.getElementById("search-box");
+  let timer;
+
+  input.addEventListener("keyup", () => {
+    clearTimeout(timer);
+
+    const query = input.value;
+
+    timer = setTimeout(() => {
+      // loading state
+      document.getElementById("results").innerHTML = "Loading...";
+
+      fetch(`/books?query=${query}`, {
+        headers: { "Accept": "application/json" }
+      })
+      .then(response => response.json())
+      .then(data => {
+        let html = "";
+
+        if (data.length === 0) {
+          html = "<p>No books found</p>";
+        } else {
+          data.forEach(book => {
+            html += `<p>${book.title} - ${book.auther}</p>`;
+          });
+        }
+
+        document.getElementById("results").innerHTML = html;
+      });
+    }, 300); // debounce
+  });
+});
+</script>

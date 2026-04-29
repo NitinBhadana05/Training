@@ -1,0 +1,15 @@
+<div>
+
+  <h1>
+      Add Books
+  </h1>
+
+  <%= form_with model: @book, method: :post do |f|%>
+    <%= f.label :title, "Title" %>
+    <%= f.text_field :title, placeholder:"enter title"%>
+    <%= f.label :auther, "Author" %>
+    <%= f.text_field :auther,placeholder: "enetr author"%>
+    <%= f.submit "Create Book"%>
+  <% end %>
+
+</div>
