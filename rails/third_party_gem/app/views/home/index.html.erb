@@ -1,0 +1,9 @@
+<% if user_signed_in? %>
+  <h1>Welcome <%= current_user.email %></h1>
+  <h2><%= link_to "Create Post", new_post_path %></h2>
+  <h2><%= link_to "Show Posts", posts_path %></h2>
+<% else %>
+  <h1>Welcome Guest</h1>
+  <%= link_to "Login", new_user_session_path %>
+<% end %>
+
