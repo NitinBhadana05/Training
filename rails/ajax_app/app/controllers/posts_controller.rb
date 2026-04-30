@@ -39,6 +39,20 @@ class PostsController < ApplicationController
     end
   end
 
+  def like
+    @post = Post.find(params[:id])
+
+    if @post.liked
+      @post.decrement!(:likes)
+      @post.update(liked: false)
+    else
+      @post.increment!(:likes)
+      @post.update(liked: true)
+    end
+
+    render json: { likes: @post.likes, liked: @post.liked }
+  end
+
   private
 
   def post_params

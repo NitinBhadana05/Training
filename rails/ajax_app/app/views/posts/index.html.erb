@@ -13,3 +13,25 @@
 <%= turbo_frame_tag "posts" do %>
   <%= render @posts %>
 <% end %>
+
+<script>
+function likePost(postId) {
+  fetch(`/posts/${postId}/like`, {
+    method: "POST",
+    headers: {
+      "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').content,
+      "Accept": "application/json"
+    }
+  })
+  .then(res => res.json())
+  .then(data => {
+    document.getElementById(`likes-${postId}`).innerText = data.likes;
+
+    const btn = document.getElementById(`btn-${postId}`);
+    btn.innerText = data.liked ? "💔" : "❤️";
+  })
+  .catch(() => {
+    alert("Error liking post");
+  });
+}
+</script>

@@ -3,6 +3,12 @@
     <strong><%= post.title %></strong> - <%= post.content %>
 
     <%= link_to "Edit", edit_post_path(post) %>
+      <button onclick="likePost(<%= post.id %>)" id="btn-<%= post.id %>">
+    <%= post.liked ? "💔 " : "❤️" %>
+  </button>
+   <span id="likes-<%= post.id %>">
+    <%= post.likes %>
+  </span>
 
     <%= button_to "Delete", post_path(post), method: :delete %>
   </p>
