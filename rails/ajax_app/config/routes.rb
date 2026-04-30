@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  devise_for :admins
+  devise_for :users
   get "posts/index"
   get "posts/new"
   get "posts/create"
@@ -17,6 +19,9 @@ Rails.application.routes.draw do
     end
   end
   root "posts#index"
+
+ 
+  
   
 
 
