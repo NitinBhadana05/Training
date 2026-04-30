@@ -14,3 +14,30 @@
 </div>
 
 <%= link_to "New post", new_post_path %>
+<br><br>
+
+<%= paginate @posts %>
+
+<script>
+  console.log("AJAX pagination loaded");
+document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("click", function(e) {
+    const link = e.target.closest(".pagination a");
+    if (!link) return;
+
+    e.preventDefault();
+
+    const url = link.href;
+
+    document.getElementById("posts-container").innerHTML = "Loading...";
+
+    fetch(url, {
+      headers: { "Accept": "application/json" }
+    })
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById("posts-container").innerHTML = html;
+    });
+  });
+});
+</script>
