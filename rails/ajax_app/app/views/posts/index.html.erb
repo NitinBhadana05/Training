@@ -10,6 +10,7 @@
         oninput: "this.form.requestSubmit()" %>
 <% end %><br>
 
+<%= turbo_stream_from "posts" %>
 <%= turbo_frame_tag "posts" do %>
   <%= render @posts %>
 <% end %>
