@@ -1,0 +1,75 @@
+<h1>New User</h1>
+
+<%= form_with model: @user do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+      <ul>
+        <% @user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div>
+    <%= f.label :age %><br>
+    <%= f.text_field :age %>
+  </div>
+
+  <div>
+  <%= f.label :email %><br>
+  <%= f.email_field :email, id: "email-input" %>
+  <p id="email-status"></p>
+</div>
+
+  <div>
+    <%= f.submit "Create User" %>
+  </div>
+<% end %>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const input = document.getElementById("email-input");
+  const status = document.getElementById("email-status");
+
+  let timer;
+
+  input.addEventListener("keyup", () => {
+    clearTimeout(timer);
+
+    const email = input.value.trim();
+
+    if (email === "") {
+      status.innerText = "";
+      return;
+    }
+
+    // 🔧 LOADING STATE
+    status.innerText = "Checking...";
+    status.style.color = "gray";
+
+    timer = setTimeout(() => {
+      fetch(`/check_email?email=${encodeURIComponent(email)}`)
+        .then(res => res.json())
+        .then(data => {
+          if (data.exists) {
+            status.innerText = "❌ Email already taken";
+            status.style.color = "red";
+          } else {
+            status.innerText = "✅ Email available";
+            status.style.color = "green";
+          }
+        })
+        .catch(() => {
+          status.innerText = "Error checking email";
+          status.style.color = "orange";
+        });
+    }, 300);
+  });
+});
+</script>
