@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   
   resources :users
   get "/check_email", to: "users#check_email"
-  root "users#index"
+ #root "users#index"
   
   #resources :posts
   resources :posts do
@@ -16,7 +16,7 @@ Rails.application.routes.draw do
       post :like
     end
   end
- # root "posts#index"
+  root "posts#index"
   
 
 

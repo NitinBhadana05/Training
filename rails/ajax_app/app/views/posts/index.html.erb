@@ -14,6 +14,15 @@
   <%= render @posts %>
 <% end %>
 
+
+<div id="posts">
+  <h3>infnite scrole start</h3>
+  <% @posts.each do |post| %>
+    <p><%= post.title %></p>
+  <% end %>
+  <h3>end</h3>
+</div>
+
 <script>
 function likePost(postId) {
   fetch(`/posts/${postId}/like`, {
@@ -34,4 +43,37 @@ function likePost(postId) {
     alert("Error liking post");
   });
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  let offset = 10;
+  let loading = false;
+
+  window.addEventListener("scroll", () => {
+    if (loading) return;
+
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) {
+      loading = true;
+
+      fetch(`/posts?offset=${offset}`, {
+        headers: { "Accept": "application/json" }
+      })
+      .then(res => res.json())
+      .then(data => {
+        const container = document.getElementById("posts");
+
+        if (data.length === 0) return;
+
+        data.forEach(post => {
+          const div = document.createElement("div");
+          div.className = "post-item";
+          div.innerHTML = `<strong>${post.title}</strong>`;
+          container.appendChild(div);
+        });
+
+        offset += 10;
+        loading = false;
+      });
+    }
+  });
+});
 </script>

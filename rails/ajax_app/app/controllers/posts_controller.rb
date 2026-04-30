@@ -1,7 +1,12 @@
 class PostsController < ApplicationController
   def index
-    @posts = Post.all.order(created_at: :desc)
+    @posts = Post.all.order(created_at: :desc).limit(10).offset(params[:offset].to_i)
     @post = Post.new
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @posts }
+    end
   end
 
   def create
