@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
+  get "messages/create"
   
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   resources :posts
-  #get "home/index"
+  get "home/index"
   devise_for :users
   #root "home#index"
 
@@ -12,7 +13,8 @@ Rails.application.routes.draw do
   end
 
   resources :users, only: [:show]
+  
   resources :products
   root "products#index"
-  
+  post "/messages", to: "messages#create"
 end

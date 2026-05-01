@@ -1,4 +1,12 @@
-<p><%= @product.name %></p>
-<p><%= @product.price %></p>
+<h1><%= @product.name %></h1>
 
-<%= image_tag @product.photo.url if @product.photo? %>
+<p><strong>Price:</strong> ₹<%= @product.price %></p>
+
+<% if @product.photo? %>
+  <%= image_tag @product.photo.url, width: 250 %>
+<% end %>
+
+<br><br>
+
+<%= link_to "⬅ Back to Products", products_path %> |
+<%= link_to "🏠 Home", root_path %>

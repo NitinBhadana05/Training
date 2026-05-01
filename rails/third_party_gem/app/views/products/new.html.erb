@@ -1,6 +1,28 @@
+<h1>Create Product</h1>
+
 <%= form_for @product, html: { multipart: true } do |f| %>
-  <%= f.text_field :name %>
-  <%= f.number_field :price %>
-  <%= f.file_field :photo %>
-  <%= f.submit %>
+
+  <div>
+    <%= f.label :name, "Product Name" %><br>
+    <%= f.text_field :name %>
+  </div>
+
+  <div>
+    <%= f.label :price, "Price" %><br>
+    <%= f.number_field :price %>
+  </div>
+
+  <div>
+    <%= f.label :photo, "Upload Image" %><br>
+    <%= f.file_field :photo %>
+  </div>
+
+  <div>
+    <%= f.submit "Create Product" %>
+  </div>
+
 <% end %>
+
+<br>
+
+<%= link_to "⬅ Back to Home", root_path %>

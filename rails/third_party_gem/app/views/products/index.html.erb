@@ -2,12 +2,47 @@
 
 <%= link_to "Create New Product", new_product_path %>
 
+
+
+
 <% @products.each do |product| %>
-  <p><%= product.name %></p>
-  
+  <% cache product do %>
+  <h3>
+    <%= link_to product.name, product_path(product) %>
+  </h3>
+
   <% if product.photo? %>
     <%= image_tag product.photo.url, width: 150 %>
   <% end %>
 
+  <p>Price: ₹<%= product.price %></p>
+
   <hr>
+
 <% end %>
+<% end %> 
+
+
+<h2>Live Chat</h2>
+
+<div id="messages"></div>
+
+<input id="chat-input" type="text">
+<button onclick="sendMessage()">Send</button>
+
+<script>
+  function sendMessage() {
+    const input = document.getElementById("chat-input")
+
+    fetch("/messages", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRF-Token": document.querySelector("[name='csrf-token']").content
+      },
+      body: JSON.stringify({ message: input.value })
+    })
+
+    input.value = ""
+  }
+</script>
