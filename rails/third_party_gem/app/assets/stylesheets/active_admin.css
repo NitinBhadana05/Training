@@ -1,0 +1,310 @@
+/* ===============================
+   🌞 FULL MODERN ACTIVEADMIN UI
+   =============================== */
+
+body.active_admin {
+  background-color: #f8fafc !important;
+  color: #1e293b !important;
+  font-family: "Inter", sans-serif;
+}
+
+/* ===== HEADER ===== */
+body.active_admin #header {
+  background: #ffffff !important;
+  border-bottom: 1px solid #e5e7eb !important;
+}
+
+body.active_admin #header h1 {
+  color: #111827 !important;
+}
+
+/* ===== TOP NAV (Dashboard, Posts) ===== */
+body.active_admin #tabs {
+  background: #ffffff !important;
+  border-bottom: 1px solid #e5e7eb !important;
+}
+
+body.active_admin #tabs ul li a {
+  color: #374151 !important;
+  padding: 10px 16px !important;
+  border-radius: 8px !important;
+}
+
+body.active_admin #tabs ul li a:hover {
+  background: #f3f4f6 !important;
+}
+
+body.active_admin #tabs ul li.current a {
+  background: #3b82f6 !important;
+  color: white !important;
+}
+
+/* ===== SIDEBAR ===== */
+body.active_admin #sidebar {
+  background: #ffffff !important;
+  border-right: 1px solid #e5e7eb !important;
+}
+
+body.active_admin .sidebar_section {
+  background: #ffffff !important;
+  border: 1px solid #e5e7eb !important;
+  border-radius: 12px !important;
+  padding: 12px !important;
+  margin-bottom: 16px !important;
+}
+
+/* ===== PAGE TITLE ===== */
+body.active_admin #page_title {
+  font-size: 22px !important;
+  font-weight: 600 !important;
+  color: #111827 !important;
+}
+
+/* ===== TABLE ===== */
+body.active_admin .index_table {
+  background: #ffffff !important;
+  border-radius: 12px !important;
+  overflow: hidden !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05) !important;
+}
+
+body.active_admin .index_table th {
+  background: #f1f5f9 !important;
+  color: #334155 !important;
+}
+
+body.active_admin .index_table td {
+  border-bottom: 1px solid #e5e7eb !important;
+}
+
+/* ===== BUTTONS ===== */
+body.active_admin .action_item a,
+body.active_admin .button,
+body.active_admin input[type="submit"] {
+  background: #3b82f6 !important;
+  color: white !important;
+  border-radius: 8px !important;
+  padding: 8px 14px !important;
+  border: none !important;
+  cursor: pointer !important;
+}
+
+body.active_admin .action_item a:hover,
+body.active_admin .button:hover {
+  background: #2563eb !important;
+}
+
+/* ===== FORM ===== */
+body.active_admin form.formtastic fieldset {
+  background: #ffffff !important;
+  border: 1px solid #e5e7eb !important;
+  border-radius: 14px !important;
+  padding: 24px !important;
+  margin-bottom: 20px !important;
+}
+
+/* Labels */
+body.active_admin form.formtastic label {
+  color: #374151 !important;
+  font-weight: 600 !important;
+  margin-bottom: 6px !important;
+  display: block !important;
+}
+
+/* Input spacing */
+body.active_admin form.formtastic li {
+  margin-bottom: 16px !important;
+  list-style: none !important;
+}
+
+/* Inputs */
+body.active_admin form.formtastic input[type="text"],
+body.active_admin form.formtastic input[type="email"],
+body.active_admin form.formtastic input[type="password"],
+body.active_admin form.formtastic textarea,
+body.active_admin form.formtastic select {
+  width: 100% !important;
+  background: #f9fafb !important;
+  border: 1px solid #d1d5db !important;
+  color: #111827 !important;
+  padding: 10px 12px !important;
+  border-radius: 10px !important;
+  font-size: 14px !important;
+}
+
+/* Focus */
+body.active_admin form.formtastic input:focus,
+body.active_admin form.formtastic textarea:focus,
+body.active_admin form.formtastic select:focus {
+  border-color: #3b82f6 !important;
+  background: #ffffff !important;
+  outline: none !important;
+  box-shadow: 0 0 0 2px rgba(59,130,246,0.15) !important;
+}
+
+/* File input */
+body.active_admin input[type="file"] {
+  border: none !important;
+  background: transparent !important;
+}
+
+/* Errors */
+body.active_admin .inline-errors {
+  color: #dc2626 !important;
+  font-size: 12px !important;
+}
+
+/* ===== FILTER BOX ===== */
+body.active_admin .filter_form {
+  background: #ffffff !important;
+  border: 1px solid #e5e7eb !important;
+  padding: 12px !important;
+  border-radius: 12px !important;
+}
+
+/* ===== DASHBOARD CARDS ===== */
+body.active_admin .dashboard .columns .column {
+  background: #ffffff !important;
+  border: 1px solid #e5e7eb !important;
+  border-radius: 12px !important;
+  padding: 16px !important;
+}
+
+/* ===== FIX FORM (CORRECT SELECTORS) ===== */
+
+body.active_admin .formtastic .input {
+  margin-bottom: 18px !important;
+}
+
+body.active_admin .formtastic .input label {
+  display: block !important;
+  font-weight: 600 !important;
+  color: #374151 !important;
+  margin-bottom: 6px !important;
+}
+
+body.active_admin .formtastic .input input,
+body.active_admin .formtastic .input textarea,
+body.active_admin .formtastic .input select {
+  width: 100% !important;
+  background: #f9fafb !important;
+  border: 1px solid #d1d5db !important;
+  padding: 10px !important;
+  border-radius: 8px !important;
+  color: #111827 !important;
+}
+
+/* Focus */
+body.active_admin .formtastic .input input:focus,
+body.active_admin .formtastic .input textarea:focus {
+  border-color: #3b82f6 !important;
+  background: #ffffff !important;
+  outline: none !important;
+}
+
+/* ===== FIX SUBMIT BUTTON ===== */
+
+body.active_admin .formtastic .actions input {
+  background: #3b82f6 !important;
+  color: white !important;
+  border-radius: 8px !important;
+  padding: 10px 16px !important;
+  border: none !important;
+}
+
+body.active_admin .formtastic .actions input:hover {
+  background: #2563eb !important;
+}
+
+/* ===== FIX LINKS ===== */
+
+body.active_admin a {
+  color: #3b82f6 !important;
+  text-decoration: none !important;
+}
+
+body.active_admin a:hover {
+  color: #2563eb !important;
+  text-decoration: underline !important;
+}
+
+/* Action links (Edit/Delete) */
+body.active_admin a.member_link {
+  padding: 4px 8px !important;
+  border-radius: 6px !important;
+  background: #e0f2fe !important;
+  color: #0369a1 !important;
+}
+
+body.active_admin a.member_link:hover {
+  background: #bae6fd !important;
+}
+/* ===== LINKS AS BUTTONS ===== */
+
+body.active_admin a,
+body.active_admin a.member_link,
+body.active_admin .action_item a {
+  display: inline-block !important;
+  background: #3b82f6 !important;
+  color: white !important;
+  padding: 6px 12px !important;
+  border-radius: 8px !important;
+  text-decoration: none !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+}
+
+body.active_admin a:hover {
+  background: #2764e9 !important;
+  color: white !important;
+}
+
+/* Special actions (Delete = red) */
+body.active_admin a.member_link.delete_link {
+  background: #ef4444 !important;
+}
+
+body.active_admin a.member_link.delete_link:hover {
+  background: #dc2626 !important;
+}
+/* ===== FORCE FORM STYLE ===== */
+
+body.active_admin form.formtastic {
+  background: #ffffff !important;
+  padding: 20px !important;
+  border-radius: 12px !important;
+  border: 1px solid #e5e7eb !important;
+}
+
+/* Each field */
+body.active_admin form.formtastic ol > li {
+  margin-bottom: 18px !important;
+}
+
+/* Labels */
+body.active_admin form.formtastic label {
+  font-weight: 600 !important;
+  color: #374151 !important;
+  margin-bottom: 6px !important;
+  display: block !important;
+}
+
+/* Inputs */
+body.active_admin form.formtastic input,
+body.active_admin form.formtastic textarea,
+body.active_admin form.formtastic select {
+  width: 100% !important;
+  padding: 10px !important;
+  border-radius: 8px !important;
+  border: 1px solid #d1d5db !important;
+  background: #f9fafb !important;
+}
+
+/* Submit */
+body.active_admin form.formtastic .actions li input {
+  background: #3b82f6 !important;
+  color: white !important;
+  padding: 10px 18px !important;
+  border-radius: 8px !important;
+  border: none !important;
+}
