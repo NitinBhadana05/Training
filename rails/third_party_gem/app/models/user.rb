@@ -5,6 +5,9 @@ class User < ApplicationRecord
 
   has_many :posts
 
+  extend FriendlyId
+  friendly_id :name, use: :slugged
+
   def self.ransackable_attributes(auth_object = nil)
       ["id", "email", "created_at", "updated_at"]
   end

@@ -1,0 +1,13 @@
+<h1>Products</h1>
+
+<%= link_to "Create New Product", new_product_path %>
+
+<% @products.each do |product| %>
+  <p><%= product.name %></p>
+  
+  <% if product.photo? %>
+    <%= image_tag product.photo.url, width: 150 %>
+  <% end %>
+
+  <hr>
+<% end %>

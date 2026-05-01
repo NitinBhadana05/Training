@@ -1,0 +1,6 @@
+<%= form_for @product, html: { multipart: true } do |f| %>
+  <%= f.text_field :name %>
+  <%= f.number_field :price %>
+  <%= f.file_field :photo %>
+  <%= f.submit %>
+<% end %>
