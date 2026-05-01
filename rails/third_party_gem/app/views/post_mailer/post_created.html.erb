@@ -1,0 +1,9 @@
+<h1>Post Created</h1>
+
+<p>Title: <%= @post.title %></p>
+<p>Content: <%= @post.content %></p>
+<% if @post.image.attached? %>
+  <p>
+    <%= image_tag url_for(@post.image), width: 200 %>
+  </p>
+<% end %>

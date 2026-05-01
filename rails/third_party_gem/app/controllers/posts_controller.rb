@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   before_action :set_post, only: %i[ show edit update destroy ]
-
+  include Pundit::Authorization
+  
   # GET /posts or /posts.json
   def index
      @posts = Post.order(created_at: :desc).page(params[:page]).per(5)
@@ -27,10 +28,12 @@ class PostsController < ApplicationController
   # POST /posts or /posts.json
   def create
     @post = current_user.posts.build(post_params)
-
+    authorize @post
 
     respond_to do |format|
       if @post.save
+        
+         PostNotificationJob.perform_later(@post.id)
         format.html { redirect_to @post, notice: "Post was successfully created." }
         format.json { render :show, status: :created, location: @post }
       else
@@ -42,6 +45,7 @@ class PostsController < ApplicationController
 
   # PATCH/PUT /posts/1 or /posts/1.json
   def update
+    authorize @post
     respond_to do |format|
       if @post.update(post_params)
         format.html { redirect_to @post, notice: "Post was successfully updated.", status: :see_other }
@@ -55,6 +59,7 @@ class PostsController < ApplicationController
 
   # DELETE /posts/1 or /posts/1.json
   def destroy
+    authorize @post
     @post.destroy!
 
     respond_to do |format|
