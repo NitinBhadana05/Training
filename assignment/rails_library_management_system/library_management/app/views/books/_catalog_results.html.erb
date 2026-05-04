@@ -1,0 +1,12 @@
+<%= turbo_frame_tag "catalog_results", target: "_top" do %>
+  <% if books.any? %>
+    <div class="book-grid">
+      <%= render books %>
+    </div>
+  <% else %>
+    <div class="empty-state">
+      <h3>No books matched your search.</h3>
+      <p>Try a different keyword or add a new title to the catalog.</p>
+    </div>
+  <% end %>
+<% end %>

@@ -18,7 +18,15 @@
       </div>
       <div>
         <dt>Catalog status</dt>
-        <dd><%= @book.available ? "Ready to issue" : "Currently with a member" %></dd>
+        <dd><%= @book.available ? "Ready to rent or buy" : (@active_issue ? "Currently with a member" : "Purchased") %></dd>
+      </div>
+      <div>
+        <dt>Rental fee</dt>
+        <dd>₹<%= number_with_precision(@book.rental_fee, precision: 2) %></dd>
+      </div>
+      <div>
+        <dt>Purchase price</dt>
+        <dd>₹<%= number_with_precision(@book.purchase_price, precision: 2) %></dd>
       </div>
       <div>
         <dt>Created</dt>
@@ -32,11 +40,25 @@
 
     <div class="detail-actions">
       <%= link_to "Back to catalog", books_path, class: "button button--ghost" %>
-      <%= link_to "Edit book", edit_book_path(@book), class: "button button--secondary" %>
-      <% if @active_issue %>
-        <%= button_to "Return book", return_book_issue_path(@active_issue), method: :patch, class: "button button--primary" %>
+      <% if current_user.admin? %>
+        <%= link_to "Edit book", edit_book_path(@book), class: "button button--secondary" %>
+        <% if @active_issue %>
+          <%= link_to "View bill", issue_path(@active_issue), class: "button button--ghost" %>
+          <%= button_to "Return book", return_book_issue_path(@active_issue), method: :patch, class: "button button--primary" %>
+        <% else %>
+          <% if @book.available? %>
+            <%= link_to "Rent book", new_issue_path(issue: { book_id: @book.id, transaction_type: "rent" }), class: "button button--primary" %>
+            <%= button_to "Buy book", issues_path, method: :post, params: { issue: { book_id: @book.id, transaction_type: "buy", issue_date: Date.current } }, class: "button button--secondary" %>
+          <% end %>
+        <% end %>
       <% else %>
-        <%= link_to "Issue book", new_issue_path(issue: { book_id: @book.id }), class: "button button--primary" %>
+        <% if @book.available? %>
+          <%= link_to "Rent book", new_issue_path(issue: { book_id: @book.id, transaction_type: "rent" }), class: "button button--primary" %>
+          <%= button_to "Buy book", issues_path, method: :post, params: { issue: { book_id: @book.id, transaction_type: "buy", issue_date: Date.current } }, class: "button button--secondary" %>
+        <% elsif @active_issue&.user == current_user %>
+          <%= link_to "View my bill", issue_path(@active_issue), class: "button button--primary" %>
+          <%= button_to "Return book", return_book_issue_path(@active_issue), method: :patch, class: "button button--secondary" %>
+        <% end %>
       <% end %>
     </div>
   </article>

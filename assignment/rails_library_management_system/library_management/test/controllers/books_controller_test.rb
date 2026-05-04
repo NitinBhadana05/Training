@@ -20,6 +20,15 @@ class BooksControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "member should not get new" do
+    delete logout_path
+    post login_path, params: { email: users(:two).email, password: "password" }
+
+    get new_book_url
+
+    assert_redirected_to books_url
+  end
+
   test "should create book" do
     assert_difference("Book.count", 1) do
       post books_url, params: {
@@ -27,6 +36,23 @@ class BooksControllerTest < ActionDispatch::IntegrationTest
           title: "Domain-Driven Design",
           author: "Eric Evans",
           isbn: "ISBN-003"
+        }
+      }
+    end
+
+    assert_redirected_to books_url
+  end
+
+  test "member should not create book" do
+    delete logout_path
+    post login_path, params: { email: users(:two).email, password: "password" }
+
+    assert_no_difference("Book.count") do
+      post books_url, params: {
+        book: {
+          title: "Clean Architecture",
+          author: "Robert Martin",
+          isbn: "ISBN-004"
         }
       }
     end

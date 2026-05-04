@@ -3,87 +3,50 @@
     <p class="eyebrow">Library dashboard</p>
     <h1>Track the catalog and keep circulation visible.</h1>
     <p class="hero__copy">
-      Search books, monitor issued titles, and move quickly between catalog work and member activity.
+      Search books, monitor issued titles, and move quickly between catalog work, billing, and member activity.
     </p>
   </div>
 
-  <div class="hero__actions">
-    <%= link_to "Add Book", new_book_path, class: "button button--primary" %>
-    <%= link_to "Issue Book", new_issue_path, class: "button button--secondary" %>
+  <div class="hero__actions hero__actions--three">
+    <% if current_user.admin? %>
+      <%= link_to "Add Book", new_book_path, class: "button button--primary" %>
+      <%= link_to "Issue Book", new_issue_path, class: "button button--secondary" %>
+      <%= link_to "Show Bills", issues_path, class: "button button--ghost" %>
+    <% else %>
+      <%= link_to "Browse Books", books_path(view: "books"), class: "button button--primary" %>
+      <%= link_to "Rent Book", new_issue_path, class: "button button--secondary" %>
+      <%= link_to "My Bills", issues_path, class: "button button--ghost" %>
+    <% end %>
   </div>
 </section>
 
-<section class="stats-grid">
-  <article class="stat-card">
-    <span>Total Books</span>
-    <strong><%= @stats[:total_books] %></strong>
-  </article>
-  <article class="stat-card">
-    <span>Available Now</span>
-    <strong><%= @stats[:available_books] %></strong>
-  </article>
-  <article class="stat-card">
-    <span>Issued Books</span>
-    <strong><%= @stats[:issued_books] %></strong>
-  </article>
-  <article class="stat-card">
-    <span>Members</span>
-    <strong><%= @stats[:members] %></strong>
-  </article>
-</section>
+<%= render "stats", stats: @stats %>
+
+<% if current_user.admin? %>
+  <%= render "quick_new_book", book: @book %>
+<% end %>
 
 <section class="panel">
   <div class="panel__header">
     <div>
       <p class="eyebrow">Catalog</p>
-      <h2>Books</h2>
+      <h2><%= @show_all_books ? "All books" : "Recent books" %></h2>
     </div>
 
-    <%= form_with url: books_path, method: :get, class: "search-form" do %>
-      <%= text_field_tag :q, @query, placeholder: "Search by title, author, or ISBN" %>
+    <%= form_with url: books_path, method: :get, class: "search-form", data: { turbo_frame: "catalog_results", turbo_action: "advance", auto_search: true } do %>
+      <%= hidden_field_tag :view, "books" %>
+      <%= text_field_tag :q, @query, placeholder: "Search by title, author, or ISBN", autocomplete: "off", data: { auto_search_input: true } %>
       <%= submit_tag "Search", class: "button button--primary" %>
     <% end %>
   </div>
 
-  <% if @books.any? %>
-    <div class="book-grid">
-      <%= render @books %>
-    </div>
-  <% else %>
-    <div class="empty-state">
-      <h3>No books matched your search.</h3>
-      <p>Try a different keyword or add a new title to the catalog.</p>
+  <%= render "catalog_results", books: @books %>
+
+  <% unless @show_all_books %>
+    <div class="panel__footer">
+      <%= link_to "View all books", books_path(view: "books"), class: "button button--primary" %>
     </div>
   <% end %>
 </section>
 
-<section class="panel">
-  <div class="panel__header">
-    <div>
-      <p class="eyebrow">Circulation</p>
-      <h2>Active loans</h2>
-    </div>
-  </div>
-
-  <% if @active_issues.any? %>
-    <div class="table-list">
-      <% @active_issues.each do |issue| %>
-        <article class="table-list__row">
-          <div>
-            <strong><%= issue.book.title %></strong>
-            <p><%= issue.user.name %> borrowed it on <%= issue.issue_date.strftime("%d %b %Y") %>.</p>
-          </div>
-          <div class="table-list__actions">
-            <%= link_to "View", book_path(issue.book), class: "button button--ghost" %>
-            <%= button_to "Return", return_book_issue_path(issue), method: :patch, class: "button button--secondary" %>
-          </div>
-        </article>
-      <% end %>
-    </div>
-  <% else %>
-    <div class="empty-state">
-      <h3>No active loans.</h3>
-      <p>All books are currently available in the catalog.</p>
-    </div>
-  <% end %>
-</section>
+<%= render "active_loans", active_issues: @active_issues %>

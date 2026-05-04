@@ -8,7 +8,11 @@ class Book < ApplicationRecord
   before_create :set_default_availability
 
   def active_issue
-    issues.includes(:user).find_by(return_date: nil)
+    issues.includes(:user).find_by(transaction_type: "rent", return_date: nil)
+  end
+
+  def latest_bill
+    issues.includes(:user).order(created_at: :desc).first
   end
 
   private

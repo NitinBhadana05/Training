@@ -1,27 +1,33 @@
-<section class="auth-shell auth-shell--centered">
-  <article class="auth-card auth-card--stacked">
-    <p class="eyebrow">Library access</p>
-    <h1>Sign in to manage the collection.</h1>
-    <p class="auth-card__intro">Use your member account to view the catalog, issue books, and process returns.</p>
-    <hr class="auth-divider">
+<section class="auth-shell">
+  <article class="auth-card">
+    <div class="auth-card__copy">
+      <p class="eyebrow">Library access</p>
+      <h1>Sign in</h1>
+      <p>Manage the catalog, issue books, and process returns from one clear workspace.</p>
+    </div>
 
-    <%= form_with url: login_path do %>
-      <div class="form-grid">
-        <div class="field field--full">
-          <%= label_tag :email, "Email" %>
-          <%= email_field_tag :email, params[:email], placeholder: "aarav@example.com" %>
+    <div class="auth-card__form">
+      <%= form_with url: login_path do %>
+        <div class="form-grid">
+          <div class="field field--full">
+            <%= label_tag :email, "Email" %>
+            <%= email_field_tag :email, params[:email], placeholder: "aarav@example.com" %>
+          </div>
+          <div class="field field--full">
+            <%= label_tag :password, "Password" %>
+            <%= password_field_tag :password, nil, placeholder: "Your password" %>
+          </div>
         </div>
-        <div class="field field--full">
-          <%= label_tag :password, "Password" %>
-          <%= password_field_tag :password, nil, placeholder: "Your password" %>
+
+        <div class="form-actions form-actions--full">
+          <%= submit_tag "Login", class: "button button--primary" %>
         </div>
-      </div>
+      <% end %>
 
-      <div class="form-actions form-actions--full">
-        <%= submit_tag "Login", class: "button button--primary" %>
+      <div class="auth-card__links">
+        <%= link_to "Forgot password?", new_password_reset_path %>
+        <span>Need an account? <%= link_to "Sign up", signup_path %></span>
       </div>
-    <% end %>
-
-    <p class="auth-card__switch">Need an account? <%= link_to "Sign up", signup_path %></p>
+    </div>
   </article>
 </section>

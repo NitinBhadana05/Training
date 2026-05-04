@@ -4,8 +4,10 @@ one:
   name: Alice Reader
   email: alice@example.com
   password_digest: <%= BCrypt::Password.create("password") %>
+  admin: true
 
 two:
   name: Bob Member
   email: bob@example.com
   password_digest: <%= BCrypt::Password.create("password") %>
+  admin: false

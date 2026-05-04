@@ -1,4 +1,5 @@
 <% active_issue = book.active_issue %>
+<% latest_bill = book.latest_bill %>
 
 <article class="book-card">
   <div class="book-card__top">
@@ -14,19 +15,37 @@
 
     <% if active_issue %>
       <p class="book-card__meta">Borrowed by <strong><%= active_issue.user.name %></strong> on <%= active_issue.issue_date.strftime("%d %b %Y") %>.</p>
+    <% elsif !book.available? && latest_bill&.buy? %>
+      <p class="book-card__meta">Purchased by <strong><%= latest_bill.user.name %></strong> on <%= latest_bill.issue_date.strftime("%d %b %Y") %>.</p>
     <% else %>
-      <p class="book-card__meta">Ready to issue to the next member.</p>
+      <p class="book-card__meta">Rent ₹<%= number_with_precision(book.rental_fee, precision: 2) %> · Buy ₹<%= number_with_precision(book.purchase_price, precision: 2) %></p>
     <% end %>
   </div>
 
   <div class="book-card__actions">
-    <%= link_to "Details", book_path(book), class: "button button--ghost" %>
-    <%= link_to "Edit", edit_book_path(book), class: "button button--ghost" %>
-    <% if active_issue %>
-      <%= button_to "Return", return_book_issue_path(active_issue), method: :patch, class: "button button--secondary" %>
+    <%= link_to "Details", book_path(book), class: "button button--ghost", data: { turbo_frame: "_top" } %>
+    <% if current_user.admin? %>
+      <%= link_to "Edit", edit_book_path(book), class: "button button--ghost", data: { turbo_frame: "_top" } %>
+      <% if active_issue %>
+        <%= link_to "Bill", issue_path(active_issue), class: "button button--ghost", data: { turbo_frame: "_top" } %>
+        <%= button_to "Return", return_book_issue_path(active_issue), method: :patch, class: "button button--secondary", form: { data: { turbo_frame: "_top" } } %>
+      <% elsif latest_bill&.buy? %>
+        <%= link_to "Bill", issue_path(latest_bill), class: "button button--ghost", data: { turbo_frame: "_top" } %>
+      <% else %>
+        <%= link_to "Rent", new_issue_path(issue: { book_id: book.id, transaction_type: "rent" }), class: "button button--primary", data: { turbo_frame: "_top" } %>
+        <%= button_to "Buy", issues_path, method: :post, params: { issue: { book_id: book.id, transaction_type: "buy", issue_date: Date.current } }, class: "button button--secondary", form: { data: { turbo_frame: "_top" } } %>
+      <% end %>
+      <%= button_to "Delete", book_path(book), method: :delete, class: "button button--danger", form: { data: { turbo_frame: "_top" } } %>
     <% else %>
-      <%= link_to "Issue", new_issue_path(issue: { book_id: book.id }), class: "button button--primary" %>
+      <% if book.available? %>
+        <%= link_to "Rent", new_issue_path(issue: { book_id: book.id, transaction_type: "rent" }), class: "button button--primary", data: { turbo_frame: "_top" } %>
+        <%= button_to "Buy", issues_path, method: :post, params: { issue: { book_id: book.id, transaction_type: "buy", issue_date: Date.current } }, class: "button button--secondary", form: { data: { turbo_frame: "_top" } } %>
+      <% elsif active_issue&.user == current_user %>
+        <%= link_to "My Bill", issue_path(active_issue), class: "button button--ghost", data: { turbo_frame: "_top" } %>
+        <%= button_to "Return", return_book_issue_path(active_issue), method: :patch, class: "button button--secondary", form: { data: { turbo_frame: "_top" } } %>
+      <% elsif latest_bill&.user == current_user %>
+        <%= link_to "My Bill", issue_path(latest_bill), class: "button button--ghost", data: { turbo_frame: "_top" } %>
+      <% end %>
     <% end %>
-    <%= button_to "Delete", book_path(book), method: :delete, class: "button button--danger" %>
   </div>
 </article>

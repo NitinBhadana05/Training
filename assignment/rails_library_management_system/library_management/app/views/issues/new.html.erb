@@ -1,22 +1,45 @@
-<section class="form-shell">
-  <div class="form-shell__intro">
-    <p class="eyebrow">Circulation</p>
-    <h1>Issue a book</h1>
-    <p>Assign an available title to a member and record the issue date in one place.</p>
-  </div>
+<section class="auth-shell">
+  <article class="auth-card">
+    <div class="auth-card__copy">
+      <p class="eyebrow">Circulation</p>
+      <h1><%= current_user.admin? ? "Issue a book" : "Rent a book" %></h1>
+      <p><%= current_user.admin? ? "Assign an available title to a member and record the issue date in one place." : "Choose an available title and rent it on your own account." %></p>
+    </div>
 
-  <article class="panel">
+    <div class="auth-card__form">
     <% if @available_books.any? %>
       <%= form_with model: @issue do |f| %>
         <div class="form-grid">
-          <div class="field">
-            <%= f.label :user_id, "Member" %>
-            <%= f.collection_select :user_id, @users, :id, :name, { prompt: "Select a member" }, { selected: params.dig(:issue, :user_id) } %>
-          </div>
+          <% if @selected_book %>
+            <div class="selected-book selected-book--full">
+              <span class="status-pill status-pill--available">Available</span>
+              <h2><%= @selected_book.title %></h2>
+              <p><%= @selected_book.author %> · ISBN <%= @selected_book.isbn %></p>
+              <div class="selected-book__prices">
+                <span>Rent ₹<%= number_with_precision(@selected_book.rental_fee, precision: 2) %></span>
+                <span>Buy ₹<%= number_with_precision(@selected_book.purchase_price, precision: 2) %></span>
+              </div>
+            </div>
+            <%= f.hidden_field :book_id, value: @selected_book.id %>
+          <% end %>
 
-          <div class="field">
-            <%= f.label :book_id, "Available book" %>
-            <%= f.collection_select :book_id, @available_books, :id, :title, { prompt: "Select a book" }, { selected: params.dig(:issue, :book_id) } %>
+          <% if current_user.admin? %>
+            <div class="field field--full">
+              <%= f.label :user_id, "Member" %>
+              <%= f.collection_select :user_id, @users, :id, :name, { prompt: "Select a member", selected: params.dig(:issue, :user_id) } %>
+            </div>
+          <% end %>
+
+          <% unless @selected_book %>
+            <div class="field field--full">
+              <%= f.label :book_id, "Available book" %>
+              <%= f.collection_select :book_id, @available_books, :id, :title, { prompt: "Select a book", selected: @issue.book_id } %>
+            </div>
+          <% end %>
+
+          <div class="field field--full">
+            <%= f.label :transaction_type, "Action" %>
+            <%= f.select :transaction_type, [["Rent", "rent"], ["Buy", "buy"]], { selected: @issue.transaction_type || "rent" } %>
           </div>
 
           <div class="field field--full">
@@ -25,9 +48,9 @@
           </div>
         </div>
 
-        <div class="form-actions">
+        <div class="form-actions form-actions--full">
           <%= link_to "Back", books_path, class: "button button--ghost" %>
-          <%= f.submit "Issue book", class: "button button--primary" %>
+          <%= f.submit @issue.transaction_type == "buy" ? "Buy book" : (current_user.admin? ? "Issue book" : "Rent book"), class: "button button--primary" %>
         </div>
       <% end %>
     <% else %>
@@ -40,5 +63,6 @@
         </div>
       </div>
     <% end %>
+    </div>
   </article>
 </section>

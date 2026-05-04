@@ -1,0 +1,39 @@
+<section class="auth-shell">
+  <article class="auth-card">
+    <div class="auth-card__copy">
+      <p class="eyebrow">Account help</p>
+      <h1>New password</h1>
+      <p>Choose a new password for <%= @user.email %>.</p>
+    </div>
+
+    <div class="auth-card__form">
+      <%= form_with model: @user, url: password_reset_path(token: params[:token], email: params[:email]), method: :patch do |f| %>
+        <% if @user.errors.any? %>
+          <div class="form-errors">
+            <h3><%= pluralize(@user.errors.count, "error") %> prevented this password from saving:</h3>
+            <ul>
+              <% @user.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div class="form-grid">
+          <div class="field">
+            <%= f.label :password, "New password" %>
+            <%= f.password_field :password, placeholder: "Minimum 6 characters" %>
+          </div>
+          <div class="field">
+            <%= f.label :password_confirmation %>
+            <%= f.password_field :password_confirmation, placeholder: "Repeat password" %>
+          </div>
+        </div>
+
+        <div class="form-actions form-actions--full">
+          <%= f.submit "Update password", class: "button button--primary" %>
+        </div>
+      <% end %>
+    </div>
+  </article>
+</section>

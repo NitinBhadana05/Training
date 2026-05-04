@@ -1,0 +1,37 @@
+<%= turbo_frame_tag "catalog_stats", class: "stats-grid" do %>
+  <% if current_user.admin? %>
+    <article class="stat-card">
+      <span>Total Books</span>
+      <strong><%= stats[:total_books] %></strong>
+    </article>
+    <article class="stat-card">
+      <span>Available Now</span>
+      <strong><%= stats[:available_books] %></strong>
+    </article>
+    <article class="stat-card">
+      <span>Issued Books</span>
+      <strong><%= stats[:issued_books] %></strong>
+    </article>
+    <article class="stat-card">
+      <span>Members</span>
+      <strong><%= stats[:members] %></strong>
+    </article>
+  <% else %>
+    <article class="stat-card">
+      <span>Available Books</span>
+      <strong><%= stats[:available_books] %></strong>
+    </article>
+    <article class="stat-card">
+      <span>My Rentals</span>
+      <strong><%= stats[:my_active_rentals] %></strong>
+    </article>
+    <article class="stat-card">
+      <span>My Bills</span>
+      <strong><%= stats[:my_bills] %></strong>
+    </article>
+    <article class="stat-card">
+      <span>My Total</span>
+      <strong>₹<%= number_with_precision(stats[:my_total_billed], precision: 2) %></strong>
+    </article>
+  <% end %>
+<% end %>

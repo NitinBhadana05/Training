@@ -1,0 +1,49 @@
+<%= turbo_frame_tag "quick_new_book", class: "panel" do %>
+  <div class="panel__header">
+    <div>
+      <p class="eyebrow">Quick add</p>
+      <h2>Add book</h2>
+    </div>
+    <p class="panel__caption">Save a new catalog item without leaving the dashboard.</p>
+  </div>
+
+  <%= form_with model: book do |f| %>
+    <% if book.errors.any? %>
+      <div class="form-errors">
+        <h3><%= pluralize(book.errors.count, "error") %> prevented this book from saving:</h3>
+        <ul>
+          <% book.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-grid form-grid--quick-book">
+      <div class="field">
+        <%= f.label :title %>
+        <%= f.text_field :title, placeholder: "Atomic Habits", required: true %>
+      </div>
+      <div class="field">
+        <%= f.label :author %>
+        <%= f.text_field :author, placeholder: "James Clear", required: true %>
+      </div>
+      <div class="field">
+        <%= f.label :isbn %>
+        <%= f.text_field :isbn, placeholder: "9780735211292", required: true %>
+      </div>
+      <div class="field">
+        <%= f.label :rental_fee %>
+        <%= f.number_field :rental_fee, min: 0, step: "0.01", placeholder: "25.00", required: true %>
+      </div>
+      <div class="field">
+        <%= f.label :purchase_price %>
+        <%= f.number_field :purchase_price, min: 0, step: "0.01", placeholder: "350.00", required: true %>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <%= f.submit "Add book", class: "button button--primary" %>
+    </div>
+  <% end %>
+<% end %>

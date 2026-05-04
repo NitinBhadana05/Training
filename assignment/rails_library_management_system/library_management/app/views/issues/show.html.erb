@@ -1,0 +1,68 @@
+<section class="detail-shell">
+  <article class="detail-card bill-card">
+    <div class="detail-card__header">
+      <div>
+        <p class="eyebrow">Issue bill</p>
+        <h1>Bill #<%= @issue.id %></h1>
+        <p class="detail-card__subhead"><%= @issue.buy? ? "Purchase record" : (@issue.return_date.present? ? "Closed rental record" : "Active rental record") %></p>
+      </div>
+      <span class="status-pill <%= @issue.return_date.present? ? "status-pill--available" : "status-pill--issued" %>">
+        <%= @issue.buy? ? "Purchased" : (@issue.return_date.present? ? "Returned" : "Active") %>
+      </span>
+    </div>
+
+    <dl class="detail-grid">
+      <div>
+        <dt>Member</dt>
+        <dd><%= @issue.user.name %></dd>
+      </div>
+      <div>
+        <dt>Book</dt>
+        <dd><%= @issue.book.title %></dd>
+      </div>
+      <div>
+        <dt>Author</dt>
+        <dd><%= @issue.book.author %></dd>
+      </div>
+      <div>
+        <dt>ISBN</dt>
+        <dd><%= @issue.book.isbn %></dd>
+      </div>
+      <div>
+        <dt>Transaction</dt>
+        <dd><%= @issue.buy? ? "Purchase" : "Rental" %></dd>
+      </div>
+      <div>
+        <dt>Issue date</dt>
+        <dd><%= @issue.issue_date.strftime("%d %b %Y") %></dd>
+      </div>
+      <div>
+        <dt>Return date</dt>
+        <dd><%= @issue.buy? ? "Not applicable" : (@issue.return_date&.strftime("%d %b %Y") || "Not returned yet") %></dd>
+      </div>
+    </dl>
+
+    <div class="bill-summary">
+      <span>Previous balance</span>
+      <strong>₹<%= number_with_precision(@issue.previous_balance, precision: 2) %></strong>
+    </div>
+
+    <div class="bill-summary">
+      <span>This bill</span>
+      <strong>₹<%= number_with_precision(@issue.amount, precision: 2) %></strong>
+    </div>
+
+    <div class="bill-summary bill-summary--total">
+      <span>Total billed</span>
+      <strong>₹<%= number_with_precision(@issue.balance_after, precision: 2) %></strong>
+    </div>
+
+    <div class="detail-actions">
+      <%= link_to "Back to books", books_path(view: "books"), class: "button button--ghost" %>
+      <%= link_to "View book", book_path(@issue.book), class: "button button--ghost" %>
+      <% if @issue.rent? && @issue.return_date.blank? && (current_user.admin? || @issue.user == current_user) %>
+        <%= button_to "Return book", return_book_issue_path(@issue), method: :patch, class: "button button--primary" %>
+      <% end %>
+    </div>
+  </article>
+</section>

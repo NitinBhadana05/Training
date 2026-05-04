@@ -26,4 +26,10 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     get users_url
     assert_response :success
   end
+
+  test "member should not get index" do
+    post login_path, params: { email: users(:two).email, password: "password" }
+    get users_url
+    assert_redirected_to books_url
+  end
 end

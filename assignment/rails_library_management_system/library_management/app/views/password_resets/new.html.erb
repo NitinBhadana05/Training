@@ -1,0 +1,26 @@
+<section class="auth-shell">
+  <article class="auth-card">
+    <div class="auth-card__copy">
+      <p class="eyebrow">Account help</p>
+      <h1>Reset password</h1>
+      <p>Enter your account email and we will send password reset instructions for that address.</p>
+    </div>
+
+    <div class="auth-card__form">
+      <%= form_with url: password_reset_path do %>
+        <div class="form-grid">
+          <div class="field field--full">
+            <%= label_tag :email, "Email" %>
+            <%= email_field_tag :email, params[:email], placeholder: "aarav@example.com" %>
+          </div>
+        </div>
+
+        <div class="form-actions form-actions--full">
+          <%= submit_tag "Send reset instructions", class: "button button--primary" %>
+        </div>
+      <% end %>
+
+      <p class="auth-card__switch"><%= link_to "Back to login", login_path %></p>
+    </div>
+  </article>
+</section>

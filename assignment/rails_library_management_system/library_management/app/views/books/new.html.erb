@@ -1,11 +1,13 @@
-<section class="form-shell">
-  <div class="form-shell__intro">
-    <p class="eyebrow">Catalog</p>
-    <h1>Add a new book</h1>
-    <p>Capture the title, author, and ISBN once so the book is ready for circulation.</p>
-  </div>
+<section class="auth-shell">
+  <article class="auth-card">
+    <div class="auth-card__copy">
+      <p class="eyebrow">Catalog</p>
+      <h1>Add a new book</h1>
+      <p>Capture the title, author, and ISBN once so the book is ready for circulation.</p>
+    </div>
 
-  <article class="panel">
+    <div class="auth-card__form">
     <%= render "form", book: @book %>
+    </div>
   </article>
 </section>

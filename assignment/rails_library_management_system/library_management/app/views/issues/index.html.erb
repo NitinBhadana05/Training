@@ -1,0 +1,39 @@
+<section class="panel">
+  <div class="panel__header">
+    <div>
+      <p class="eyebrow">Billing</p>
+      <h2><%= current_user.admin? ? "Issue bills" : "My bills" %></h2>
+    </div>
+    <%= link_to current_user.admin? ? "Issue Book" : "Rent Book", new_issue_path, class: "button button--primary" %>
+  </div>
+
+  <% if @issues.any? %>
+    <div class="table-list">
+      <% @issues.each do |issue| %>
+        <article class="table-list__row">
+          <div>
+            <strong>Bill #<%= issue.id %> · <%= issue.book.title %></strong>
+            <p>
+              <%= issue.user.name %> <%= issue.buy? ? "bought" : "rented" %> it on <%= issue.issue_date.strftime("%d %b %Y") %>.
+              <%= issue.buy? ? "Total billed ₹#{number_with_precision(issue.balance_after, precision: 2)}." : (issue.return_date.present? ? "Returned on #{issue.return_date.strftime("%d %b %Y")}." : "Still active.") %>
+            </p>
+          </div>
+          <div class="table-list__actions">
+            <%= link_to "View Bill", issue_path(issue), class: "button button--ghost" %>
+            <% if issue.rent? && !issue.return_date.present? && (current_user.admin? || issue.user == current_user) %>
+              <%= button_to "Return", return_book_issue_path(issue), method: :patch, class: "button button--secondary" %>
+            <% end %>
+          </div>
+        </article>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="empty-state">
+      <h3>No bills yet.</h3>
+      <p><%= current_user.admin? ? "Issue a book to create the first bill." : "Rent a book to create your first bill." %></p>
+      <div class="empty-state__actions">
+        <%= link_to current_user.admin? ? "Issue Book" : "Rent Book", new_issue_path, class: "button button--primary" %>
+      </div>
+    </div>
+  <% end %>
+</section>

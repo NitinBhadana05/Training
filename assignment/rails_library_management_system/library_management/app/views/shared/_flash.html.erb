@@ -1,5 +1,7 @@
-<% flash.each do |key, message| %>
-  <div class="flash flash--<%= key == "notice" ? "notice" : "alert" %>">
-    <%= message %>
-  </div>
+<%= turbo_frame_tag "flash" do %>
+  <% flash.each do |key, message| %>
+    <div class="flash flash--<%= key == "notice" ? "notice" : "alert" %>">
+      <%= message %>
+    </div>
+  <% end %>
 <% end %>

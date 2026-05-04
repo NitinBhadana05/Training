@@ -10,4 +10,8 @@ class ApplicationController < ActionController::Base
   def require_login
     redirect_to login_path unless current_user
   end
+
+  def require_admin
+    redirect_to books_path, alert: "Admin access required" unless current_user&.admin?
+  end
 end

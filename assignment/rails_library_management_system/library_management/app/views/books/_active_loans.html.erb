@@ -1,0 +1,33 @@
+<%= turbo_frame_tag "active_loans", class: "panel", target: "_top" do %>
+  <div class="panel__header">
+    <div>
+      <p class="eyebrow">Circulation</p>
+      <h2>Active loans</h2>
+    </div>
+  </div>
+
+  <% if active_issues.any? %>
+    <div class="table-list">
+      <% active_issues.each do |issue| %>
+        <article class="table-list__row">
+          <div>
+            <strong><%= issue.book.title %></strong>
+            <p><%= issue.user.name %> borrowed it on <%= issue.issue_date.strftime("%d %b %Y") %>.</p>
+          </div>
+          <div class="table-list__actions">
+            <%= link_to "View", book_path(issue.book), class: "button button--ghost" %>
+            <%= link_to "Bill", issue_path(issue), class: "button button--ghost" %>
+            <% if current_user.admin? %>
+              <%= button_to "Return", return_book_issue_path(issue), method: :patch, class: "button button--secondary" %>
+            <% end %>
+          </div>
+        </article>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="empty-state">
+      <h3>No active loans.</h3>
+      <p>All books are currently available in the catalog.</p>
+    </div>
+  <% end %>
+<% end %>
