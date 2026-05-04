@@ -1,0 +1,13 @@
+<h1>Products</h1>
+
+
+<h3>Search for products</h3>
+<%= search_form_for @q, url: products_path, method: :get, data: { turbo_frame: "products" } do |f| %>
+  <%= f.search_field :name_cont, placeholder: "Search products..." %>
+<% end %>
+
+<%= turbo_frame_tag "products" do %>
+  <%= render partial: "products_list", locals: { products: @products } %>
+<% end %>
+
+<%= link_to "New Product", new_product_path %>
