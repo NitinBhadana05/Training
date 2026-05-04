@@ -183,6 +183,7 @@ body.active_admin a.button,
 body.active_admin .button,
 body.active_admin .action_items a,
 body.active_admin #title_bar .action_items a {
+  align-items: center;
   background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
   border: 0;
   border-radius: 9999px;
@@ -193,9 +194,12 @@ body.active_admin #title_bar .action_items a {
   font-size: 14px;
   font-weight: 800;
   letter-spacing: 0.02em;
+  justify-content: center;
+  line-height: 1;
   min-height: 52px;
   padding: 12px 20px;
   text-shadow: none;
+  vertical-align: middle;
 }
 
 body.active_admin.logged_out #login input[type="submit"] {
@@ -396,6 +400,7 @@ body.active_admin #title_bar {
   border: 0;
   box-shadow: none;
   padding: 28px 20px 8px;
+  width: auto;
 }
 
 body.active_admin #title_bar #titlebar_left,
@@ -405,11 +410,38 @@ body.active_admin #title_bar #titlebar_right {
   vertical-align: middle;
 }
 
+body.active_admin #title_bar #titlebar_right {
+  text-align: right;
+  width: 1%;
+  white-space: nowrap;
+}
+
 body.active_admin #title_bar h2 {
   color: #0f172a;
   font-size: 30px;
   font-weight: 900;
   letter-spacing: -0.03em;
+}
+
+body.active_admin #title_bar .action_items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-end;
+  margin: 0;
+}
+
+body.active_admin #title_bar .action_items span.action_item {
+  margin: 0;
+}
+
+body.active_admin #title_bar .action_items span.action_item a,
+body.active_admin #title_bar .action_items span.action_item .button,
+body.active_admin #title_bar .action_items span.action_item .dropdown_menu > a {
+  display: inline-flex;
+  margin: 0;
+  min-height: 44px;
+  padding: 10px 16px;
 }
 
 body.active_admin .flashes .flash,
@@ -446,18 +478,10 @@ body.active_admin table.index_table th {
   text-transform: uppercase;
 }
 
-body.active_admin .columns {
-  margin: 0 -10px 24px;
-}
-
-body.active_admin .columns .column {
-  padding: 0 10px;
-}
-
 body.active_admin .panel_contents,
 body.active_admin .attributes_table,
 body.active_admin .paginated_collection_contents {
-  padding: 18px 20px 20px;
+  padding: 16px 18px 18px;
 }
 
 body.active_admin .index_as_table .panel_contents,
@@ -465,10 +489,56 @@ body.active_admin .paginated_collection_contents {
   padding: 0;
 }
 
+body.active_admin .panel + .panel {
+  margin-top: 22px;
+}
+
+body.active_admin .panel_contents > table {
+  border-collapse: collapse;
+  table-layout: fixed;
+  width: 100%;
+}
+
+body.active_admin .panel_contents > table th,
+body.active_admin .panel_contents > table td {
+  border: 1px solid #e5e7eb;
+  line-height: 1.5;
+  padding: 14px 16px;
+  text-align: center;
+  vertical-align: top;
+}
+
+body.active_admin .panel_contents > table th {
+  background: linear-gradient(180deg, #fff7ed 0%, #ffedd5 100%);
+  color: #9a3412;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+body.active_admin .panel_contents > table th:first-child,
+body.active_admin .panel_contents > table td:first-child {
+  border-left: 0;
+}
+
+body.active_admin .panel_contents > table th:last-child,
+body.active_admin .panel_contents > table td:last-child {
+  border-right: 0;
+}
+
+body.active_admin .panel_contents > table tbody tr:nth-child(even) td {
+  background: rgba(248, 250, 252, 0.72);
+}
+
+body.active_admin .panel_contents > table tbody tr:hover td {
+  background: #fffaf5;
+}
+
 body.active_admin table.index_table,
 body.active_admin .attributes_table table {
-  border-collapse: separate;
-  border-spacing: 0;
+  border-collapse: collapse;
+  table-layout: fixed;
   width: 100%;
 }
 
@@ -476,8 +546,45 @@ body.active_admin table.index_table td,
 body.active_admin table.index_table th,
 body.active_admin .attributes_table td,
 body.active_admin .attributes_table th {
-  border-bottom: 1px solid #f1f5f9;
-  padding: 16px 18px;
+  border: 1px solid #e5e7eb;
+  line-height: 1.5;
+  text-align: center;
+  vertical-align: top;
+  padding: 14px 16px;
+}
+
+body.active_admin table.index_table th,
+body.active_admin .attributes_table th {
+  border-top: 0;
+  white-space: nowrap;
+}
+
+body.active_admin table.index_table th:first-child,
+body.active_admin table.index_table td:first-child,
+body.active_admin .attributes_table th:first-child,
+body.active_admin .attributes_table td:first-child {
+  border-left: 0;
+}
+
+body.active_admin table.index_table th:last-child,
+body.active_admin table.index_table td:last-child,
+body.active_admin .attributes_table th:last-child,
+body.active_admin .attributes_table td:last-child {
+  border-right: 0;
+}
+
+body.active_admin table.index_table td {
+  color: #334155;
+  font-size: 14px;
+}
+
+body.active_admin .attributes_table th {
+  width: 220px;
+}
+
+body.active_admin .attributes_table td {
+  color: #0f172a;
+  font-size: 15px;
 }
 
 body.active_admin table.index_table tbody tr:nth-child(even) td {
@@ -493,9 +600,256 @@ body.active_admin #sidebar {
   padding-right: 20px;
 }
 
+body.active_admin td.col-actions,
+body.active_admin th.col-actions {
+  text-align: center;
+  white-space: nowrap;
+  width: 180px;
+}
+
+body.active_admin td.col-id,
+body.active_admin th.col-id,
+body.active_admin td.col-selectable,
+body.active_admin th.col-selectable {
+  width: 60px;
+}
+
+body.active_admin td.col-selectable,
+body.active_admin th.col-selectable,
+body.active_admin td.col-id,
+body.active_admin th.col-id {
+  padding-left: 12px;
+  padding-right: 12px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+body.active_admin table.index_table td input[type="checkbox"],
+body.active_admin table.index_table th input[type="checkbox"] {
+  margin: 0;
+  transform: translateY(1px);
+}
+
+body.active_admin .index_as_table .index_table a.member_link,
+body.active_admin td.actions a,
+body.active_admin td.col-actions a,
+body.active_admin .table_tools a {
+  background: #fff7ed;
+  border: 1px solid #fed7aa;
+  border-radius: 9999px;
+  color: #c2410c;
+  display: inline-flex;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1;
+  margin-left: 6px;
+  padding: 9px 12px;
+}
+
+body.active_admin .index_as_table .index_table a.member_link:hover,
+body.active_admin td.actions a:hover,
+body.active_admin td.col-actions a:hover,
+body.active_admin .table_tools a:hover {
+  background: #f97316;
+  border-color: #f97316;
+  color: #fff;
+}
+
+body.active_admin .admin-table-primary strong,
+body.active_admin .admin-table-meta strong,
+body.active_admin .admin-detail-stack strong {
+  color: #0f172a;
+  display: block;
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+body.active_admin .admin-table-primary span,
+body.active_admin .admin-table-meta span,
+body.active_admin .admin-detail-stack span {
+  color: #64748b;
+  display: block;
+  font-size: 12px;
+  line-height: 1.45;
+  margin-top: 4px;
+}
+
+body.active_admin .admin-count-badge {
+  align-items: center;
+  background: #fff7ed;
+  border: 1px solid #fed7aa;
+  border-radius: 9999px;
+  color: #c2410c;
+  display: inline-flex;
+  font-size: 12px;
+  font-weight: 800;
+  justify-content: center;
+  min-width: 38px;
+  padding: 6px 10px;
+}
+
+body.active_admin .admin-table-link {
+  font-weight: 800;
+}
+
+body.active_admin .admin-long-copy {
+  color: #334155;
+  line-height: 1.8;
+  max-width: 780px;
+}
+
+body.active_admin .admin-long-copy p {
+  margin: 0 0 12px;
+}
+
 body.active_admin #sidebar .filter_form .filter_form_field,
 body.active_admin #sidebar .filter_form .buttons {
   margin-bottom: 14px;
+}
+
+body.active_admin .filter_form {
+  display: grid;
+  gap: 14px;
+}
+
+body.active_admin .filter_form .filter_form_field {
+  margin: 0;
+  text-align: left;
+}
+
+body.active_admin .filter_form label,
+body.active_admin .filter_form input[type="text"],
+body.active_admin .filter_form input[type="email"],
+body.active_admin .filter_form input[type="password"],
+body.active_admin .filter_form input[type="number"],
+body.active_admin .filter_form textarea,
+body.active_admin .filter_form select,
+body.active_admin .filter_form .choices-group {
+  text-align: left;
+}
+
+body.active_admin .filter_form .buttons {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 4px 0 0;
+}
+
+body.active_admin .filter_form .buttons .clear_filters_btn,
+body.active_admin .filter_form .buttons input,
+body.active_admin .filter_form .buttons .button {
+  margin: 0;
+}
+
+body.active_admin .filter_form .buttons .clear_filters_btn a,
+body.active_admin .filter_form .buttons .clear_filters_btn,
+body.active_admin .filter_form .buttons input[type="submit"] {
+  min-height: 42px;
+}
+
+body.active_admin .filter_form .buttons .clear_filters_btn a {
+  align-items: center;
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+  border-radius: 9999px;
+  color: #334155;
+  display: inline-flex;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1;
+  padding: 0 14px;
+}
+
+body.active_admin .filter_form .buttons .clear_filters_btn a:hover {
+  background: #fff7ed;
+  border-color: #fdba74;
+  color: #c2410c;
+}
+
+body.active_admin #collection_selection_toggle_panel,
+body.active_admin .batch_actions_selector {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+body.active_admin #collection_selection_toggle_panel {
+  margin: 0 0 14px;
+}
+
+body.active_admin #collection_selection_toggle_panel > .resource_selection_toggle_cell {
+  float: none;
+}
+
+body.active_admin #collection_selection_toggle_panel a,
+body.active_admin .batch_actions_selector .dropdown_menu_button,
+body.active_admin .batch_actions_selector .dropdown_menu > a {
+  align-items: center;
+  background: #fff;
+  border: 1px solid #cbd5e1;
+  border-radius: 9999px;
+  color: #334155;
+  display: inline-flex;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1;
+  min-height: 42px;
+  padding: 0 14px;
+}
+
+body.active_admin #collection_selection_toggle_panel a:hover,
+body.active_admin .batch_actions_selector .dropdown_menu_button:hover,
+body.active_admin .batch_actions_selector .dropdown_menu > a:hover {
+  background: #fff7ed;
+  border-color: #fdba74;
+  color: #c2410c;
+}
+
+body.active_admin .batch_actions_selector {
+  margin-bottom: 14px;
+}
+
+body.active_admin .comments {
+  display: grid;
+  gap: 18px;
+}
+
+body.active_admin .comments .active_admin_comment {
+  margin: 0;
+  max-width: none;
+}
+
+body.active_admin .comments .active_admin_comment .active_admin_comment_meta {
+  color: #64748b;
+  float: none;
+  margin-bottom: 10px;
+  width: auto;
+}
+
+body.active_admin .comments .active_admin_comment .active_admin_comment_author {
+  color: #0f172a;
+}
+
+body.active_admin .comments .active_admin_comment .active_admin_comment_body {
+  margin-left: 0;
+}
+
+body.active_admin .comments form.active_admin_comment {
+  margin-left: 0;
+}
+
+body.active_admin .comments form.active_admin_comment fieldset.inputs,
+body.active_admin .comments form.active_admin_comment fieldset.buttons {
+  padding: 0;
+}
+
+body.active_admin .comments form.active_admin_comment textarea,
+body.active_admin .comments form.active_admin_comment input[type="text"],
+body.active_admin .comments form.active_admin_comment input[type="email"] {
+  margin-bottom: 10px;
 }
 
 body.active_admin form {
@@ -504,7 +858,7 @@ body.active_admin form {
 
 body.active_admin form fieldset.inputs,
 body.active_admin form fieldset.actions {
-  padding: 24px 24px 18px;
+  padding: 22px 22px 20px;
 }
 
 body.active_admin form fieldset > legend,
@@ -525,11 +879,14 @@ body.active_admin form fieldset.actions > legend span {
   font-weight: 900;
   letter-spacing: -0.02em;
   margin-bottom: 8px;
+  text-align: center;
 }
 
 body.active_admin form fieldset > ol > li {
   border-top: 0;
-  padding: 0 0 18px;
+  margin: 0;
+  padding: 0 0 16px;
+  text-align: center;
 }
 
 body.active_admin form fieldset > ol > li:last-child {
@@ -539,6 +896,7 @@ body.active_admin form fieldset > ol > li:last-child {
 body.active_admin form fieldset > ol > li label {
   float: none;
   margin-bottom: 10px;
+  text-align: center;
   width: 100%;
 }
 
@@ -547,6 +905,7 @@ body.active_admin form fieldset > ol > li p.inline-errors,
 body.active_admin form fieldset > ol > li ul.errors {
   margin-left: 0;
   margin-top: 8px;
+  text-align: center;
 }
 
 body.active_admin form fieldset > ol > li fieldset:not(.inputs) ol,
@@ -562,6 +921,7 @@ body.active_admin form fieldset > ol > li.boolean label {
   font-weight: 600;
   letter-spacing: 0;
   padding-left: 0;
+  text-align: center;
   text-transform: none;
 }
 
@@ -576,6 +936,11 @@ body.active_admin form input[type="number"],
 body.active_admin form textarea,
 body.active_admin form select {
   max-width: 100%;
+  text-align: center;
+}
+
+body.active_admin form select {
+  padding-right: 38px;
 }
 
 body.active_admin form textarea {
@@ -611,6 +976,20 @@ body.active_admin .admin-dashboard-hero {
   margin: 0 20px 28px;
   overflow: hidden;
   padding: 34px;
+}
+
+body.active_admin .admin-dashboard-shell {
+  align-items: start;
+  display: grid;
+  gap: 24px;
+  grid-template-columns: minmax(0, 1.55fr) minmax(300px, 0.85fr);
+  margin: 0 20px 28px;
+}
+
+body.active_admin .admin-dashboard-main,
+body.active_admin .admin-dashboard-side {
+  display: grid;
+  gap: 22px;
 }
 
 body.active_admin .admin-dashboard-copy span {
@@ -707,7 +1086,9 @@ body.active_admin .admin-note-list li {
     justify-content: flex-start;
   }
 
+  body.active_admin .admin-dashboard-shell,
   body.active_admin .admin-dashboard-hero {
     grid-template-columns: 1fr;
   }
+
 }
