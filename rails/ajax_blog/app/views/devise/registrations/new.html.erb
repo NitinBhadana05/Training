@@ -1,0 +1,24 @@
+<%= render "devise/shared/auth_shell", title: "Create account", subtitle: "Publish posts and keep editing rights attached to your own user.", eyebrow: "Join now" do %>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "space-y-5" }) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+
+    <div>
+      <%= f.label :email, class: "mb-2 block text-sm font-semibold text-slate-700" %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-coral focus:ring-2 focus:ring-orange-100" %>
+    </div>
+
+    <div>
+      <%= f.label :password, class: "mb-2 block text-sm font-semibold text-slate-700" %>
+      <%= f.password_field :password, autocomplete: "new-password", class: "w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-coral focus:ring-2 focus:ring-orange-100" %>
+    </div>
+
+    <div>
+      <%= f.label :password_confirmation, class: "mb-2 block text-sm font-semibold text-slate-700" %>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-coral focus:ring-2 focus:ring-orange-100" %>
+    </div>
+
+    <%= f.submit "Create account", class: "w-full rounded-full bg-coral px-5 py-3 text-sm font-semibold text-white transition hover:bg-orange-600" %>
+  <% end %>
+
+  <%= render "devise/shared/links" %>
+<% end %>

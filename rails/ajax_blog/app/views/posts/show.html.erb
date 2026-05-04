@@ -1,0 +1,19 @@
+<article class="mx-auto max-w-4xl rounded-[2rem] border border-white/80 bg-white/90 p-6 shadow-glow sm:p-8">
+  <p class="text-sm font-semibold uppercase tracking-[0.2em] text-coral"><%= @post.created_at.strftime("%d %b %Y at %I:%M %p") %></p>
+  <h1 class="mt-3 text-4xl font-black tracking-tight text-ink"><%= @post.title %></h1>
+  <p class="mt-2 text-sm font-semibold text-slate-500">By <%= @post.user.email %></p>
+  <p class="mt-6 whitespace-pre-wrap text-base leading-8 text-slate-700"><%= @post.content %></p>
+
+  <div class="mt-8 flex flex-wrap items-center gap-3">
+    <%= render "likes/count", post: @post %>
+    <%= render "likes/button", post: @post %>
+  </div>
+
+  <div class="mt-8 flex flex-wrap gap-3 text-sm font-semibold">
+    <% if can_manage_post?(@post) %>
+      <%= link_to "Edit", edit_post_path(@post), class: "rounded-full bg-ink px-4 py-2 text-white transition hover:bg-slate-800" %>
+      <%= link_to "Delete", post_path(@post), data: { turbo_method: :delete, turbo_confirm: "Delete this post?" }, class: "rounded-full border border-red-200 px-4 py-2 text-red-600 transition hover:bg-red-50" %>
+    <% end %>
+    <%= link_to "Back", posts_path, class: "rounded-full border border-slate-200 px-4 py-2 text-slate-700 transition hover:border-coral hover:text-coral" %>
+  </div>
+</article>

@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: First Private Post
+  content: Private content for user one
+  user: one
+  slug: first-private-post
+
+two:
+  title: Second Private Post
+  content: Private content for user two
+  user: two
+  slug: second-private-post

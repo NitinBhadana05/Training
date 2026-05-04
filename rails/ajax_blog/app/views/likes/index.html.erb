@@ -1,0 +1,30 @@
+<h1>Posts</h1>
+
+<%= link_to "New Post", new_post_path %>
+
+<% @posts.each do |post| %>
+  <div>
+    <h3><%= link_to post.title, post %></h3>
+    <p><%= post.content %></p>
+
+    <div id="likes_count_<%= post.id %>">
+      <%= post.likes.count %>
+    </div>
+
+    <% if post.likes.exists?(user: current_user) %>
+      <% like = post.likes.find_by(user: current_user) %>
+      <%= button_to "Unlike", post_like_path(post, like), method: :delete, data: { turbo: true } %>
+    <% else %>
+      <%= button_to "Like", post_likes_path(post), method: :post, data: { turbo: true } %>
+    <% end %>
+
+    <br>
+
+    <%= link_to "Edit", edit_post_path(post) %> |
+    <%= link_to "Delete", post, method: :delete, data: { confirm: "Are you sure?" } %>
+  </div>
+
+  <hr>
+<% end %>
+
+<%= paginate @posts %>

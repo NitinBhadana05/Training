@@ -1,0 +1,29 @@
+<%= form_with(model: @post) do |f| %>
+  <% if @post.errors.any? %>
+    <div class="mb-6 rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+      <p class="font-semibold"><%= pluralize(@post.errors.count, "error") %> prevented this post from saving:</p>
+      <ul class="mt-2 list-disc pl-5">
+        <% @post.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="space-y-6">
+    <div>
+      <%= f.label :title, class: "mb-2 block text-sm font-semibold text-slate-700" %>
+      <%= f.text_field :title, class: "w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-coral focus:ring-2 focus:ring-orange-100" %>
+    </div>
+
+    <div>
+      <%= f.label :content, class: "mb-2 block text-sm font-semibold text-slate-700" %>
+      <%= f.text_area :content, rows: 10, class: "w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-coral focus:ring-2 focus:ring-orange-100" %>
+    </div>
+
+    <div class="flex flex-wrap gap-3">
+      <%= f.submit class: "rounded-full bg-ink px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-800" %>
+      <%= link_to "Back", posts_path, class: "rounded-full border border-slate-200 px-5 py-3 text-sm font-semibold text-slate-700 transition hover:border-coral hover:text-coral" %>
+    </div>
+  </div>
+<% end %>

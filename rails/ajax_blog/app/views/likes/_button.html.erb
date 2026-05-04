@@ -1,0 +1,7 @@
+<div id="like_button_<%= post.id %>">
+  <% if liked_post?(post) %>
+    <%= button_to "Unlike", post_like_path(post), method: :delete, data: { turbo: true }, class: "rounded-full border border-slate-300 bg-slate-100 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-200" %>
+  <% else %>
+    <%= button_to "Like", post_like_path(post), method: :post, data: { turbo: true }, class: "rounded-full border border-orange-200 px-4 py-2 text-sm font-semibold text-coral transition hover:bg-orange-50" %>
+  <% end %>
+</div>
