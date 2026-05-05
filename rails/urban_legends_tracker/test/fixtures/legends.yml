@@ -1,13 +1,13 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  title: MyString
-  description: MyText
-  location: MyString
-  credibility_score: 1
+  title: Vanishing Hitchhiker
+  description: A detailed story about a hitchhiker who disappears before reaching town.
+  location: Delhi
+  credibility_score: 6
 
 two:
-  title: MyString
-  description: MyText
-  location: MyString
-  credibility_score: 1
+  title: Midnight Caller
+  description: A long account of eerie phone calls that stop the moment police arrive.
+  location: Mumbai
+  credibility_score: 7

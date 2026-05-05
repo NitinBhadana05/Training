@@ -1,0 +1,13 @@
+<h1>Urban Legends</h1>
+
+<%= link_to "New Legend", new_legend_path %>
+
+<% @legends.each do |legend| %>
+  <div>
+    <h3><%= legend.title %></h3>
+    <p><%= legend.location %></p>
+    <%= link_to "Show", legend %>
+    <%= link_to "Edit", edit_legend_path(legend) %>
+    <%= link_to "Delete", legend, data: { turbo_method: :delete, turbo_confirm: "Sure?" } %>
+  </div>
+<% end %>
