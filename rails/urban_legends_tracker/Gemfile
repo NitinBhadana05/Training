@@ -77,5 +77,4 @@ gem 'devise-api'
 
 gem 'active_model_serializers', '~> 0.10.0'
 
-gem 'pagy'
-
+gem 'pagy', '~> 9.3', require: 'pagy'

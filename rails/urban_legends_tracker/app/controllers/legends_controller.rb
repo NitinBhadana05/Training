@@ -1,8 +1,9 @@
+include Pagy::Backend
 class LegendsController < ApplicationController
   before_action :set_legend, only: %i[show edit update destroy]
 
   def index
-    @legends = Legend.all
+    @pagy, @legends = pagy(Legend.order(created_at: :desc), limit: 4)
   end
 
   def show

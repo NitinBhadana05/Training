@@ -11,3 +11,13 @@
     <%= link_to "Delete", legend, data: { turbo_method: :delete, turbo_confirm: "Sure?" } %>
   </div>
 <% end %>
+
+<hr>
+
+<p>
+  Page: <%= @pagy.page %> /
+  Total Pages: <%= @pagy.pages %> |
+  Total Count: <%= @pagy.count %>
+</p>
+
+<%= pagy_nav(@pagy).html_safe if @pagy.pages > 1 %>
