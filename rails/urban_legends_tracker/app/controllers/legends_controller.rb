@@ -1,9 +1,10 @@
 include Pagy::Backend
 class LegendsController < ApplicationController
   before_action :set_legend, only: %i[show edit update destroy]
+  before_action :load_legends, only: %i[index destroy]
 
   def index
-    @pagy, @legends = pagy(Legend.order(created_at: :desc), limit: 4)
+    load_legends
   end
 
   def show
@@ -17,7 +18,7 @@ class LegendsController < ApplicationController
     @legend = Legend.new(legend_params)
 
     if @legend.save
-      redirect_to @legend, notice: "Legend created!"
+      redirect_to legends_path, notice: "Legend created!"
     else
       render :new, status: :unprocessable_entity
     end
@@ -28,7 +29,7 @@ class LegendsController < ApplicationController
 
   def update
     if @legend.update(legend_params)
-      redirect_to @legend, notice: "Updated!"
+      redirect_to legends_path, notice: "Updated!"
     else
       render :edit, status: :unprocessable_entity
     end
@@ -36,10 +37,22 @@ class LegendsController < ApplicationController
 
   def destroy
     @legend.destroy
-    redirect_to legends_path, notice: "Deleted!", status: :see_other
+    load_legends
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.replace("legends_results", partial: "legends/results")
+      end
+      format.html { redirect_to legends_path, notice: "Deleted!", status: :see_other }
+    end
   end
 
   private
+
+  def load_legends
+    @q = Legend.ransack(params[:q])
+    legends = @q.result(distinct: true).order(created_at: :desc)
+    @pagy, @legends = pagy(legends, limit: 4)
+  end
 
   def set_legend
     @legend = Legend.find(params[:id])

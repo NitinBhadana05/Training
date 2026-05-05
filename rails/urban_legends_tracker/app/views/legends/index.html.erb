@@ -2,22 +2,25 @@
 
 <%= link_to "New Legend", new_legend_path %>
 
-<% @legends.each do |legend| %>
+<h2>Search Legends</h2>
+
+<%= search_form_for @q, html: { data: { turbo_frame: "legends_results" } } do |f| %>
   <div>
-    <h3><%= legend.title %></h3>
-    <p><%= legend.location %></p>
-    <%= link_to "Show", legend %>
-    <%= link_to "Edit", edit_legend_path(legend) %>
-    <%= link_to "Delete", legend, data: { turbo_method: :delete, turbo_confirm: "Sure?" } %>
+    <%= f.label :title_cont, "Title" %>
+    <%= f.search_field :title_cont %>
   </div>
+
+  <div>
+    <%= f.label :location_cont, "Location" %>
+    <%= f.search_field :location_cont %>
+  </div>
+
+  <%= f.submit "Search" %>
+  <%= link_to "Clear", legends_path %>
 <% end %>
 
 <hr>
 
-<p>
-  Page: <%= @pagy.page %> /
-  Total Pages: <%= @pagy.pages %> |
-  Total Count: <%= @pagy.count %>
-</p>
-
-<%= pagy_nav(@pagy).html_safe if @pagy.pages > 1 %>
+<%= turbo_frame_tag "legends_results" do %>
+  <%= render "results" %>
+<% end %>

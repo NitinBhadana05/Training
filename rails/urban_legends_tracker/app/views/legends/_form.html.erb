@@ -1,8 +1,7 @@
-
-<%= form_with model: @legend do |f| %>
-  <% if @legend.errors.any? %>
+<%= form_with model: legend do |f| %>
+  <% if legend.errors.any? %>
     <ul>
-      <% @legend.errors.full_messages.each do |msg| %>
+      <% legend.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
     </ul>

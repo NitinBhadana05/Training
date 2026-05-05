@@ -1,0 +1,9 @@
+<%= turbo_frame_tag dom_id(legend) do %>
+  <div>
+    <h3><%= legend.title %></h3>
+    <p><%= legend.location %></p>
+    <%= link_to "Show", legend, data: { turbo_frame: "_top" } %>
+    <%= link_to "Edit", edit_legend_path(legend), data: { turbo_frame: "_top" } %>
+    <%= link_to "Delete", legend, data: { turbo_method: :delete, turbo_confirm: "Sure?" } %>
+  </div>
+<% end %>

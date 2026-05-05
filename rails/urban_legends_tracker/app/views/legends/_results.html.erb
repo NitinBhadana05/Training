@@ -1,0 +1,13 @@
+<% @legends.each do |legend| %>
+  <%= render legend %>
+<% end %>
+
+<hr>
+
+<p>
+  Page: <%= @pagy.page %> /
+  Total Pages: <%= @pagy.pages %> |
+  Total Count: <%= @pagy.count %>
+</p>
+
+<%= pagy_nav(@pagy, anchor_string: 'data-turbo-frame="legends_results"').html_safe if @pagy.pages > 1 %>
