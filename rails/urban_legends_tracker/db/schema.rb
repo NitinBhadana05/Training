@@ -10,8 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_05_055133) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_05_132500) do
   create_table "legends", force: :cascade do |t|
+    t.string "cover_image"
     t.datetime "created_at", null: false
     t.integer "credibility_score"
     t.text "description"

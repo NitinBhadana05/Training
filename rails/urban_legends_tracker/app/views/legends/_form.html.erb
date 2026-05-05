@@ -1,31 +1,51 @@
-<%= form_with model: legend do |f| %>
+<%= form_with model: legend, html: { class: "legend-form" } do |f| %>
   <% if legend.errors.any? %>
-    <ul>
+    <ul class="legend-form__errors">
       <% legend.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
     </ul>
   <% end %>
 
-  <div>
+  <%= f.hidden_field :cover_image_cache %>
+
+  <div class="legend-form__field">
     <%= f.label :title %>
     <%= f.text_field :title %>
   </div>
 
-  <div>
+  <div class="legend-form__field">
     <%= f.label :description %>
     <%= f.text_area :description %>
   </div>
 
-  <div>
+  <div class="legend-form__field">
     <%= f.label :location %>
     <%= f.text_field :location %>
   </div>
 
-  <div>
+  <div class="legend-form__field">
     <%= f.label :credibility_score %>
     <%= f.number_field :credibility_score %>
   </div>
 
-  <%= f.submit %>
+  <div class="legend-form__field">
+    <%= f.label :cover_image, "Legend image" %>
+    <%= f.file_field :cover_image, accept: "image/*" %>
+  </div>
+
+  <% if legend.cover_image? %>
+    <div class="legend-form__field">
+      <p class="legend-form__hint">Current image</p>
+      <%= image_tag legend.cover_image.thumb.url, alt: legend.title, class: "legend-form__preview" %>
+      <label class="legend-form__checkbox">
+        <%= f.check_box :remove_cover_image %>
+        Remove image
+      </label>
+    </div>
+  <% end %>
+
+  <div class="legend-form__actions">
+    <%= f.submit class: "button" %>
+  </div>
 <% end %>

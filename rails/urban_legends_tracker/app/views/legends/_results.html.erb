@@ -1,13 +1,13 @@
-<% @legends.each do |legend| %>
-  <%= render legend %>
-<% end %>
-
+<div class="legend-grid">
+  <% @legends.each do |legend| %>
+    <%= render legend %>
+  <% end %>
+</div>
+<br>
 <hr>
 
-<p>
-  Page: <%= @pagy.page %> /
-  Total Pages: <%= @pagy.pages %> |
-  Total Count: <%= @pagy.count %>
-</p>
+<br>
 
-<%= pagy_nav(@pagy, anchor_string: 'data-turbo-frame="legends_results"').html_safe if @pagy.pages > 1 %>
+<div class="pagination-nav">
+  <%= pagy_nav(@pagy, anchor_string: 'data-turbo-frame="legends_results"').html_safe if @pagy.pages > 1 %>
+</div>

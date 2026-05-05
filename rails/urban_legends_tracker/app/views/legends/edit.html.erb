@@ -1,2 +1,6 @@
 <h1>Edit Legend</h1>
 <%= render "legends/form", legend: @legend %>
+
+<p class="page-actions">
+  <%= link_to "Back", legend_path(@legend), class: "button button--secondary" %>
+</p>

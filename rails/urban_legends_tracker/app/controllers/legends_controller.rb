@@ -59,6 +59,6 @@ class LegendsController < ApplicationController
   end
 
   def legend_params
-    params.require(:legend).permit(:title, :description, :location, :credibility_score)
+    params.require(:legend).permit(:title, :description, :location, :credibility_score, :cover_image, :cover_image_cache, :remove_cover_image)
   end
 end

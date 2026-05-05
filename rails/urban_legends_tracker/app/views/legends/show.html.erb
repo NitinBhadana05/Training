@@ -1,7 +1,14 @@
 <h1><%= @legend.title %></h1>
 
+<% if @legend.cover_image? %>
+  <p><%= image_tag @legend.cover_image.url, alt: @legend.title, class: "legend-image" %></p>
+<% end %>
+
 <p><%= @legend.description %></p>
 <p>📍 <%= @legend.location %></p>
 <p>Credibility: <%= @legend.credibility_score %></p>
 
-<%= link_to "Back", legends_path %>
+<p class="page-actions">
+  <%= link_to "Back", legends_path, class: "button button--secondary" %>
+  <%= link_to "Edit", edit_legend_path(@legend), class: "button" %>
+</p>
