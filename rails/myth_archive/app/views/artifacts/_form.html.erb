@@ -1,0 +1,45 @@
+
+
+<%= form_with model: [@explorer, @artifact],
+              local: true do |f| %>
+
+  <% if @artifact.errors.any? %>
+    <ul>
+      <% @artifact.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <div>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div>
+    <%= f.label :description %>
+    <%= f.text_area :description %>
+  </div>
+
+  <div>
+    <%= f.label :origin_country %>
+    <%= f.text_field :origin_country %>
+  </div>
+
+  <div>
+    <%= f.label :danger_level %>
+    <%= f.number_field :danger_level %>
+  </div>
+
+  <div>
+    <%= f.label :discovered_on %>
+    <%= f.date_field :discovered_on %>
+  </div>
+
+  <div>
+    <%= f.label :image %>
+    <%= f.file_field :image %>
+  </div>
+
+  <%= f.submit %>
+<% end %>

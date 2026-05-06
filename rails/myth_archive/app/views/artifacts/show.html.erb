@@ -1,0 +1,32 @@
+
+
+<h1><%= @artifact.name %></h1>
+
+<p><%= @artifact.description %></p>
+
+<p>
+  Origin:
+  <%= @artifact.origin_country %>
+</p>
+
+<p>
+  Danger:
+  <%= @artifact.danger_level %>
+</p>
+
+<p>
+  Explorer:
+  <%= @artifact.explorer.codename %>
+</p>
+
+<% if @artifact.image.present? %>
+  <%= image_tag @artifact.image.url %>
+<% end %>
+
+<br><br>
+
+<%= link_to "Edit",
+    edit_explorer_artifact_path(@explorer, @artifact) %>
+
+<%= link_to "Back",
+    explorer_artifacts_path(@explorer) %>

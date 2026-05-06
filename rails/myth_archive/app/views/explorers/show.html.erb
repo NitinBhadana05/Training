@@ -1,0 +1,51 @@
+
+
+<h1><%= @explorer.codename %></h1>
+
+<p>
+  Region:
+  <%= @explorer.region %>
+</p>
+
+<p>
+  Reputation:
+  <%= @explorer.reputation %>
+</p>
+
+<hr>
+
+<h2>Artifacts</h2>
+
+<p>
+  <%= link_to "View All Artifacts", explorer_artifacts_path(@explorer) %>
+  <%= link_to "Add Artifact", new_explorer_artifact_path(@explorer) %>
+</p>
+
+<% @explorer.artifacts.each do |artifact| %>
+  <div>
+    <h3><%= artifact.name %></h3>
+
+    <p><%= artifact.description %></p>
+
+    <p>
+      Danger Level:
+      <%= artifact.danger_level %>
+    </p>
+
+    <%= link_to "View Artifact",
+        explorer_artifact_path(@explorer, artifact) %>
+  </div>
+<% end %>
+
+<br>
+
+<%= link_to "Edit", edit_explorer_path(@explorer) %>
+
+<%= link_to "Delete",
+            @explorer,
+            data: {
+              turbo_method: :delete,
+              turbo_confirm: "Are you sure?"
+            } %>
+
+<%= link_to "Back", explorers_path %>

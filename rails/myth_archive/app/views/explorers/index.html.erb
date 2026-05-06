@@ -1,0 +1,50 @@
+<h1>Explorers</h1>
+
+<%= link_to "New Explorer", new_explorer_path %>
+
+<hr>
+
+<h2>API-Data</h2>
+
+<p>
+  <%= link_to "Explorers API", api_v1_explorers_path %>  <br> <br>
+  <%= link_to "Artifacts API", api_v1_artifacts_path %>
+</p>
+
+<hr>
+
+<%= search_form_for @q do |f| %>
+  <%= f.label :codename_cont, "Search Codename" %>
+  <%= f.search_field :codename_cont %>
+
+  <%= f.submit "Search" %>
+<% end %>
+
+<hr>
+
+<% @explorers.each do |explorer| %>
+  <div>
+    <h3><%= explorer.codename %></h3>
+
+    <p>Region: <%= explorer.region %></p>
+
+    <p>Reputation: <%= explorer.reputation %></p>
+
+    <p>Artifacts: <%= explorer.artifacts.count %></p>
+
+    <%= link_to "Show", explorer %>
+    <%= link_to "Artifacts", explorer_artifacts_path(explorer) %>
+    <%= link_to "Edit", edit_explorer_path(explorer) %>
+
+    <%= link_to "Delete",
+                explorer,
+                data: {
+                  turbo_method: :delete,
+                  turbo_confirm: "Are you sure?"
+                } %>
+  </div>
+
+  <hr>
+<% end %>
+
+<%= pagy_nav(@pagy).html_safe %>

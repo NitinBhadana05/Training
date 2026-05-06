@@ -64,3 +64,23 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+gem 'mimemagic', '~> 0.3.10'
+# Search
+gem 'ransack'
+
+# Pagination
+gem 'pagy', '~> 9.3', require: 'pagy'
+
+# File uploads
+gem 'carrierwave'
+gem 'mini_magick'
+
+# API Serialization
+gem 'active_model_serializers', '~> 0.10.0'
+
+# Fake seed data
+gem 'faker'
+
+# Better debugging
+gem 'pry'

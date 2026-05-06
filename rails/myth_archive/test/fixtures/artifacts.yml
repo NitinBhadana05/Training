@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  description: MyText
+  origin_country: MyString
+  danger_level: 1
+  discovered_on: 2026-05-06
+  image: MyString
+  explorer: one
+
+two:
+  name: MyString
+  description: MyText
+  origin_country: MyString
+  danger_level: 1
+  discovered_on: 2026-05-06
+  image: MyString
+  explorer: two

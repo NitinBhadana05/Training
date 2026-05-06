@@ -1,0 +1,21 @@
+
+<%= form_with model: @explorer do |f| %>
+
+  <div>
+    <%= f.label :codename %>
+    <%= f.text_field :codename %>
+  </div>
+
+  <div>
+    <%= f.label :reputation %>
+    <%= f.number_field :reputation %>
+  </div>
+
+  <div>
+    <%= f.label :region %>
+    <%= f.text_field :region %>
+  </div>
+
+  <%= f.submit %>
+
+<% end %>
