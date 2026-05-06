@@ -1,0 +1,32 @@
+<!-- app/views/hunters/_form.html.erb -->
+
+<%= form_with model: @hunter,
+    class: "space-y-6 rounded-2xl border border-gray-200 bg-white p-8 shadow-sm" do |f| %>
+
+  <div>
+    <%= f.label :alias,
+        class: "mb-2 block text-sm font-semibold text-gray-700" %>
+
+    <%= f.text_field :alias,
+        class: "w-full rounded-xl border border-gray-300 px-4 py-3 focus:border-blue-500 focus:outline-none" %>
+  </div>
+
+  <div>
+    <%= f.label :rank,
+        class: "mb-2 block text-sm font-semibold text-gray-700" %>
+
+    <%= f.text_field :rank,
+        class: "w-full rounded-xl border border-gray-300 px-4 py-3 focus:border-blue-500 focus:outline-none" %>
+  </div>
+
+  <div>
+    <%= f.label :region,
+        class: "mb-2 block text-sm font-semibold text-gray-700" %>
+
+    <%= f.text_field :region,
+        class: "w-full rounded-xl border border-gray-300 px-4 py-3 focus:border-blue-500 focus:outline-none" %>
+  </div>
+
+  <%= f.submit class: "rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white hover:bg-blue-500" %>
+
+<% end %>

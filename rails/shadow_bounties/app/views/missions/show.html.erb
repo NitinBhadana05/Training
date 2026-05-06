@@ -1,0 +1,76 @@
+<!-- app/views/missions/show.html.erb -->
+
+<div class="mx-auto max-w-4xl p-8">
+  <div class="rounded-2xl border border-gray-200 bg-white p-8 shadow-sm">
+
+    <div class="mb-8 flex items-center justify-between">
+      <h1 class="text-4xl font-bold text-gray-800">
+        Mission Details
+      </h1>
+
+      <% if @mission.completed %>
+        <span class="rounded-full bg-green-100 px-4 py-2 text-sm font-semibold text-green-700">
+          Completed
+        </span>
+      <% else %>
+        <span class="rounded-full bg-yellow-100 px-4 py-2 text-sm font-semibold text-yellow-700">
+          Pending
+        </span>
+      <% end %>
+    </div>
+
+    <div class="space-y-6">
+
+      <div class="rounded-xl bg-gray-100 p-6">
+        <h2 class="mb-2 text-sm font-semibold uppercase tracking-wide text-gray-500">
+          Hunter
+        </h2>
+
+        <p class="text-2xl font-bold text-gray-800">
+          <%= @mission.hunter.alias %>
+        </p>
+      </div>
+
+      <div class="rounded-xl bg-gray-100 p-6">
+        <h2 class="mb-2 text-sm font-semibold uppercase tracking-wide text-gray-500">
+          Target
+        </h2>
+
+        <p class="text-2xl font-bold text-gray-800">
+          <%= @mission.bounty.target_name %>
+        </p>
+      </div>
+
+      <div class="rounded-xl bg-gray-100 p-6">
+        <h2 class="mb-2 text-sm font-semibold uppercase tracking-wide text-gray-500">
+          Mission Notes
+        </h2>
+
+        <p class="leading-relaxed text-gray-700">
+          <%= @mission.notes %>
+        </p>
+      </div>
+
+    </div>
+
+    <div class="mt-10 flex flex-wrap gap-4">
+
+      <%= link_to "Edit Mission",
+          edit_mission_path(@mission),
+          class: "rounded-lg bg-yellow-500 px-5 py-3 font-medium text-white hover:bg-yellow-400" %>
+
+      <%= link_to "Delete Mission",
+          @mission,
+          data: {
+            turbo_method: :delete,
+            turbo_confirm: "Delete this mission?"
+          },
+          class: "rounded-lg bg-red-600 px-5 py-3 font-medium text-white hover:bg-red-500" %>
+
+      <%= link_to "Back",
+          missions_path,
+          class: "rounded-lg bg-gray-900 px-5 py-3 font-medium text-white hover:bg-gray-700" %>
+
+    </div>
+  </div>
+</div>

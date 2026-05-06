@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  alias: MyString
+  rank: MyString
+  region: MyString
+
+two:
+  alias: MyString
+  rank: MyString
+  region: MyString

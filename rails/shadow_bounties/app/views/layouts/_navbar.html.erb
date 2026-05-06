@@ -1,0 +1,32 @@
+<nav class="w-full border-b border-gray-200 bg-white text-gray-900 shadow-sm">
+  <div class="flex h-20 w-full items-center justify-between px-8 py-8">
+    
+    <div class="flex items-center gap-8">
+      <%= link_to "Shadow Bounties",
+          root_path,
+          class: "text-2xl font-bold tracking-wide text-gray-900" %>
+
+      <div class="flex items-center gap-3">
+        <%= link_to "Dashboard",
+            root_path,
+            class: "rounded-md px-4 py-2 text-sm font-medium #{current_page?(root_path) ? 'bg-indigo-50 text-indigo-700' : 'text-gray-700 hover:bg-gray-100'}" %>
+
+        <%= link_to "Missions",
+            missions_path,
+            class: "rounded-md px-4 py-2 text-sm font-medium #{current_page?(missions_path) ? 'bg-indigo-50 text-indigo-700' : 'text-gray-700 hover:bg-gray-100'}" %>
+
+        <%= link_to "Hunters",
+            hunters_path,
+            class: "rounded-md px-4 py-2 text-sm font-medium #{current_page?(hunters_path) ? 'bg-indigo-50 text-indigo-700' : 'text-gray-700 hover:bg-gray-100'}" %>
+
+        <%= link_to "Bounties",
+            bounties_path,
+            class: "rounded-md px-4 py-2 text-sm font-medium #{current_page?(bounties_path) ? 'bg-indigo-50 text-indigo-700' : 'text-gray-700 hover:bg-gray-100'}" %>
+      </div>
+    </div>
+
+    <%= link_to "+ Create",
+        new_dashboard_path,
+        class: "rounded-md bg-indigo-500 px-5 py-3 text-sm font-semibold text-white hover:bg-indigo-400" %>
+  </div>
+</nav>

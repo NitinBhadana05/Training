@@ -1,0 +1,115 @@
+<!-- app/views/bounties/index.html.erb -->
+
+<div class="p-8">
+
+  <div class="mb-8 flex items-center justify-between">
+    <h1 class="text-4xl font-bold text-gray-800">
+      Bounties
+    </h1>
+
+    <%= link_to "New Bounty",
+        new_bounty_path,
+        class: "rounded-xl bg-blue-600 px-5 py-3 font-medium text-white hover:bg-blue-500" %>
+  </div>
+
+  <%= search_form_for @q do |f| %>
+
+    <div class="mb-8 flex flex-wrap gap-4">
+
+      <%= f.search_field :target_name_cont,
+          placeholder: "Search target...",
+          class: "rounded-xl border border-gray-300 px-4 py-3 focus:border-blue-500 focus:outline-none" %>
+
+      <%= f.select :status_eq,
+          [["Open", "open"], ["Captured", "captured"], ["Dead", "dead"]],
+          { include_blank: "All Status" },
+          class: "rounded-xl border border-gray-300 px-4 py-3 focus:border-blue-500 focus:outline-none" %>
+
+      <%= f.submit "Search",
+          class: "rounded-xl bg-gray-900 px-5 py-3 text-white hover:bg-gray-700" %>
+
+    </div>
+
+  <% end %>
+
+  <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+
+    <% @bounties.each do |bounty| %>
+
+      <div class="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition hover:shadow-md">
+
+        <% if bounty.poster_image.present? %>
+          <%= image_tag bounty.poster_image.url,
+              class: "h-56 w-full object-cover" %>
+        <% end %>
+
+        <div class="p-6">
+
+          <div class="mb-4 flex items-center justify-between">
+
+            <h2 class="text-2xl font-bold text-gray-800">
+              <%= bounty.target_name %>
+            </h2>
+
+            <% if bounty.status == "open" %>
+              <span class="rounded-full bg-yellow-100 px-3 py-1 text-sm font-medium text-yellow-700">
+                OPEN
+              </span>
+
+            <% elsif bounty.status == "captured" %>
+              <span class="rounded-full bg-green-100 px-3 py-1 text-sm font-medium text-green-700">
+                CAPTURED
+              </span>
+
+            <% else %>
+              <span class="rounded-full bg-red-100 px-3 py-1 text-sm font-medium text-red-700">
+                DEAD
+              </span>
+            <% end %>
+
+          </div>
+
+          <div class="space-y-2 text-gray-500">
+
+            <p>
+              Threat Level:
+              <span class="font-semibold text-gray-800">
+                <%= bounty.threat_level %>
+              </span>
+            </p>
+
+            <p>
+              Reward:
+              <span class="font-semibold text-gray-800">
+                $<%= bounty.reward_amount %>
+              </span>
+            </p>
+
+            <p>
+              Last Seen:
+              <span class="font-semibold text-gray-800">
+                <%= bounty.last_seen %>
+              </span>
+            </p>
+
+          </div>
+
+          <div class="mt-6">
+            <%= link_to "View Details",
+                bounty,
+                class: "inline-block rounded-xl bg-gray-900 px-5 py-3 text-white hover:bg-gray-700" %>
+          </div>
+
+        </div>
+
+      </div>
+
+    <% end %>
+
+  </div>
+
+  <div class="mt-10">
+    <%== pagy_nav(@pagy) %>
+  </div>
+
+</div>
