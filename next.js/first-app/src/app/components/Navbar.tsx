@@ -24,6 +24,12 @@ export default function Navbar({ title }: NavbarProps) {
             Contact
           </Link>
         </li>
+
+        <li>
+          <Link href="/users" className="hover:underline">
+            Users
+          </Link>
+        </li>
       </ul>
     </nav>
   )

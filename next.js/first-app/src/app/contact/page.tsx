@@ -6,6 +6,7 @@ export default function Contact() {
   const [name, setName] = useState("")
 
   return (
+    
     <main className="p-10">
       <input
         type="text"

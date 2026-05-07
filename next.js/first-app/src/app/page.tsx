@@ -2,15 +2,26 @@
 
 
 
-import Navbar from "./components/Navbar"
 
-const name = "Next.js"
-const age = 30
+import { useState, useEffect } from "react"
+
+
 export default function Home() {
+  const name = "Next.js"
+  const age = 30
+  const [click, setClick] = useState(false)
+  const [showFruits, setShowFruits] = useState(false)
+  const toggleFruits = () => setShowFruits(prev => !prev)
+
+  useEffect(() => {
+    console.log("Page loaded successfully...................")
+  }, [])
   return (
+
+
     <div>
       
-      <Navbar title="Next Learning App" />
+      
       <main className="p-10">
         <h1 className="text-4xl font-bold">
           Hello Next.js 🚀
@@ -21,14 +32,29 @@ export default function Home() {
           <h1>My name is {name}</h1>
 
           <div className="p-10">
-            <button className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-500 hover:text-black">
-              Click Me
+            <button onClick={() => setClick(prev => !prev)} className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-500 hover:text-black">
+              {click ? 'Clicked' : 'Click Me'}
+              
+            </button>&nbsp;&nbsp;&nbsp;
+            
+            <h1 className="text-2xl mt-4">
+              {click}
+              {click ? 'Button has been clicked!' : 'Button has not been clicked yet.'}
+            </h1>
+
+            <button 
+              onClick={toggleFruits}
+              className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+              {showFruits ? 'Hide Fruits' : 'Show Fruits'}
             </button>
+
+            
+            {showFruits && <Fruits />}
           </div>
-          <Fruits />
+          
       </main>
     </div>
-  )
+  ) 
 }
 
 export function Fruits() {
