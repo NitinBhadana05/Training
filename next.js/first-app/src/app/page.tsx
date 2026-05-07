@@ -1,3 +1,7 @@
+"use client"
+
+
+
 import Navbar from "./components/Navbar"
 
 const name = "Next.js"
@@ -21,8 +25,24 @@ export default function Home() {
               Click Me
             </button>
           </div>
-        
+          <Fruits />
       </main>
     </div>
+  )
+}
+
+export function Fruits() {
+  const fruits = ["Apple", "Banana", "Mango"]
+
+  return (
+    <main className="p-10">
+      <ul>
+        {fruits.map((fruit) => (
+          <li key={fruit} className="text-2xl">
+            {fruit}
+          </li>
+        ))}
+      </ul>
+    </main>
   )
 }
