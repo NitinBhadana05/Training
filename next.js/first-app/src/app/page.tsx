@@ -4,6 +4,7 @@
 
 
 import { useState, useEffect } from "react"
+import LoginButton from "./components/LoginButton"
 
 
 export default function Home() {
@@ -23,6 +24,8 @@ export default function Home() {
       
       
       <main className="p-10">
+
+         <LoginButton />
         <h1 className="text-4xl font-bold">
           Hello Next.js 🚀
         </h1>
