@@ -30,6 +30,18 @@ export default function Navbar({ title }: NavbarProps) {
             Users
           </Link>
         </li>
+
+        <li>
+          <Link href="/posts" className="hover:underline">
+            Posts
+          </Link>
+        </li>
+
+        <li>
+          <Link href="/dashboard" className="hover:underline">
+            Dashboard
+          </Link>
+        </li>
       </ul>
     </nav>
   )
