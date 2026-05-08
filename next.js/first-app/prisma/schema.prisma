@@ -1,0 +1,57 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model ar_internal_metadata {
+  key        String   @id @db.VarChar
+  value      String?  @db.VarChar
+  created_at DateTime @db.Timestamp(6)
+  updated_at DateTime @db.Timestamp(6)
+}
+
+model bounties {
+  id            BigInt     @id @default(autoincrement())
+  created_at    DateTime   @db.Timestamp(6)
+  last_seen     String?    @db.VarChar
+  poster_image  String?    @db.VarChar
+  reward_amount Int?
+  status        String?    @db.VarChar
+  target_name   String?    @db.VarChar
+  threat_level  Int?
+  updated_at    DateTime   @db.Timestamp(6)
+  missions      missions[]
+}
+
+model hunters {
+  id         BigInt     @id @default(autoincrement())
+  alias      String?    @db.VarChar
+  created_at DateTime   @db.Timestamp(6)
+  rank       String?    @db.VarChar
+  region     String?    @db.VarChar
+  updated_at DateTime   @db.Timestamp(6)
+  missions   missions[]
+}
+
+model missions {
+  id         BigInt   @id @default(autoincrement())
+  hunter_id  BigInt
+  bounty_id  BigInt
+  completed  Boolean?
+  notes      String?
+  created_at DateTime @db.Timestamp(6)
+  updated_at DateTime @db.Timestamp(6)
+  hunters    hunters  @relation(fields: [hunter_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_rails_2dd92b903c")
+  bounties   bounties @relation(fields: [bounty_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_rails_41ab5c0440")
+
+  @@index([bounty_id], map: "index_missions_on_bounty_id")
+  @@index([hunter_id], map: "index_missions_on_hunter_id")
+}
+
+model schema_migrations {
+  version String @id @db.VarChar
+}

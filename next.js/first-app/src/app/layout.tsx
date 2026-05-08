@@ -5,11 +5,22 @@ import Navbar from "./components/Navbar";
 
 import AuthProvider from "./providers/SessionProvider";
 
+
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
 });
 
+declare global {
+  interface BigInt {
+    toJSON(): string;
+  }
+}
+
+BigInt.prototype.toJSON = function () {
+  return this.toString();
+};
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
