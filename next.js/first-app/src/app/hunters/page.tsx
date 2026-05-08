@@ -134,40 +134,41 @@ const updateHunter = async (id: bigint) => {
             Delete
           </button>
 
-          {editingId === hunter.id.toString() && (
-            <div className="mt-4 space-y-2">
-              <input
-                type="text"
-                placeholder="Alias"
-                value={editAlias}
-                onChange={(e) => setEditAlias(e.target.value)}
-                className="border p-2 rounded w-full"
-              /> <br /><br />
+          {editingId === String(hunter.id) && (
+  <div className="mt-4 border p-4 rounded bg-gray-100">
+    <input
+      type="text"
+      placeholder="Alias"
+      value={editAlias}
+      onChange={(e) => setEditAlias(e.target.value)}
+      className="border p-2 rounded w-full mb-2 text-black"
+    />
 
-              <input
-                type="text"
-                placeholder="Rank"
-                value={editRank}
-                onChange={(e) => setEditRank(e.target.value)}
-                className="border p-2 rounded w-full"
-              /> <br /> <br />
-      
+    <input
+      type="text"
+      placeholder="Rank"
+      value={editRank}
+      onChange={(e) => setEditRank(e.target.value)}
+      className="border p-2 rounded w-full mb-2 text-black"
+    />
 
-              <input
-                type="text"
-                placeholder="Region"
-                value={editRegion}
-                onChange={(e) => setEditRegion(e.target.value)}
-                className="border p-2 rounded w-full"
-              />
+    <input
+      type="text"
+      placeholder="Region"
+      value={editRegion}
+      onChange={(e) => setEditRegion(e.target.value)}
+      className="border p-2 rounded w-full mb-4 text-black"
+    />
 
-              <button
-                onClick={() => updateHunter(hunter.id)}
-                className="bg-green-500 text-white px-3 py-2 rounded"
-              >Save
-              </button>
-            </div>
-          )}
+    <button
+      type="button"
+      onClick={() => updateHunter(hunter.id)}
+      className="bg-blue-600 text-black px-4 py-2 rounded"
+    >
+      Save
+    </button>
+  </div>
+)}
         </div>
       ))}
     </main>

@@ -48,6 +48,12 @@ export default function Navbar({ title }: NavbarProps) {
             Hunters
           </Link>
         </li>
+
+        <li>
+          <Link href="/missions" className="hover:underline">
+            Missions
+          </Link>
+        </li>
       </ul>
     </nav>
   )
