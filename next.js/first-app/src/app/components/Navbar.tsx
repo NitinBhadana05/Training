@@ -54,6 +54,12 @@ export default function Navbar({ title }: NavbarProps) {
             Missions
           </Link>
         </li>
+
+        <li>
+          <Link href="/bounties" className="hover:underline">
+            Bounties
+          </Link>
+        </li>
       </ul>
     </nav>
   )
