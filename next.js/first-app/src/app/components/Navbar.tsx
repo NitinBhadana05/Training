@@ -42,6 +42,12 @@ export default function Navbar({ title }: NavbarProps) {
             Dashboard
           </Link>
         </li>
+
+        <li>
+          <Link href="/hunters" className="hover:underline">
+            Hunters
+          </Link>
+        </li>
       </ul>
     </nav>
   )
