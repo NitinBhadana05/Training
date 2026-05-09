@@ -3,6 +3,7 @@
 import {prisma} from "@/lib/prisma"
 import { revalidatePath } from "next/cache"
 import { missionSchema } from "@/lib/validations/mission"
+import { getCurrentUser } from "@/lib/auth"
 
 export async function createMission(formData: FormData) {
   try {
@@ -75,7 +76,16 @@ export async function updateMission(formData: FormData) {
 
 export async function deleteMission(formData: FormData) {
   const id = formData.get("id") as string
+  const user =
+  await getCurrentUser()
 
+if (!user) {
+  throw new Error("Unauthorized")
+}
+
+if (user.role !== "admin") {
+  throw new Error("Forbidden")
+}
   await prisma.missions.delete({
     where: {
       id: BigInt(id),

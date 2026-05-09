@@ -2,6 +2,8 @@ import jwt from "jsonwebtoken"
 
 import { cookies } from "next/headers"
 
+import prisma from "@/lib/prisma"
+
 export async function getCurrentUser() {
 
   const cookieStore = await cookies()
@@ -14,12 +16,19 @@ export async function getCurrentUser() {
   }
 
   try {
-    const decoded = jwt.verify(
+    const decoded: any = jwt.verify(
       token,
       process.env.JWT_SECRET!
     )
 
-    return decoded
+    const user =
+      await prisma.user.findUnique({
+        where: {
+          id: decoded.userId,
+        },
+      })
+
+    return user
 
   } catch {
     return null

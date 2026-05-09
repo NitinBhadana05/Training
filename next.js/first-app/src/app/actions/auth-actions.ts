@@ -157,3 +157,64 @@ export async function login(
     }
   }
 }
+
+
+export async function forgotPassword(
+  prevState: any,
+  formData: FormData
+) {
+
+  try {
+    const email =
+      formData.get("email") as string
+
+    const user =
+      await prisma.user.findUnique({
+        where: {
+          email,
+        },
+      })
+
+    if (!user) {
+      return {
+        success: "",
+        error: "User not found",
+      }
+    }
+
+    const resetToken =
+      crypto.randomBytes(32).toString("hex")
+
+    const expiry =
+      new Date(Date.now() + 1000 * 60 * 15)
+
+    await prisma.user.update({
+      where: {
+        id: user.id,
+      },
+      data: {
+        resetToken,
+        resetTokenExpiry: expiry,
+      },
+    })
+
+    console.log(
+      `Reset Link:
+http://localhost:3000/reset-password/${resetToken}`
+    )
+
+    return {
+      success:
+        "Reset link generated in terminal",
+      error: "",
+    }
+
+  } catch (error: any) {
+    console.error(error)
+
+    return {
+      success: "",
+      error: error.message,
+    }
+  }
+}
