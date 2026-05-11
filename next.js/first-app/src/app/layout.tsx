@@ -3,10 +3,6 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar";
 
-import AuthProvider from "./providers/SessionProvider";
-
-
-
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -52,9 +48,7 @@ export default function RootLayout({
         </aside>
 
         <main className="flex grow p-10">
-          <AuthProvider>
           {children}
-        </AuthProvider>
         </main>
       </div>
 

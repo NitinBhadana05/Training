@@ -5,7 +5,7 @@ import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
 
 import { cookies } from "next/headers"
-
+import { redirect } from "next/navigation"
 
 
 import {prisma} from "@/lib/prisma"
@@ -123,6 +123,13 @@ export async function login(
       }
     }
 
+    if (!process.env.JWT_SECRET) {
+      return {
+        success: "",
+        error: "JWT_SECRET is not configured",
+      }
+    }
+
     const token = jwt.sign(
       {
         userId: user.id,
@@ -138,15 +145,12 @@ export async function login(
 
     cookieStore.set("token", token, {
       httpOnly: true,
-      secure: false,
+      secure: process.env.NODE_ENV === "production",
       path: "/",
       maxAge: 60 * 60 * 24 * 7,
     })
 
-    return {
-      success: "Login successful",
-      error: "",
-    }
+    redirect("/dashboard")
 
   } catch (error: any) {
     console.error(error)
@@ -157,6 +161,7 @@ export async function login(
     }
   }
 }
+<<<<<<< HEAD
 
 
 export async function forgotPassword(
@@ -218,3 +223,5 @@ http://localhost:3000/reset-password/${resetToken}`
     }
   }
 }
+=======
+>>>>>>> d7490b8 (update functionality and resolve errors,)

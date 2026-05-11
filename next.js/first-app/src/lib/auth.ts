@@ -5,6 +5,9 @@ import { cookies } from "next/headers"
 import prisma from "@/lib/prisma"
 
 export async function getCurrentUser() {
+  if (!process.env.JWT_SECRET) {
+    return null
+  }
 
   const cookieStore = await cookies()
 
