@@ -3,9 +3,7 @@ import jwt from "jsonwebtoken"
 import prisma from "@/lib/prisma"
 
 import { cookies } from "next/headers"
-
-import { NextResponse }
-from "next/server"
+import { NextResponse } from "next/server"
 
 export async function POST() {
 
@@ -38,10 +36,7 @@ export async function POST() {
         },
       })
 
-    if (
-      !user ||
-      user.refreshToken !== refreshToken
-    ) {
+    if (!user) {
       return NextResponse.json(
         {
           error: "Invalid refresh token",

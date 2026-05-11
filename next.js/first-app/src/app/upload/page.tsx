@@ -2,8 +2,7 @@
 
 import Image from "next/image"
 
-import { useActionState }
-from "react"
+import { useActionState } from "react"
 
 import {
   uploadImage

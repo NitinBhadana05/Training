@@ -1,11 +1,7 @@
 "use server"
 
 import fs from "fs/promises"
-
 import path from "path"
-
-import { v4 as uuidv4 }
-from "uuid"
 
 export async function uploadImage(
   prevState: any,
@@ -34,7 +30,7 @@ export async function uploadImage(
       file.name.split(".").pop()
 
     const fileName =
-      `${uuidv4()}.${fileExtension}`
+      `${crypto.randomUUID()}.${fileExtension}`
 
     const uploadPath =
       path.join(

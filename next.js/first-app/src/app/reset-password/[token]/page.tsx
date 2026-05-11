@@ -1,35 +1,42 @@
 "use client"
 
-import { useActionState } from "react"
+import { use, useActionState } from "react"
 
-import {
-  forgotPassword
-} from "@/app/actions/auth-actions"
+import { resetPassword } from "@/app/actions/auth-actions"
 
 const initialState = {
   success: "",
   error: "",
 }
 
-export default function ForgotPasswordPage() {
+export default function ResetPasswordTokenPage({
+  params,
+}: {
+  params: Promise<{ token: string }>
+}) {
+  const { token } = use(params)
 
   const [state, formAction, pending] =
     useActionState(
-      forgotPassword,
+      resetPassword,
       initialState
     )
 
   return (
     <main className="p-10 max-w-xl mx-auto">
-
       <h1 className="text-4xl font-bold mb-6">
-        Forgot Password
+        Reset Password
       </h1>
 
       <form
         action={formAction}
         className="space-y-4"
       >
+        <input
+          type="hidden"
+          name="token"
+          value={token}
+        />
 
         {state.success && (
           <p className="text-green-500">
@@ -44,9 +51,9 @@ export default function ForgotPasswordPage() {
         )}
 
         <input
-          type="email"
-          name="email"
-          placeholder="Email"
+          type="password"
+          name="password"
+          placeholder="New Password"
           className="border p-2 rounded w-full"
         />
 
@@ -56,8 +63,8 @@ export default function ForgotPasswordPage() {
           className="bg-black text-white px-4 py-2 rounded"
         >
           {pending
-            ? "Sending..."
-            : "Send Reset Link"}
+            ? "Resetting..."
+            : "Reset Password"}
         </button>
       </form>
     </main>

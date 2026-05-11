@@ -1,12 +1,10 @@
 "use server"
 
-
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
 
 import { cookies } from "next/headers"
 import { redirect } from "next/navigation"
-
 
 import {prisma} from "@/lib/prisma"
 
@@ -161,8 +159,6 @@ export async function login(
     }
   }
 }
-<<<<<<< HEAD
-
 
 export async function forgotPassword(
   prevState: any,
@@ -187,21 +183,23 @@ export async function forgotPassword(
       }
     }
 
-    const resetToken =
-      crypto.randomBytes(32).toString("hex")
+    if (!process.env.JWT_SECRET) {
+      return {
+        success: "",
+        error: "JWT_SECRET is not configured",
+      }
+    }
 
-    const expiry =
-      new Date(Date.now() + 1000 * 60 * 15)
-
-    await prisma.user.update({
-      where: {
-        id: user.id,
+    const resetToken = jwt.sign(
+      {
+        userId: user.id,
+        intent: "password-reset",
       },
-      data: {
-        resetToken,
-        resetTokenExpiry: expiry,
-      },
-    })
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "15m",
+      }
+    )
 
     console.log(
       `Reset Link:
@@ -223,5 +221,69 @@ http://localhost:3000/reset-password/${resetToken}`
     }
   }
 }
-=======
->>>>>>> d7490b8 (update functionality and resolve errors,)
+
+export async function resetPassword(
+  prevState: {
+    success: string
+    error: string
+  },
+  formData: FormData
+) {
+  try {
+    const token = formData.get("token") as string
+    const password = formData.get("password") as string
+
+    if (!token || !password) {
+      return {
+        success: "",
+        error: "Token and password are required",
+      }
+    }
+
+    if (!process.env.JWT_SECRET) {
+      return {
+        success: "",
+        error: "JWT_SECRET is not configured",
+      }
+    }
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET) as {
+      userId?: string
+      intent?: string
+    }
+
+    if (
+      decoded.intent !== "password-reset" ||
+      !decoded.userId
+    ) {
+      return {
+        success: "",
+        error: "Invalid reset token",
+      }
+    }
+
+    const hashedPassword =
+      await bcrypt.hash(password, 10)
+
+    await prisma.user.update({
+      where: {
+        id: decoded.userId,
+      },
+      data: {
+        password: hashedPassword,
+      },
+    })
+
+    return {
+      success: "Password reset successfully",
+      error: "",
+    }
+  } catch (error: any) {
+    console.error(error)
+
+    return {
+      success: "",
+      error: error.message ?? "Invalid or expired token",
+    }
+  }
+}
