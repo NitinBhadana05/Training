@@ -1,0 +1,68 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+model User {
+  id                         String   @id @default(uuid())
+
+  name                       String
+
+  email                      String   @unique
+
+  password                   String
+
+  role                       Role     @default(USER)
+
+  isVerified                 Boolean  @default(false)
+
+  verificationToken          String?
+
+  verificationTokenExpiry    DateTime?
+
+  resetPasswordToken         String?
+
+  resetPasswordTokenExpiry   DateTime?
+
+  refreshToken               String?
+
+  createdAt                  DateTime @default(now())
+
+  updatedAt                  DateTime @updatedAt
+
+  sessions                   Session[]
+}
+
+model Session {
+  id           String   @id @default(uuid())
+
+  userId       String
+
+  refreshToken String
+
+  expiresAt    DateTime
+
+  user         User @relation(fields: [userId], references: [id])
+
+  createdAt    DateTime @default(now())
+}
+
+model Permission {
+  id   String @id @default(uuid())
+
+  name String @unique
+}
