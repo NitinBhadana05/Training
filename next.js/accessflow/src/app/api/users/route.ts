@@ -1,6 +1,10 @@
 import bcrypt from "bcryptjs";
 import { prisma } from "@/lib/prisma";
 import { requireAdmin } from "@/lib/auth";
+import {
+  adminCreateUserSchema,
+  getFirstZodError,
+} from "@/lib/validations";
 
 export async function GET() {
   try {
@@ -59,13 +63,30 @@ export async function POST(
       );
     }
 
+    const body = await req.json();
+    const parsed =
+      adminCreateUserSchema.safeParse(
+        body
+      );
+    if (!parsed.success) {
+      return Response.json(
+        {
+          message:
+            getFirstZodError(
+              parsed.error
+            ),
+        },
+        { status: 400 }
+      );
+    }
+
     const {
       name,
       email,
       password,
       role,
       isVerified,
-    } = await req.json();
+    } = parsed.data;
 
     const existingUser =
       await prisma.user.findUnique({
@@ -95,14 +116,8 @@ export async function POST(
           email,
           password:
             hashedPassword,
-          role:
-            role === "ADMIN"
-              ? "ADMIN"
-              : "USER",
-          isVerified:
-            Boolean(
-              isVerified
-            ),
+          role,
+          isVerified,
         },
         select: {
           id: true,

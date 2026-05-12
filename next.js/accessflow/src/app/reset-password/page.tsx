@@ -5,6 +5,7 @@ import {
   useRouter,
   useSearchParams,
 } from "next/navigation";
+import { resetPasswordSchema } from "@/lib/validations";
 
 export default function ResetPasswordPage() {
   const [password, setPassword] =
@@ -13,17 +14,36 @@ export default function ResetPasswordPage() {
     useSearchParams();
   const router =
     useRouter();
+  const [error, setError] =
+    useState("");
 
   const handleSubmit = async (
     e: React.FormEvent
   ) => {
     e.preventDefault();
+    setError("");
 
     const token =
       searchParams.get("token");
 
     if (!token) {
-      alert("Missing token");
+      setError("Missing token");
+      return;
+    }
+
+    const parsed =
+      resetPasswordSchema.safeParse(
+        {
+          token,
+          password,
+        }
+      );
+    if (!parsed.success) {
+      setError(
+        parsed.error.issues[0]
+          ?.message ??
+          "Invalid input"
+      );
       return;
     }
 
@@ -36,8 +56,10 @@ export default function ResetPasswordPage() {
             "application/json",
         },
         body: JSON.stringify({
-          token,
-          password,
+          token:
+            parsed.data.token,
+          password:
+            parsed.data.password,
         }),
       }
     );
@@ -60,6 +82,11 @@ export default function ResetPasswordPage() {
         <h1 className="text-2xl font-bold">
           Reset Password
         </h1>
+        {error ? (
+          <p className="text-sm text-red-600">
+            {error}
+          </p>
+        ) : null}
 
         <input
           type="password"

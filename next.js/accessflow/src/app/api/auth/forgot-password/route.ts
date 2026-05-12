@@ -1,13 +1,33 @@
 import crypto from "crypto";
 import { prisma } from "@/lib/prisma";
 import { sendResetPasswordEmail } from "@/lib/mail";
+import {
+  forgotPasswordSchema,
+  getFirstZodError,
+} from "@/lib/validations";
 
 export async function POST(
   req: Request
 ) {
   try {
+    const body = await req.json();
+    const parsed =
+      forgotPasswordSchema.safeParse(
+        body
+      );
+    if (!parsed.success) {
+      return Response.json(
+        {
+          message:
+            getFirstZodError(
+              parsed.error
+            ),
+        },
+        { status: 400 }
+      );
+    }
     const { email } =
-      await req.json();
+      parsed.data;
 
     const user =
       await prisma.user.findUnique({

@@ -1,10 +1,14 @@
 "use client";
 
 import {
-  FormEvent,
   useEffect,
   useState,
 } from "react";
+import { useRouter } from "next/navigation";
+import {
+  adminCreateUserSchema,
+  adminUpdateUserSchema,
+} from "@/lib/validations";
 
 type User = {
   id: string;
@@ -25,6 +29,9 @@ const defaultForm = {
 };
 
 export default function AdminPage() {
+  const router =
+    useRouter();
+
   const [users, setUsers] =
     useState<User[]>([]);
   const [
@@ -39,6 +46,8 @@ export default function AdminPage() {
   ] = useState<
     string | null
   >(null);
+  const [error, setError] =
+    useState("");
 
   const fetchUsers =
     async () => {
@@ -59,6 +68,7 @@ export default function AdminPage() {
     };
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     void fetchUsers();
   }, []);
 
@@ -68,9 +78,10 @@ export default function AdminPage() {
   };
 
   const onSubmit = async (
-    e: FormEvent
+    e: React.FormEvent
   ) => {
     e.preventDefault();
+    setError("");
 
     const url = editingId
       ? `/api/users/${editingId}`
@@ -91,6 +102,23 @@ export default function AdminPage() {
           }
         : form;
 
+    const parsed = editingId
+      ? adminUpdateUserSchema.safeParse(
+          payload
+        )
+      : adminCreateUserSchema.safeParse(
+          payload
+        );
+
+    if (!parsed.success) {
+      setError(
+        parsed.error.issues[0]
+          ?.message ??
+          "Invalid input"
+      );
+      return;
+    }
+
     const res = await fetch(
       url,
       {
@@ -100,7 +128,7 @@ export default function AdminPage() {
             "application/json",
         },
         body: JSON.stringify(
-          payload
+          parsed.data
         ),
       }
     );
@@ -163,6 +191,16 @@ export default function AdminPage() {
       <h1 className="text-3xl font-bold">
         Admin Panel
       </h1>
+      <button
+        onClick={() =>
+          router.push(
+            "/dashboard"
+          )
+        }
+        className="mt-3 border px-3 py-1"
+      >
+        Home
+      </button>
 
       <p className="mb-6 mt-2">
         Full user CRUD
@@ -172,6 +210,11 @@ export default function AdminPage() {
         onSubmit={onSubmit}
         className="mb-8 grid max-w-2xl gap-3 border p-4"
       >
+        {error ? (
+          <p className="text-sm text-red-600">
+            {error}
+          </p>
+        ) : null}
         <input
           className="border p-2"
           placeholder="Name"

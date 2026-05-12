@@ -1,6 +1,10 @@
 import { prisma } from "@/lib/prisma";
 import { requireAdmin, requireAuth } from "@/lib/auth";
 import bcrypt from "bcryptjs";
+import {
+  adminUpdateUserSchema,
+  getFirstZodError,
+} from "@/lib/validations";
 
 interface Props {
   params: Promise<{
@@ -97,13 +101,30 @@ export async function PATCH(
     const { id } =
       await params;
 
+    const body = await req.json();
+    const parsed =
+      adminUpdateUserSchema.safeParse(
+        body
+      );
+    if (!parsed.success) {
+      return Response.json(
+        {
+          message:
+            getFirstZodError(
+              parsed.error
+            ),
+        },
+        { status: 400 }
+      );
+    }
+
     const {
       name,
       email,
       role,
       isVerified,
       password,
-    } = await req.json();
+    } = parsed.data;
 
     const data: Record<
       string,
@@ -111,14 +132,8 @@ export async function PATCH(
     > = {
       name,
       email,
-      role:
-        role === "ADMIN"
-          ? "ADMIN"
-          : "USER",
-      isVerified:
-        Boolean(
-          isVerified
-        ),
+      role,
+      isVerified,
     };
 
     if (

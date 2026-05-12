@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { registerSchema } from "@/lib/validations";
 
 export default function RegisterPage() {
   const router =
@@ -12,11 +13,27 @@ export default function RegisterPage() {
     email: "",
     password: "",
   });
+  const [error, setError] =
+    useState("");
 
   const handleSubmit = async (
     e: React.FormEvent
   ) => {
     e.preventDefault();
+    setError("");
+
+    const parsed =
+      registerSchema.safeParse(
+        formData
+      );
+    if (!parsed.success) {
+      setError(
+        parsed.error.issues[0]
+          ?.message ??
+          "Invalid input"
+      );
+      return;
+    }
 
     const response = await fetch(
       "/api/auth/register",
@@ -29,7 +46,7 @@ export default function RegisterPage() {
         },
 
         body: JSON.stringify(
-          formData
+          parsed.data
         ),
       }
     );
@@ -59,6 +76,11 @@ export default function RegisterPage() {
         <h1 className="text-2xl font-bold">
           Register
         </h1>
+        {error ? (
+          <p className="text-sm text-red-600">
+            {error}
+          </p>
+        ) : null}
 
         <input
           type="text"

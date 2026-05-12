@@ -1,15 +1,32 @@
 "use client";
 
 import { useState } from "react";
+import { forgotPasswordSchema } from "@/lib/validations";
 
 export default function ForgotPasswordPage() {
   const [email, setEmail] =
+    useState("");
+  const [error, setError] =
     useState("");
 
   const handleSubmit = async (
     e: React.FormEvent
   ) => {
     e.preventDefault();
+    setError("");
+
+    const parsed =
+      forgotPasswordSchema.safeParse(
+        { email }
+      );
+    if (!parsed.success) {
+      setError(
+        parsed.error.issues[0]
+          ?.message ??
+          "Invalid input"
+      );
+      return;
+    }
 
     const response = await fetch(
       "/api/auth/forgot-password",
@@ -20,7 +37,8 @@ export default function ForgotPasswordPage() {
             "application/json",
         },
         body: JSON.stringify({
-          email,
+          email:
+            parsed.data.email,
         }),
       }
     );
@@ -40,6 +58,11 @@ export default function ForgotPasswordPage() {
         <h1 className="text-2xl font-bold">
           Forgot Password
         </h1>
+        {error ? (
+          <p className="text-sm text-red-600">
+            {error}
+          </p>
+        ) : null}
 
         <input
           type="email"

@@ -4,6 +4,7 @@ import { useState } from "react";
 
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { loginSchema } from "@/lib/validations";
 
 export default function LoginPage() {
   const router =
@@ -14,11 +15,27 @@ export default function LoginPage() {
       email: "",
       password: "",
     });
+  const [error, setError] =
+    useState("");
 
   const handleSubmit = async (
     e: React.FormEvent
   ) => {
     e.preventDefault();
+    setError("");
+
+    const parsed =
+      loginSchema.safeParse(
+        formData
+      );
+    if (!parsed.success) {
+      setError(
+        parsed.error.issues[0]
+          ?.message ??
+          "Invalid input"
+      );
+      return;
+    }
 
     const response = await fetch(
       "/api/auth/login",
@@ -31,7 +48,7 @@ export default function LoginPage() {
         },
 
         body: JSON.stringify(
-          formData
+          parsed.data
         ),
       }
     );
@@ -61,6 +78,11 @@ export default function LoginPage() {
         <h1 className="text-2xl font-bold">
           Login
         </h1>
+        {error ? (
+          <p className="text-sm text-red-600">
+            {error}
+          </p>
+        ) : null}
 
         <input
           type="email"

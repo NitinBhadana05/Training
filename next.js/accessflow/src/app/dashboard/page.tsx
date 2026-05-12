@@ -69,27 +69,29 @@ export default function DashboardPage() {
           "loading..."}
       </p>
 
-      {me?.role === "ADMIN" ? (
-        <button
-          onClick={() =>
-            router.push(
-              "/admin"
-            )
-          }
-          className="mt-4 border px-4 py-2"
-        >
-          Open Admin Panel
-        </button>
-      ) : null}
+      <div className="mt-4 flex flex-col gap-3">
+        {me?.role === "ADMIN" ? (
+          <button
+            onClick={() =>
+              router.push(
+                "/admin"
+              )
+            }
+            className="w-fit border px-4 py-2"
+          >
+            Manage Users
+          </button>
+        ) : null}
 
-      <button
-        onClick={
-          handleLogout
-        }
-        className="mt-6 bg-black px-4 py-2 text-white"
-      >
-        Logout
-      </button>
+        <button
+          onClick={
+            handleLogout
+          }
+          className="w-fit bg-black px-4 py-2 text-white"
+        >
+          Logout
+        </button>
+      </div>
     </div>
   );
 }

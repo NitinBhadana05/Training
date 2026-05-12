@@ -1,14 +1,35 @@
 import bcrypt from "bcryptjs";
 import { prisma } from "@/lib/prisma";
+import {
+  getFirstZodError,
+  resetPasswordSchema,
+} from "@/lib/validations";
 
 export async function POST(
   req: Request
 ) {
   try {
+    const body = await req.json();
+    const parsed =
+      resetPasswordSchema.safeParse(
+        body
+      );
+    if (!parsed.success) {
+      return Response.json(
+        {
+          message:
+            getFirstZodError(
+              parsed.error
+            ),
+        },
+        { status: 400 }
+      );
+    }
+
     const {
       token,
       password,
-    } = await req.json();
+    } = parsed.data;
 
     const user =
       await prisma.user.findFirst({

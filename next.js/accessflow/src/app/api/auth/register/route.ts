@@ -5,16 +5,36 @@ import bcrypt from "bcryptjs";
 import crypto from "crypto";
 
 import { sendVerificationEmail } from "@/lib/mail";
+import {
+  getFirstZodError,
+  registerSchema,
+} from "@/lib/validations";
 
 export async function POST(req: Request) {
   try {
     const body = await req.json();
+    const parsed =
+      registerSchema.safeParse(
+        body
+      );
+
+    if (!parsed.success) {
+      return Response.json(
+        {
+          message:
+            getFirstZodError(
+              parsed.error
+            ),
+        },
+        { status: 400 }
+      );
+    }
 
     const {
       name,
       email,
       password,
-    } = body;
+    } = parsed.data;
 
     const existingUser =
       await prisma.user.findUnique({
@@ -72,7 +92,7 @@ export async function POST(req: Request) {
       message:
         "User registered",
     });
-  } catch (error) {
+  } catch {
     return Response.json(
       {
         message:
